@@ -24,17 +24,26 @@ grails.project.dependency.resolution = {
 
         mavenLocal()
         mavenCentral()
-
+ebr()
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://snapshots.repository.codehaus.org"
+        mavenRepo "http://repository.codehaus.org"
+       mavenRepo "http://download.java.net/maven/2/"
+        mavenRepo "http://repository.jboss.com/maven2/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        // runtime 'mysql:mysql-connector-java:5.1.20'
+        runtime 'dropbox:dropbox-java-sdk:1.5.1' 
+        runtime 'mysql:mysql-connector-java:5.1.20'
+         
+        
+         //     org.springframework.beans.factoryBeanCreation;
+        build 'org.apache.httpcomponents:httpcore:4.0.1' 
+        build 'org.apache.httpcomponents:httpclient:4.0.3' 
+        runtime 'org.apache.httpcomponents:httpcore:4.0.1'
+        runtime 'org.apache.httpcomponents:httpclient:4.0.3'
+      runttime 'com.dropbox.client2.DropboxAPI:dropbox-java-sdk:1.5.1'
     }
 
     plugins {
