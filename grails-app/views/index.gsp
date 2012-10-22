@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="js/html5.js"></script>
 <![endif]-->
 </head>
-<body id="page1">
+<body id="page1">  
 <div class="main">
 <!-- header -->
 	<header>
