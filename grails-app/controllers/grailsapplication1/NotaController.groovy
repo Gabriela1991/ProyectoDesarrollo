@@ -28,8 +28,6 @@ class NotaController {
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
         redirect(action: "show", id: notaInstance.id)
-        
-        
     }
 
     def show(Long id) {
