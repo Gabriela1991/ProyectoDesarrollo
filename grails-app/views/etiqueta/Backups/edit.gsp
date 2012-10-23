@@ -1,13 +1,13 @@
-<%@ page import="grailsapplication1.Nota" %>
+<%@ page import="grailsapplication1.Etiqueta" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'nota.label', default: 'Nota')}" />
+		<g:set var="entityName" value="${message(code: 'etiqueta.label', default: 'Etiqueta')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#edit-nota" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#edit-etiqueta" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -15,21 +15,21 @@
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
-		<div id="edit-nota" class="content scaffold-edit" role="main">
+		<div id="edit-etiqueta" class="content scaffold-edit" role="main">
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<g:hasErrors bean="${notaInstance}">
+			<g:hasErrors bean="${etiquetaInstance}">
 			<ul class="errors" role="alert">
-				<g:eachError bean="${notaInstance}" var="error">
+				<g:eachError bean="${etiquetaInstance}" var="error">
 				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
 			<g:form method="post" >
-				<g:hiddenField name="id" value="${notaInstance?.id}" />
-				<g:hiddenField name="version" value="${notaInstance?.version}" />
+				<g:hiddenField name="id" value="${etiquetaInstance?.id}" />
+				<g:hiddenField name="version" value="${etiquetaInstance?.version}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
@@ -39,23 +39,5 @@
 				</fieldset>
 			</g:form>
 		</div>
-                <div class="dialog">
-    <table>
-        <tbody>
-            <tr class="prop">
-                <td valign="top" class="name"><label for="texto">Name:</label></td>
-                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'texto','errors')}">
-                    <input type="text" id="name" name="texto" value="${fieldValue(bean:notaInstance,field:'texto')}"/>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name"><label for="etiquetas">Books:</label></td>
-                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'etiquetas','errors')}">
-                    <g:render template="etiquetas" model="['notaInstance':notaInstance]" />
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 	</body>
 </html>
