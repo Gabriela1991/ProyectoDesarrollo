@@ -1,20 +1,37 @@
 <%@ page import="grailsapplication1.Persona" %>
 
 
-<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'nombre', 'error')} ">
+
+<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'nombre', 'error')} required">
 	<label for="nombre">
 		<g:message code="persona.nombre.label" default="Nombre" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="nombre" value="${personaInstance?.nombre}"/>
+	<g:textField name="nombre" maxlength="15" required="" value="${personaInstance?.nombre}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'apellido', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'apellido', 'error')} required">
 	<label for="apellido">
 		<g:message code="persona.apellido.label" default="Apellido" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="apellido" value="${personaInstance?.apellido}"/>
+	<g:textField name="apellido" maxlength="15" required="" value="${personaInstance?.apellido}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'correo', 'error')} required">
+	<label for="correo">
+		<g:message code="persona.correo.label" default="Correo" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="correo" maxlength="45" required="" value="${personaInstance?.correo}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'cuenta', 'error')} required">
+	<label for="cuenta">
+		<g:message code="persona.cuenta.label" default="Cuenta" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="cuenta" maxlength="45" required="" value="${personaInstance?.cuenta}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'clave', 'error')} ">
@@ -22,44 +39,22 @@
 		<g:message code="persona.clave.label" default="Clave" />
 		
 	</label>
-	<g:passwordField name="clave" value="${personaInstance?.clave}"/>
+	<g:field type="password" name="clave" maxlength="15" value="${personaInstance?.clave}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'cuentadropbox', 'error')} required">
+	<label for="cuentadropbox">
+		<g:message code="persona.cuentadropbox.label" default="Cuentadropbox" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="cuentadropbox" maxlength="45" required="" value="${personaInstance?.cuentadropbox}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'clavedropbox', 'error')} ">
 	<label for="clavedropbox">
-		<g:message code="persona.clavedropbox.label" default="Clave de dropbox" />
+		<g:message code="persona.clavedropbox.label" default="Clavedropbox" />
 		
 	</label>
-	<g:passwordField name="clavedropbox" value="${personaInstance?.clavedropbox}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'correo', 'error')} ">
-	<label for="correo">
-		<g:message code="persona.correo.label" default="Correo" />
-		
-	</label>
-	<g:textField name="correo" value="${personaInstance?.correo}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'cuenta', 'error')} ">
-	<label for="cuenta">
-		<g:message code="persona.cuenta.label" default="Cuenta" />
-		
-	</label>
-	<g:textField name="cuenta" value="${personaInstance?.cuenta}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'cuentadropbox', 'error')} ">
-	<label for="cuentadropbox">
-		<g:message code="persona.cuentadropbox.label" default="Cuenta de dropbox" />
-		
-	</label>
-	<g:textField name="cuentadropbox" value="${personaInstance?.cuentadropbox}"/>
-</div>
-
-<br></br>
-
-<div class="rightcol" align="center">
-      <g:submitButton class="button" name="submitButton" value="Crear cuenta o iniciar sesion no se cual es xD" />
+	<g:field type="password" name="clavedropbox" maxlength="15" value="${personaInstance?.clavedropbox}"/>
 </div>
 

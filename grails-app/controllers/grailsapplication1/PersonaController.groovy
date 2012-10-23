@@ -6,15 +6,6 @@ class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
-        redirect(action: "list", params: params)
-    }
-
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [personaInstanceList: Persona.list(params), personaInstanceTotal: Persona.count()]
-    }
-
     def create() {
         [personaInstance: new Persona(params)]
     }
