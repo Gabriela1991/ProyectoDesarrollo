@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Home</title>
-<meta name="layout" content="main"/>
+
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -51,10 +51,10 @@
 				</div>
 				<div class="wrapper">
                                   <p></p>
-					<article class="col1"><a href="#" class="button">INICIAR</a></article>
+					<article class="col1"><a href="http://localhost:8080/GrailsApplication1/persona/Inicio" class="button">INICIAR</a></article>
 				</div>
 			</section>
-<a href="http://localhost:8080/GrailsApplication1/persona/create" class="skip"><g:message code="default.link.skip.label" default="Hacer Usuario"/></a>
+<a href="http://localhost:8080/GrailsApplication1/persona/create" class="skip"><g:message code="default.link.skip.label" default="CREAR CUENTA"/></a>
 		
 		<div id="page-body" role="main">
 			
