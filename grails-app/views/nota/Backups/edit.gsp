@@ -39,23 +39,5 @@
 				</fieldset>
 			</g:form>
 		</div>
-                <div class="dialog">
-    <table>
-        <tbody>
-            <tr class="prop">
-                <td valign="top" class="name"><label for="texto">Name:</label></td>
-                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'texto','errors')}">
-                    <input type="text" id="name" name="texto" value="${fieldValue(bean:notaInstance,field:'texto')}"/>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name"><label for="etiquetas">Books:</label></td>
-                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'etiquetas','errors')}">
-                    <g:render template="etiquetas" model="['notaInstance':notaInstance]" />
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 	</body>
 </html>

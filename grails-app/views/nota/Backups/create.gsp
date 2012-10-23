@@ -14,7 +14,6 @@
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
-                               
 		<div id="create-nota" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -35,29 +34,6 @@
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>
 			</g:form>
-                        
-                        
-                                <!--            <div class="dialog"> -->
-   <!-- <table>
-        <tbody>
-            <tr class="prop">
-                <td valign="top" class="name"><label for="texto">Name:</label></td>
-                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'texto','errors')}">
-                    <input type="text" id="name" name="texto" value="${fieldValue(bean:notaInstance,field:'texto')}"/>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name"><label for="etiquetas">Books:</label></td>
-                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'etiquetas','errors')}">
-                    <g:render template="etiquetas" model="['notaInstance':notaInstance]" />
-                </td>
-            </tr>
-        </tbody>
-    </table> -->
-<!--  </div> -->
-                        
-                        
 		</div>
-       
 	</body>
 </html>

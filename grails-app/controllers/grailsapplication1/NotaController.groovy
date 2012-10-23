@@ -53,6 +53,19 @@ class NotaController {
     }
 
     def update(Long id, Long version) {
+        
+   /*     def notaInstance = Nota.get( params.id )
+            if(notaInstance) {
+                if(params.version) {
+                    // ... version locking stuff
+                }
+            notaInstance.properties = params
+            def _toBeDeleted = notaInstance.etiquetas.findAll {it._deleted}
+            if (_toBeDeleted) {
+                notaInstance.etiquetas.removeAll(_toBeDeleted)
+            }
+    */
+            
         def notaInstance = Nota.get(id)
         if (!notaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'nota.label', default: 'Nota'), id])
