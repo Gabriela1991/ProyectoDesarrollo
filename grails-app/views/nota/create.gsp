@@ -4,6 +4,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'nota.label', default: 'Nota')}" />
+                <g:set var="entityName2" value="${message(code: 'etiqueta.label', default: 'Etiqueta')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -27,37 +28,16 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form action="save" >
+			<g:form action="save" method="post">
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-				</fieldset>
-			</g:form>
-                        
-                        
-                                <!--            <div class="dialog"> -->
-   <!-- <table>
-        <tbody>
-            <tr class="prop">
-                <td valign="top" class="name"><label for="texto">Name:</label></td>
-                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'texto','errors')}">
-                    <input type="text" id="name" name="texto" value="${fieldValue(bean:notaInstance,field:'texto')}"/>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name"><label for="etiquetas">Books:</label></td>
-                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'etiquetas','errors')}">
-                    <g:render template="etiquetas" model="['notaInstance':notaInstance]" />
-                </td>
-            </tr>
-        </tbody>
-    </table> -->
-<!--  </div> -->
-                        
-                        
+                                        <g:link controller="nota" action="listar" params="[id: 'etiqueta1', ]">${message(code: 'default.add.label', args: [message(code: 'nota.label', default: 'nota')])}</g:link>
+                                       
+                                </fieldset>
+			</g:form>                        
 		</div>
-       
 	</body>
 </html>

@@ -14,6 +14,15 @@ class NotaController {
         params.max = Math.min(max ?: 10, 100)
         [notaInstanceList: Nota.list(params), notaInstanceTotal: Nota.count()]
     }
+    
+    def listar () {
+     //   def objeto= Nota.executeQuery("select MAX (id) from Nota");
+        def notaInstance = Nota.find("from Nota where id= (Select MAX(id) from Nota)");
+
+      //  def query = Nota.where{ id == max(id) }
+      //  def fran= query.find();
+        [notas: notaInstance]
+    }
 
     def create() {
         [notaInstance: new Nota(params)]
@@ -30,6 +39,15 @@ class NotaController {
         redirect(action: "show", id: notaInstance.id)
     }
 
+        
+    def listetiqqueta (){
+        def etiquetaInstance = new Etiqueta (params)
+        def notaInstance = new Nota ().executeQuery("select max id from nota");
+        notaInstance.getEtiquetas().println();
+        
+    }
+    
+    
     def show(Long id) {
         def notaInstance = Nota.get(id)
         if (!notaInstance) {
