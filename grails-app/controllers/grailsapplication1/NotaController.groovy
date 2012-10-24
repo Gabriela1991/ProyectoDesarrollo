@@ -40,6 +40,12 @@ class NotaController {
     }
 
     def save() {
+     //   println (params);
+        params.etiquetas= new ArrayList();
+        EtiquetaController ec= new EtiquetaController();
+       // ec.create2(params.etiquetas)
+      //  params.etiquetas[0];
+       // println (params.etiquetas[0]);
         def notaInstance = new Nota(params)
         if (!notaInstance.save(flush: true)) {
             render(view: "create", model: [notaInstance: notaInstance])

@@ -35,7 +35,6 @@
 <input type="button" value="Añadir etiqueta" onclick="addChild();" />
  <div id="childList">
     <g:each var="etiqueta" in="${notaInstance.etiquetas}" status="i">
-      
         <g:render template='etiqueta' model="['etiqueta':etiqueta,'i':i]"/>  <!-- //se supone que aki inserta?? -->
     </g:each>
 </div>
