@@ -3,8 +3,8 @@
    </head>
    <body>
         <ul>
-        <g:each in="${notas}" var="persona">
-           <li>${persona.texto} ${persona.titulo}</li>
+        <g:each in="${etiquetas}" var="nota">
+           <li>hola</li>
         </g:each>
         </ul>
    </body>

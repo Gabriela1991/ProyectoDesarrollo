@@ -35,7 +35,11 @@
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                                         <g:link controller="nota" action="listar" params="[id: 'etiqueta1', ]">${message(code: 'default.add.label', args: [message(code: 'nota.label', default: 'nota')])}</g:link>
-                                       
+                                        <!-- que hace lo de adentro
+                                        
+                                        //lo puse yo -->
+                                        
+                                        
                                 </fieldset>
 			</g:form>                        
 		</div>

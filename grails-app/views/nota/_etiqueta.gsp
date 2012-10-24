@@ -12,10 +12,10 @@
   </head>
   <body>
     <div id="etiqueta${i}">
-    <g:hiddenField name='EtiquetaList[${i}].id' value='${etiqueta.id}'/>
-    <g:textField name='EtiquetasList[${i}].title' value='${etiqueta.title}'/>
-    <input type="hidden" name='EtiquetasList[${i}]._deleted' id='EtiquetasList[${i}]._deleted' value='false'/>
-    <span onClick="$('#EtiquetasList\\[${i}\\]\\._deleted').val('true'); $('#etiqueta${i}').hide()"><img src="${resource(dir:'images/skin', file:'icon_delete.png')}" /></span>
+    <g:hiddenField name='etiquetas[${i}].id' value='${etiqueta.id}'/>
+    <g:textField name='etiquetas[${i}]' value='${etiqueta.texto}'/>
+    <input type="hidden" name='etiquetas[${i}]._deleted' id='etiquetas[${i}]._deleted' value='false'/>
+    <span onClick="$('#etiquetas\\[${i}\\]\\._deleted').val('true'); $('#etiqueta${i}').hide()"><img src="${resource(dir:'images/skin', file:'icon_delete.png')}" /></span>
 </div>
   </body>
 </html>
