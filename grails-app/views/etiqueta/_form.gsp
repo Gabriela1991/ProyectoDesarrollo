@@ -2,6 +2,14 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: etiquetaInstance, field: '_deleted', 'error')} ">
+	<label for="_deleted">
+		<g:message code="etiqueta._deleted.label" default="Deleted" />
+		
+	</label>
+	<g:checkBox name="_deleted" value="${etiquetaInstance?._deleted}" />
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: etiquetaInstance, field: 'nota', 'error')} required">
 	<label for="nota">
 		<g:message code="etiqueta.nota.label" default="Nota" />

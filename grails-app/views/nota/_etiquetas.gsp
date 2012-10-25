@@ -17,7 +17,7 @@
         templateHtml += "<span onClick='$(\"#" + htmlId + "\").remove();'><img src='" + deleteIcon + "' /></span>\n";
         templateHtml += "</div>\n";
         $("#childList").append(templateHtml);
-        var posicion= childCount;
+     /*   var posicion= childCount;
         var obtener;
         if (posicion >0){
             obtener=document.getElementById('etiquetas['+(posicion-1)+']'); 
@@ -26,7 +26,7 @@
          lista.push (obtener.value);
         
           
-        }
+        }*/
        // var lista = document.form.eti.value;
        // alert (lista.push(obtener.value));
         childCount++;      

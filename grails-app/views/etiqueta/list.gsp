@@ -24,6 +24,8 @@
 				<thead>
 					<tr>
 					
+						<g:sortableColumn property="_deleted" title="${message(code: 'etiqueta._deleted.label', default: 'Deleted')}" />
+					
 						<th><g:message code="etiqueta.nota.label" default="Nota" /></th>
 					
 						<g:sortableColumn property="texto" title="${message(code: 'etiqueta.texto.label', default: 'Texto')}" />
@@ -34,7 +36,9 @@
 				<g:each in="${etiquetaInstanceList}" status="i" var="etiquetaInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${etiquetaInstance.id}">${fieldValue(bean: etiquetaInstance, field: "nota")}</g:link></td>
+						<td><g:link action="show" id="${etiquetaInstance.id}">${fieldValue(bean: etiquetaInstance, field: "_deleted")}</g:link></td>
+					
+						<td>${fieldValue(bean: etiquetaInstance, field: "nota")}</td>
 					
 						<td>${fieldValue(bean: etiquetaInstance, field: "texto")}</td>
 					

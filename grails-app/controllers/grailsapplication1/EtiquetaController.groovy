@@ -16,11 +16,6 @@ class EtiquetaController {
     }
 
     def create() {
-        println(params);
-        [etiquetaInstance: new Etiqueta(params)]
-    }
-    
-    def create2(params){
         [etiquetaInstance: new Etiqueta(params)]
     }
 

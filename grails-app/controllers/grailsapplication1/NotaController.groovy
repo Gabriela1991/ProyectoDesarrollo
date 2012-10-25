@@ -10,16 +10,16 @@ class NotaController {
         redirect(action: "list", params: params)
     }
     
-    def etiquetas = {new ArrayList() as grails.converters.JSON 
+    def etiquetas = {new ArrayList() as grails.converters.JSON  //este metodo realmente no hace nada.. solo probando
             [Etiqueta: etiquetas];
-    } 
+    }  
     
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [notaInstanceList: Nota.list(params), notaInstanceTotal: Nota.count()]
     }
     
-    def listar () {
+    def listar () {  //este metodo tampoco hace falta
      //   def objeto= Nota.executeQuery("select MAX (id) from Nota");
         def notaInstance = Nota.find("from Nota where id= (Select MAX(id) from Nota)");
         def notafinal= new Nota();
@@ -39,21 +39,30 @@ class NotaController {
         [notaInstance: new Nota(params)]
     }
 
-    def save() {
-     //   println (params);
-        params.etiquetas= new ArrayList();
-        EtiquetaController ec= new EtiquetaController();
-       // ec.create2(params.etiquetas)
-      //  params.etiquetas[0];
-       // println (params.etiquetas[0]);
-        def notaInstance = new Nota(params)
-        if (!notaInstance.save(flush: true)) {
+    def save() { 
+                
+        def params2= params.clone(); //los parametros del html los clono para poder modificarlos
+        println(params.size());
+        def numero = params.size();
+        def x=0;
+        while (numero-- >7){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
+            params.remove('etiquetas['+x+']');
+            x++;
+        }
+        def notaInstance = new Nota(params) //creo la nueva nota
+        numero= params2.size();
+        x=0;
+      while (numero-- > 7){
+          notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]); //y aqui se le añaden los hijos a esa nota creada
+          x++;
+      }
+        if (!notaInstance.save(flush: true)) { //aqui solo guardo en la bd y listo
             render(view: "create", model: [notaInstance: notaInstance])
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
-        redirect(action: "show", id: notaInstance.id)
+        redirect(action: "show", id: notaInstance.id)        
     }
 
         
