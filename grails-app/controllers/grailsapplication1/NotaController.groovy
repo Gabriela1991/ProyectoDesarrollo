@@ -100,31 +100,24 @@ class NotaController {
     def update(Long id, Long version) {
        
        def notaInstance = Nota.get(id)
-        def params2 =params.clone();
         def numero = params.size();
         def x=0;
-        println (params)
-        while (numero > 9){
-           // println(numero)params.getAt('etiquetas['+x+']')
-           def etiqueta= Etiqueta.find("from Etiqueta where Nota_Id=:id", [id:id]);
-            if (params.getAt('etiquetas['+x+']._deleted')=='true'){          
-                println ('entre en borrar hijo')                 
-               notaInstance.removeFromEtiquetas(etiqueta)
-               
-            } else if (params.getAt('etiquetas['+x+']._deleted')=='false'){
-                
-            } else {
-                
-                notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]);
+        while (numero > 9){ //los parametros de la nota por defecto son 9 si tiene mas es porque hay alguna etiqueta agregada
+           def etiqueta= Etiqueta.find("from Etiqueta where Nota_Id=:id", [id:id]); //aqui se obtiene la etiqueta asociada a la nota
+            if (params.getAt('etiquetas['+x+']._deleted')=='true'){  //si el _deleted esta activado es que mande a borrar la etiqueta                      
+               notaInstance.removeFromEtiquetas(etiqueta)              
+            } else if (params.getAt('etiquetas['+x+']._deleted')=='false'){ //si esta en false es porque se mando a actualizar el texto de la etiqueta
+                etiqueta.setTexto(params.getAt('etiquetas['+x+']'));
+                etiqueta.save(flush:true);
+            } else { //si nisiquiera aparece el atributo _deleted es que no hay etiquetas y acabo de agregar una nueva
+                notaInstance.addToEtiquetas([texto:params.getAt('etiquetas['+x+']')]);
             }
-            params.remove('etiquetas['+x+']._deleted')
+            params.remove('etiquetas['+x+']._deleted') //debo borrar estos 3 parametros para poder insertar la nota correctamente
                   params.remove('etiquetas['+x+']')
                   params.remove('etiquetas['+x+'].id') 
             numero=numero-3;
             x++;
-        }
-        
-       println (params);     
+        }     
         if (!notaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'nota.label', default: 'Nota'), id])
             redirect(action: "list")
