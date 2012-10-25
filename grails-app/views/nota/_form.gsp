@@ -24,8 +24,7 @@
 		<g:message code="nota.etiquetas.label" default="Etiquetas" />
 		
 	</label> -->
-   
-
+       
  <div class="dialog"> 
     
         <tbody>
