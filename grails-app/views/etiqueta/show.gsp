@@ -23,15 +23,6 @@
 			</g:if>
 			<ol class="property-list etiqueta">
 			
-				<g:if test="${etiquetaInstance?._deleted}">
-				<li class="fieldcontain">
-					<span id="_deleted-label" class="property-label"><g:message code="etiqueta._deleted.label" default="Deleted" /></span>
-					
-						<span class="property-value" aria-labelledby="_deleted-label"><g:formatBoolean boolean="${etiquetaInstance?._deleted}" /></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${etiquetaInstance?.nota}">
 				<li class="fieldcontain">
 					<span id="nota-label" class="property-label"><g:message code="etiqueta.nota.label" default="Nota" /></span>

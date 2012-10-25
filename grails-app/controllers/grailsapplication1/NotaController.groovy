@@ -95,21 +95,36 @@ class NotaController {
 
         [notaInstance: notaInstance]
     }
+    
 
     def update(Long id, Long version) {
-        
-     /* def notaInstance = Nota.get( params.id )
-    if(notaInstance) {
-        if(params.version) {
-            
+       
+       def notaInstance = Nota.get(id)
+        def params2 =params.clone();
+        def numero = params.size();
+        def x=0;
+        println (params)
+        while (numero > 9){
+           // println(numero)params.getAt('etiquetas['+x+']')
+           def etiqueta= Etiqueta.find("from Etiqueta where Nota_Id=:id", [id:id]);
+            if (params.getAt('etiquetas['+x+']._deleted')=='true'){          
+                println ('entre en borrar hijo')                 
+               notaInstance.removeFromEtiquetas(etiqueta)
+               
+            } else if (params.getAt('etiquetas['+x+']._deleted')=='false'){
+                
+            } else {
+                
+                notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]);
+            }
+            params.remove('etiquetas['+x+']._deleted')
+                  params.remove('etiquetas['+x+']')
+                  params.remove('etiquetas['+x+'].id') 
+            numero=numero-3;
+            x++;
         }
-    notaInstance.properties = params
-    def _toBeDeleted = notaInstance.etiquetas.findAll {it._deleted}
-    if (_toBeDeleted) {
-        notaInstance.etiquetas.removeAll(_toBeDeleted)
-    }*/
-            
-        def notaInstance = Nota.get(id)
+        
+       println (params);     
         if (!notaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'nota.label', default: 'Nota'), id])
             redirect(action: "list")

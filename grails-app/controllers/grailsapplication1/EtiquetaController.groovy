@@ -53,6 +53,8 @@ class EtiquetaController {
     }
 
     def update(Long id, Long version) {
+        
+        println(params);
         def etiquetaInstance = Etiqueta.get(id)
         if (!etiquetaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'etiqueta.label', default: 'Etiqueta'), id])
@@ -82,6 +84,8 @@ class EtiquetaController {
     }
 
     def delete(Long id) {
+        
+        println (params);
         def etiquetaInstance = Etiqueta.get(id)
         if (!etiquetaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'etiqueta.label', default: 'Etiqueta'), id])
