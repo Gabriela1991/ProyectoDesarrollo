@@ -3,7 +3,7 @@ package grailsapplication1
 import org.springframework.dao.DataIntegrityViolationException
 
 class NotaController {
-
+//asjflafhsjfnasjf se ve?
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
