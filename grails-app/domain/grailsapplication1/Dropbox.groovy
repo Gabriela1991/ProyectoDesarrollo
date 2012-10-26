@@ -42,7 +42,7 @@ public class Dropbox {
         AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
         WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
         WebAuthInfo authInfo = session.getAuthInfo();
-
+//fshjdhfhsdf
         RequestTokenPair pair = authInfo.requestTokenPair;
         //String url = authInfo.url;
         String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()
