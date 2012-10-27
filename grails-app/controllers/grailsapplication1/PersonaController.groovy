@@ -15,10 +15,10 @@ class PersonaController {
     def inicioSesion = {
     def persona = Persona.findWhere(correo:params['correo'],
         clave:params['clave'])
-   println (params) 
     session.persona = persona
          if (persona){
-          redirect(controller:'persona',action:'ventanaInicio')
+             println (persona.id);
+          redirect(controller:'persona',action:'ventanaInicio', params: [id: persona.id])
           Dropbox x=new Dropbox();
           x.main();
       }
