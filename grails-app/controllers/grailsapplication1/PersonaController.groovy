@@ -4,20 +4,20 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class PersonaController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST", doLogin: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def login = { 
+    def inicio = { 
     }
     
-    def doLogin = {
+    def inicioSesion = {
     def persona = Persona.findWhere(correo:params['correo'],
          clave:params['clave'])
    println (params) 
     session.persona = persona
          if (persona)
-          redirect(controller:'nota',action:'list')
+          redirect(controller:'persona',action:'inicioSesion')
        else
-           redirect(controller:'persona',action:'list')
+           redirect(controller:'persona',action:'inicio')
     }
     
     def create() {

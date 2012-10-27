@@ -28,30 +28,41 @@
 					<article class="col1">
 						<h2>BIENVENIDO</h2>
                                                 <p><strong>Inicio de Sesi&oacute;n.</strong></p>
+                                                <g:form action="inicioSesion" method="post">
                                                 <table style="background: darkseagreen">
                                                   <tr>
                                                     <td>
-                                                      <label for="login" style="color: #ffffff">... Usuario: </label>
+                                                      <label for="cuenta" style="color: #ffffff">... Usuario: </label>
                                                     </td>
                                                     <td>
-                                                      <input type="text" id="login" name="login"/>
+                                                      <input type="text" id="cuenta" name="cuenta" value='${persona?.correo}' />
                                                     </td>
                                                   </tr>
                                                   <tr>
                                                     <td>
-                                                      <label for="password" style="color: #ffffff">... Clave: </label>
+                                                      <label for="clave" style="color: #ffffff">... Clave: </label>
                                                     </td>
                                                     <td>
-                                                      <input type="password" id="password" name="password"/>
+                                                      <input type="password" id="clave" name="clave" value='${persona?.clave}'/>
                                                     </td>
                                                   </tr>
                                                 </table>
+                                                  
+                                                  <div class="buttons">
+                     <span class="formButton">
+                        <input type="submit" value="Login">LOGIN</input>
+</span>
+               </div>
+                                                </g:form>
                                                <!-- <input type="submit" value="Login"/> -->
 					</article>
 				</div>
 				<div class="wrapper">
                                   <p></p>
-					<article class="col1"><a href="http://localhost:8080/GrailsApplication1/persona/Inicio" class="button">INICIAR</a></article>
+                                  <h2><g:link controller="persona" action="inicioSesion">INICIAR</g:link></h2>
+                                    <h2><a href="http://localhost:8080/GrailsApplication1/persona/create">CREAR USUARIO</a></h2>
+                                  
+                                  
 				</div>
 			</section>
 <a href="http://localhost:8080/GrailsApplication1/persona/create" class="skip"><g:message code="default.link.skip.label" default="CREAR CUENTA"/></a>
@@ -74,8 +85,7 @@
 	<div class="main">
 <!-- footer -->
 		<footer>
-			<a href="http://www.templatemonster.com/" target="_blank" rel="nofollow">www.templatemonster.com</a><br>
-			<a href="http://www.templates.com/product/3d-models/" target="_blank" rel="nofollow">www.templates.com</a>
+			<p> Desarrolladores: Keyla Hernandez, Maria G Loreto, Angel Valderrama</p>                                        			
 		</footer>
 <!-- / footer -->
 	</div>
