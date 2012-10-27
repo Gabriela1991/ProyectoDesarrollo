@@ -87,9 +87,7 @@
                       </tr>
                       <tr>
                         <td>
-                      <script>
-                      alert (${params.id});
-                      </script>
+                     
                           <p>Consulte la informacion que ha sido almacenada</p>
                           <p>al momento de la creacion de su cuenta<a href='http://localhost:8080/GrailsApplication1/persona/show/${params.id}'>.::Ver::.</a><</p>
                         </td>

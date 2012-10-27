@@ -26,6 +26,8 @@
 					
 						<g:sortableColumn property="nombre" title="${message(code: 'libreta.nombre.label', default: 'Nombre')}" />
 					
+						<th><g:message code="libreta.persona.label" default="Persona" /></th>
+					
 						<g:sortableColumn property="tema" title="${message(code: 'libreta.tema.label', default: 'Tema')}" />
 					
 					</tr>
@@ -35,6 +37,8 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${libretaInstance.id}">${fieldValue(bean: libretaInstance, field: "nombre")}</g:link></td>
+					
+						<td>${fieldValue(bean: libretaInstance, field: "persona")}</td>
 					
 						<td>${fieldValue(bean: libretaInstance, field: "tema")}</td>
 					

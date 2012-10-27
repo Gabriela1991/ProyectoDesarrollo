@@ -34,27 +34,11 @@
 	<g:textField name="cuenta" maxlength="45" required="" value="${personaInstance?.cuenta}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'clave', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'clave', 'error')} required">
 	<label for="clave">
 		<g:message code="persona.clave.label" default="Clave" />
-		
-	</label>
-	<g:field type="password" name="clave" maxlength="15" value="${personaInstance?.clave}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'cuentadropbox', 'error')} required">
-	<label for="cuentadropbox">
-		<g:message code="persona.cuentadropbox.label" default="Cuentadropbox" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="cuentadropbox" maxlength="45" required="" value="${personaInstance?.cuentadropbox}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'clavedropbox', 'error')} ">
-	<label for="clavedropbox">
-		<g:message code="persona.clavedropbox.label" default="Clavedropbox" />
-		
-	</label>
-	<g:field type="password" name="clavedropbox" maxlength="15" value="${personaInstance?.clavedropbox}"/>
+	<g:field type="password" name="clave" maxlength="15" required="" value="${personaInstance?.clave}"/>
 </div>
 

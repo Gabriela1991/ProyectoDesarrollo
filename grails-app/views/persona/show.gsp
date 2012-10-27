@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'persona.label', default: 'Usuario')}" />
+		<g:set var="entityName" value="${message(code: 'persona.label', default: 'Persona')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -12,6 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
@@ -63,24 +64,6 @@
 					<span id="clave-label" class="property-label"><g:message code="persona.clave.label" default="Clave" /></span>
 					
 						<span class="property-value" aria-labelledby="clave-label"><g:fieldValue bean="${personaInstance}" field="clave"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${personaInstance?.cuentadropbox}">
-				<li class="fieldcontain">
-					<span id="cuentadropbox-label" class="property-label"><g:message code="persona.cuentadropbox.label" default="Cuentadropbox" /></span>
-					
-						<span class="property-value" aria-labelledby="cuentadropbox-label"><g:fieldValue bean="${personaInstance}" field="cuentadropbox"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${personaInstance?.clavedropbox}">
-				<li class="fieldcontain">
-					<span id="clavedropbox-label" class="property-label"><g:message code="persona.clavedropbox.label" default="Clavedropbox" /></span>
-					
-						<span class="property-value" aria-labelledby="clavedropbox-label"><g:fieldValue bean="${personaInstance}" field="clavedropbox"/></span>
 					
 				</li>
 				</g:if>
