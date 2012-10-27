@@ -18,15 +18,26 @@ class PersonaController {
    println (params) 
     session.persona = persona
          if (persona)
-          redirect(controller:'persona',action:'inicioSesion')
+          redirect(controller:'persona',action:'ventanaInicio')
        else
-           redirect(controller:'persona',action:'ventanaInicio')
+           redirect(controller:'persona',action:'inicio')
     }
     
     def create() {
         [personaInstance: new Persona(params)]
     }
-
+    
+    def list(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        [personaInstanceList: Persona.list(params), personaInstanceTotal: Persona.count()]
+    }
+    
+    def mostrarInfo(){
+        def personaInstance = new Persona(params)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
+        redirect(action: "show", id: personaInstance.id)
+    }
+    
     def save() {
         def personaInstance = new Persona(params)
         if (!personaInstance.save(flush: true)) {
