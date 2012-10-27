@@ -45,22 +45,25 @@ class NotaController {
     def save() { 
                 
         def params2= params.clone(); //los parametros del html los clono para poder modificarlos
-       // println(params.size());
+
         def numero = params.size();
         def x=0;
+
         while (numero-- >7){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
             params.remove('etiquetas['+x+']');
             params.remove('etiqueta2');
             params2.remove('etiqueta2');
             x++;
-      //      println (params)
         }
+
         def notaInstance = new Nota(params) //creo la nueva nota
         numero= params2.size();
         x=0;
-      while (numero-- > 7){
-         // println (params2);
-          notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]); //y aqui se le añaden los hijos a esa nota creada
+      while (numero > 7){
+         if (params2.getAt('etiquetas['+x+']')){
+          notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]); //y aqui se le añaden los hijos a esa nota 
+          numero=numero-1;
+         }
           x++;
       }
         if (!notaInstance.save(flush: true)) { //aqui solo guardo en la bd y listo
