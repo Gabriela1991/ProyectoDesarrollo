@@ -20,32 +20,28 @@
 </div>
 
  <div class="fieldcontain ${hasErrors(bean: notaInstance, field: 'etiquetas', 'error')} ">
-	<label for="etiquetas">
+	<!--<label for="etiquetas">
 		<g:message code="nota.etiquetas.label" default="Etiquetas" />
 		
-	</label>
-	
- <script language="javascript" type="text/javascript">  
-var i = 2;
-var sourceTextNode = document.getElementsByName("imagedescription2")[0];
-function createTextBox(){
-    var newNode = sourceTextNode.cloneNode(false);
-    newNode.setAttribute("name", ++i);
-    var parent = sourceTextNode.parentNode;
-    if(parent.lastchild == sourceTextNode) {
-        parent.appendChild(newNode);
-    } else {
-        parent.insertBefore(newNode, sourceTextNode.nextSibling);
-    }
-}
+	</label> -->
+   
 
-function btnClicked(){
-    createTextBox();
-}   
-   
- </script>  
-   
- <g:submitButton name="Agregar Etiqueta" value="Submit" onclick="btnClicked" />
+ <div class="dialog"> 
+    
+        <tbody>
+            <tr class="prop">
+                <td valign="top" class="name"><label for="textoetiqueta">Etiquetas:</label></td>
+                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'texto','errors')}">
+                    
+                </td>
+                <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'etiquetas','errors')}">
+                    <g:render template="etiquetas" model="['notaInstance':notaInstance]" />
+                </td>
+            </tr>
+          
+        </tbody>
+    
+ </div> 
    
 <!-- <ul class="one-to-many">
 <g:each in="${notaInstance?.etiquetas?}" var="e">
@@ -56,7 +52,9 @@ function btnClicked(){
 </li>
 </ul>  -->
 
-</div>  
+
+</div> 
+<div id = "childList"></div>
 
 <div class="fieldcontain ${hasErrors(bean: notaInstance, field: 'libreta', 'error')} required">
 	<label for="libreta">

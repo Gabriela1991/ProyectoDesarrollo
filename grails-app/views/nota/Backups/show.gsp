@@ -49,7 +49,7 @@
 				<li class="fieldcontain">
 					<span id="libreta-label" class="property-label"><g:message code="nota.libreta.label" default="Libreta" /></span>
 					
-						<span class="property-value" aria-labelledby="libreta-label"><g:link controller="libreta" action="show" id="${notaInstance?.libreta?.id}">${notaInstance?.libreta?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="libreta-label"><g:link controller="libreta" action="show" id="${notaInstance?.libreta?.id}">${notaInstance?.libreta?.nombre.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

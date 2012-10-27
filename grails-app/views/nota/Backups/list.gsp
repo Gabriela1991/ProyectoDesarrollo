@@ -12,11 +12,11 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="create" action="create"><g:message code="Crear nueva nota" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-nota" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1><g:message code="Lista de Notas" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -24,8 +24,8 @@
 				<thead>
 					<tr>
 					
-						<th><g:message code="nota.libreta.label" default="Libreta" /></th>
-					
+						<th><g:message code="nota.libreta.label" default="Libretas" /></th>
+                                                                                      					
 						<g:sortableColumn property="texto" title="${message(code: 'nota.texto.label', default: 'Texto')}" />
 					
 						<g:sortableColumn property="titulo" title="${message(code: 'nota.titulo.label', default: 'Titulo')}" />
@@ -36,7 +36,7 @@
 				<g:each in="${notaInstanceList}" status="i" var="notaInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${notaInstance.id}">${fieldValue(bean: notaInstance, field: "libreta")}</g:link></td>
+						<td><g:link action="show" id="${notaInstance.id}">${notaInstance.libreta.nombre?.encodeAsHTML()}</g:link></td>
 					
 						<td>${fieldValue(bean: notaInstance, field: "texto")}</td>
 					
