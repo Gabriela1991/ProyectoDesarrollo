@@ -21,4 +21,12 @@ class Persona {
         cuentadropbox(blank:false, maxSize:45)
         clavedropbox(blank:false, password:true, maxSize:15)
     }
+    
+    public String getCorreo(){
+        return correo;
+    }
+    
+    public String getClave(){
+        return clave;
+    }
 }

@@ -26,7 +26,7 @@
                     <tr>
                       <td> <h2 style="color: forestgreen">BIENVENIDO</h2> </td>
                       <td> <h2><a href="http://localhost:8080/GrailsApplication1/Persona/show"> .::Modificar Perfil::.</a></h2> </td>
-                      <td> <h2 style="color: brown"><a href="http://localhost:8080/GrailsApplication1/Inicio">.::Cerrar Sesion::.</a></h2> </td>
+                      <td> <h2 style="color: brown"><g:render te>.::Cerrar Sesion::.</a></h2> </td>
                     </tr>
                   </table>
 			
