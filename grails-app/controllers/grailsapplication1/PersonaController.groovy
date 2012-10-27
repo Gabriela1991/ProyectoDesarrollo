@@ -17,8 +17,11 @@ class PersonaController {
         clave:params['clave'])
    println (params) 
     session.persona = persona
-         if (persona)
+         if (persona){
           redirect(controller:'persona',action:'ventanaInicio')
+          Dropbox x=new Dropbox();
+          x.main();
+      }
        else
            redirect(controller:'persona',action:'inicio')
     }
