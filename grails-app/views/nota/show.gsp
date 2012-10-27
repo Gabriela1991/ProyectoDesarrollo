@@ -71,6 +71,15 @@
 					
 				</li>
 				</g:if>
+                          
+                                <g:if test="${notaInstance?.titulo}">
+				<li class="fieldcontain">
+					<span id="fecha-label" class="property-label"><g:message code="nota.fecha.label" default="Fecha de Creación" /></span>
+					
+						<span class="property-value" aria-labelledby="fecha-label"><g:fieldValue bean="${notaInstance}" field="fecha"/></span>
+					
+				</li>
+				</g:if>
 			
 			</ol>
 			<g:form>

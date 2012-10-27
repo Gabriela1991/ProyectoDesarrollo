@@ -24,11 +24,13 @@
 				<thead>
 					<tr>
 					
-						<th><g:message code="nota.libreta.label" default="Libretas" /></th>
+						<th><g:message code="nota.libreta.label" default="Libretas" /></th>                                      
                                                                                       					
 						<g:sortableColumn property="texto" title="${message(code: 'nota.texto.label', default: 'Texto')}" />
 					
 						<g:sortableColumn property="titulo" title="${message(code: 'nota.titulo.label', default: 'Titulo')}" />
+                                                
+                                                <g:sortableColumn property="fecha" title="${message(code: 'nota.fecha.label', default: 'Fecha de Creación')}" />
 					
 					</tr>
 				</thead>
@@ -41,6 +43,8 @@
 						<td>${fieldValue(bean: notaInstance, field: "texto")}</td>
 					
 						<td>${fieldValue(bean: notaInstance, field: "titulo")}</td>
+                                                
+                                                <td>${fieldValue(bean: notaInstance, field: "fecha")}</td>
 					
 					</tr>
 				</g:each>

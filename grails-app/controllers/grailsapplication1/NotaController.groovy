@@ -39,28 +39,33 @@ class NotaController {
     }
 
     def create() {
-        [notaInstance: new Nota(params)]
+        def nota= new Nota(params);
+        nota.fecha= new Date().format("dd/MM/yyyy");
+        [notaInstance: nota]
     }
 
     def save() { 
                 
         def params2= params.clone(); //los parametros del html los clono para poder modificarlos
-
+        println (params); 
         def numero = params.size();
         def x=0;
 
-        while (numero-- >7){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
+        while (numero-- >8){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
             params.remove('etiquetas['+x+']');
             params.remove('etiqueta2');
             params2.remove('etiqueta2');
+        //    params.remove('libreta.id');
+        //    params.putAt('libreta.id',params2.getAt('libreta.id'))
             x++;
         }
 
         def notaInstance = new Nota(params) //creo la nueva nota
         numero= params2.size();
         x=0;
-      while (numero > 7){
+      while (numero > 8){
          if (params2.getAt('etiquetas['+x+']')){
+             
           notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]); //y aqui se le añaden los hijos a esa nota 
           numero=numero-1;
          }

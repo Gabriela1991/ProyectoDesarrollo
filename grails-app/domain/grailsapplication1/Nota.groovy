@@ -5,11 +5,10 @@ class Nota {
  static belongsTo = Libreta
  String titulo;
  String texto;
- private String fecha_creacion;
+ String fecha;
  Libreta libreta;
  List etiquetas = new ArrayList()
- //Etiqueta etiqueta;  
- //  
+
  // relaciones
  
   static hasMany = [etiquetas: Etiqueta,adjuntos: Adjunto]
@@ -19,6 +18,8 @@ class Nota {
     }
     
     static constraints = {
+        texto nullabe: true;
+        texto maxSize: 1000;
     }
     
      def getEtiquetasList() {
@@ -28,7 +29,7 @@ class Nota {
     }
     
       def String toString() {
-        return "${titulo}, ${texto}"
+        return "${titulo}, ${texto}, ${fecha}"
     
       }
 }
