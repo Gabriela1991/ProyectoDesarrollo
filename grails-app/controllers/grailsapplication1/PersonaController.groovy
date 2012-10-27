@@ -18,9 +18,9 @@ class PersonaController {
    println (params) 
     session.persona = persona
          if (persona)
-          redirect(controller:'persona',action:'inicioSesion')
+          redirect(controller:'persona',action:'ventanaInicio')
        else
-           redirect(controller:'persona',action:'ventanaInicio')
+           redirect(controller:'persona',action:'inicio')
     }
     
     def create() {

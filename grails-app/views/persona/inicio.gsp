@@ -15,7 +15,7 @@
                           <label for='correo'>Correo:</label>
 </td>
 <td valign='top' style='text-align:left;' width='80%'>
-                          <input id="orreo" type='text' name='correo' value='${persona?.correo}' />                      </td>
+                          <input id="correo" type='text' name='correo' value='${persona?.correo}' />                      </td>
                   </tr>
 <tr class='prop'>
                       <td valign='top' style='text-align:left;' width='20%'>
