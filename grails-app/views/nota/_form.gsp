@@ -60,7 +60,7 @@
 		<g:message code="nota.fecha.label" default="Fecha" />
 		
 	</label>
-	<g:textField name="fecha" value="${notaInstance?.fecha}"/>
+	<g:textField name="fecha" readonly="readonly" value="${notaInstance?.fecha}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: notaInstance, field: 'titulo', 'error')} ">
