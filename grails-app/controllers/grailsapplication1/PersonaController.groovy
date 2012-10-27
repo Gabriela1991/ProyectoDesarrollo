@@ -4,7 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class PersonaController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST", inicioSesion: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def inicio = { 
     }
@@ -26,21 +26,19 @@ class PersonaController {
            redirect(controller:'persona',action:'inicio')
     }
     
-    def create() {
-        [personaInstance: new Persona(params)]
+    def index() {
+        redirect(action: "list", params: params)
     }
-    
+
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [personaInstanceList: Persona.list(params), personaInstanceTotal: Persona.count()]
     }
-    
-    def mostrarInfo(){
-        def personaInstance = new Persona(params)
-        flash.message = message(code: 'default.created.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
-        redirect(action: "show", id: personaInstance.id)
+
+    def create() {
+        [personaInstance: new Persona(params)]
     }
-    
+
     def save() {
         def personaInstance = new Persona(params)
         if (!personaInstance.save(flush: true)) {
