@@ -65,7 +65,7 @@ class EtiquetaController {
         if (version != null) {
             if (etiquetaInstance.version > version) {
                 etiquetaInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'etiqueta.label', default: 'Etiqueta')] as Object[],
+                    [message(code: 'etiqueta.label', default: 'Etiqueta')] as Object[],
                           "Another user has updated this Etiqueta while you were editing")
                 render(view: "edit", model: [etiquetaInstance: etiquetaInstance])
                 return
@@ -102,5 +102,15 @@ class EtiquetaController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'etiqueta.label', default: 'Etiqueta'), id])
             redirect(action: "show", id: id)
         }
+    }
+    def getEtiqueta = {
+        //Se la lista de estados
+        def etiquetaList = notaInstance?.etiqueta
+        //Se hace el render del emplate '_selectEstados.gsp' con la lista de estados obtenida.
+        render(template: "selectEtiqueta", model: [etiquetaList:etiquetaList])
+    }
+    def findEtiquetas = {
+        def etiqueta = Etiqueta.get(params.etiqueta.id)
+        render(template: 'etiquetaSelection', model:  [etiqueta: etiqueta])
     }
 }

@@ -5,7 +5,6 @@ import org.springframework.dao.DataIntegrityViolationException
 class NotaController {
 //asjflafhsjfnasjf se ve?
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
     def index() {
         redirect(action: "list", params: params)
     }
@@ -18,7 +17,11 @@ class NotaController {
         params.max = Math.min(max ?: 10, 100)
         [notaInstanceList: Nota.list(params), notaInstanceTotal: Nota.count()]
     }
-    
+    def search(){
+        def Etiqueta = Nota.executeQuery("SELECT distinct b.texto FROM Etiqueta b")
+        [ Etiqueta:Etiqueta]
+        
+    }
     def listar () {  //este metodo tampoco hace falta
      //   def objeto= Nota.executeQuery("select MAX (id) from Nota");
         def notaInstance = Nota.find("from Nota where id= (Select MAX(id) from Nota)");
@@ -42,17 +45,21 @@ class NotaController {
     def save() { 
                 
         def params2= params.clone(); //los parametros del html los clono para poder modificarlos
-        println(params.size());
+       // println(params.size());
         def numero = params.size();
         def x=0;
         while (numero-- >7){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
             params.remove('etiquetas['+x+']');
+            params.remove('etiqueta2');
+            params2.remove('etiqueta2');
             x++;
+      //      println (params)
         }
         def notaInstance = new Nota(params) //creo la nueva nota
         numero= params2.size();
         x=0;
       while (numero-- > 7){
+         // println (params2);
           notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]); //y aqui se le añaden los hijos a esa nota creada
           x++;
       }
@@ -100,24 +107,38 @@ class NotaController {
     def update(Long id, Long version) {
        
        def notaInstance = Nota.get(id)
-        def numero = params.size();
+        params.remove('etiqueta2');
+        def numero = params.size()
+     
+
         def x=0;
-        while (numero > 9){ //los parametros de la nota por defecto son 9 si tiene mas es porque hay alguna etiqueta agregada
-           def etiqueta= Etiqueta.find("from Etiqueta where Nota_Id=:id", [id:id]); //aqui se obtiene la etiqueta asociada a la nota
+        
+        while (params.getAt('etiquetas['+x+']')){ //los parametros de la nota por defecto son 9 si tiene mas es porque hay alguna etiqueta agregada
+        //  println (numero)
+     
+       //     def etiqueta= Etiqueta.find("from Etiqueta where Nota_Id=:id and id=:idetiq", [id:id,idetiq:params.getAt('etiquetas['+x+'].id').toLong()]); //aqui se obtiene la etiqueta asociada a la nota
+   
+            
             if (params.getAt('etiquetas['+x+']._deleted')=='true'){  //si el _deleted esta activado es que mande a borrar la etiqueta                      
-               notaInstance.removeFromEtiquetas(etiqueta)              
-            } else if (params.getAt('etiquetas['+x+']._deleted')=='false'){ //si esta en false es porque se mando a actualizar el texto de la etiqueta
+              def  etiqueta= Etiqueta.find("from Etiqueta where Nota_Id=:id and id=:idetiq", [id:id,idetiq:params.getAt('etiquetas['+x+'].id').toLong()]);
+                notaInstance.removeFromEtiquetas(etiqueta)
+            } 
+            else if (params.getAt('etiquetas['+x+']._deleted')=='false'){ //si esta en false es porque se mando a actualizar el texto de la etiqueta
+               def etiqueta= Etiqueta.find("from Etiqueta where Nota_Id=:id and id=:idetiq", [id:id,idetiq:params.getAt('etiquetas['+x+'].id').toLong()]);
                 etiqueta.setTexto(params.getAt('etiquetas['+x+']'));
                 etiqueta.save(flush:true);
-            } else { //si nisiquiera aparece el atributo _deleted es que no hay etiquetas y acabo de agregar una nueva
-                notaInstance.addToEtiquetas([texto:params.getAt('etiquetas['+x+']')]);
+            } 
+            else { //si nisiquiera aparece el atributo _deleted es que no hay etiquetas y acabo de agregar una nueva
+                notaInstance.addToEtiquetas([texto:params.getAt('etiquetas['+x+']')]); 
             }
+            
             params.remove('etiquetas['+x+']._deleted') //debo borrar estos 3 parametros para poder insertar la nota correctamente
                   params.remove('etiquetas['+x+']')
                   params.remove('etiquetas['+x+'].id') 
-            numero=numero-3;
             x++;
+            
         }     
+     
         if (!notaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'nota.label', default: 'Nota'), id])
             redirect(action: "list")

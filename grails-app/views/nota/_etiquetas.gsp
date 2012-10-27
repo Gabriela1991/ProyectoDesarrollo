@@ -1,7 +1,7 @@
 
 <html>
   <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Sample title</title>
   </head> 
@@ -18,17 +18,8 @@
         templateHtml += "</div>\n";
         $("#childList").append(templateHtml);
      /*   var posicion= childCount;
-        var obtener;
-        if (posicion >0){
-            obtener=document.getElementById('etiquetas['+(posicion-1)+']'); 
-           
-         var lista = ${notaInstance.etiquetas};
-         lista.push (obtener.value);
-        
-          
-        }*/
-       // var lista = document.form.eti.value;
-       // alert (lista.push(obtener.value));
+      * 
+      */
         childCount++;      
   }
 </script>

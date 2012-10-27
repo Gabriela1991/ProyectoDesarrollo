@@ -6,6 +6,7 @@
 		<g:set var="entityName" value="${message(code: 'nota.label', default: 'Nota')}" />
                 <g:set var="entityName2" value="${message(code: 'etiqueta.label', default: 'Etiqueta')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+                <g:javascript library="jquery" plugin="jquery"/>
 	</head>
 	<body>
 		<a href="#create-nota" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -34,7 +35,6 @@
 				</fieldset>
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                                        <g:link controller="nota" action="listar" params="[id: 'etiqueta1', ]">${message(code: 'default.add.label', args: [message(code: 'nota.label', default: 'nota')])}</g:link>
                                         <!-- que hace lo de adentro
                                         
                                         //lo puse yo -->
