@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home</title>
-
+<title>Perfil Usuario</title>
+<meta name="layout" content="main">
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -16,66 +16,77 @@
 	<script type="text/javascript" src="js/html5.js"></script>
 <![endif]-->
 </head>
-<body id="page1">  
-
-  
+<body id="page1">
+ 
 <div class="body1">
+  
+	<div class="body2"> 
 		<div class="main">
+                  <table>
+                    <tr>
+                      <td> <h2 style="color: forestgreen">BIENVENIDO</h2> </td>
+                      <td> <h2><a href="http://localhost:8080/GrailsApplication1/Persona/show"> .::Modificar Perfil::.</a></h2> </td>
+                      <td> <h2 style="color: brown"><a href="http://localhost:8080/GrailsApplication1/Inicio">.::Cerrar Sesion::.</a></h2> </td>
+                    </tr>
+                  </table>
+			
 <!-- / header-->
 <!-- content -->
 			<section id="content">
 				<div class="wrapper marg_left1">
-					<article class="col1">
-						<h2>BIENVENIDO</h2>
-                                                <p><strong>Inicio de Sesi&oacute;n.</strong></p>
-                                                <table style="background: darkseagreen">
-                                                  <tr>
-                                                    <td>
-                                                      <label for="login" style="color: #ffffff">... Usuario: </label>
-                                                    </td>
-                                                    <td>
-                                                      <input type="text" id="login" name="login"/>
-                                                    </td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>
-                                                      <label for="password" style="color: #ffffff">... Clave: </label>
-                                                    </td>
-                                                    <td>
-                                                      <input type="password" id="password" name="password"/>
-                                                    </td>
-                                                  </tr>
-                                                </table>
-                                               <!-- <input type="submit" value="Login"/> -->
-					</article>
-				</div>
-				<div class="wrapper">
-                                  <p></p>
-					<article class="col1"><a href="http://localhost:8080/GrailsApplication1/persona/Inicio" class="button">INICIAR</a></article>
-				</div>
+				  <article class="col1">
+					<div class="wrapper">
+						  <p>
+                                                  <h2 style="color: dodgerblue">Crear Libreta</h2>
+						    <figure class="left marg_right1"><img src="images/libreta.jpg" alt="" width="123" height="128"></figure>
+						  </p>
+						  <p><img src="images/comillasA.jpg" width="29" height="24"><strong> Administre sus notas y recordatorios personales, agrupandolos por un tema especifico mediante el uso de libretas.</strong>						  <img src="images/comillasC.jpg" width="29" height="24"></p>
+<article class="col1"><a href="http://localhost:8080/GrailsApplication1/libreta/create" class="button">Crear</a></article>
+					  <p>&nbsp;</p>
+                            
+				      <p>&nbsp;</p>
+				      <div class="wrapper">
+				        <p>
+                                          <h2 style="color: dodgerblue">Crear Nota</h2>
+				          <figure class="left marg_right1"><img src="images/notas.jpg" alt="" width="134" height="128"></figure>
+			            </p>
+				        <p><span class="under"><strong><img src="images/comillasA.jpg" width="29" height="24">Escriba sus notas y administre sus recordatorios de la manera que m&aacute;s le agrade.</strong></span></p>
+				        <p><span class="under"><strong> As&oacute;cielos a una libreta y adjunte los archivos de interes.</strong><img src="images/comillasC.jpg" width="29" height="24"></span></p>
+				        <article class="col1"><a href="http://localhost:8080/GrailsApplication1/nota/create" class="button">Crear</a></article>
+				        <p>&nbsp;</p>
+			          </div>
+				      <p>&nbsp;</p>
+					</div>
+				  </article>
+				  <article class="col2 pad_left1">
+					  <h2 style="color: dodgerblue">Ver Libretas</h2>
+				    <figure class="marg_top1 pad_bot1">
+			        <p><a href="http://localhost:8080/GrailsApplication1/libreta/list"><img src="images/libreta (1).jpg" alt="" width="115" height="93"></a></p>
+					    <p><strong>Consulte, edite o elimine una libreta ya creada.</strong>
+                                              <a href="http://localhost:8080/GrailsApplication1/libreta/list">.::Ver Libreta::.</a>
+                                            </p>
+				    </figure>
+					  <p>&nbsp;</p>
+						<h2 style="color: dodgerblue">Ver Notas</h2>
+                    <figure class="marg_top1 pad_bot1">
+                          <p><a href="http://localhost:8080/GrailsApplication1/nota/list"><img src="images/note.png" alt="" width="107" height="75"></a></p>
+                          <p><strong>Consulte, edite o elimine una nota ya creada.</strong>
+                          <a href="http://localhost:8080/GrailsApplication1/nota/list">.::Ver Nota::.</a>
+                          </p>
+                        </figure>
+                        <p>&nbsp;</p>
+</article>
+			  </div>				
 			</section>
-<a href="http://localhost:8080/GrailsApplication1/persona/create" class="skip"><g:message code="default.link.skip.label" default="CREAR CUENTA"/></a>
-		
-		<div id="page-body" role="main">
-			
-			<div id="controller-list" role="navigation">
-				<h2>Menu</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
-			</div>
-		</div>
 <!-- / content -->
 		</div>
+	</div>
 </div>
 <div class="body3">
 	<div class="main">
 <!-- footer -->
 		<footer>
-			<a href="http://www.templatemonster.com/" target="_blank" rel="nofollow">www.templatemonster.com</a><br>
-			<a href="http://www.templates.com/product/3d-models/" target="_blank" rel="nofollow">www.templates.com</a>
+                  <p> Desarrolladores: Keyla Hernandez, Maria G Loreto, Angel Valderrama</p>                                        			
 		</footer>
 <!-- / footer -->
 	</div>

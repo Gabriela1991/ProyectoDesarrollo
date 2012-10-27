@@ -6,6 +6,18 @@ class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    def checkUser() {
+        if(!session.user) {
+            // i.e. user not logged in
+            redirect(controller:'user',action:'login')
+            return false
+        }
+    }
+    
+    def login = { 
+        
+    }
+    
     def create() {
         [personaInstance: new Persona(params)]
     }
