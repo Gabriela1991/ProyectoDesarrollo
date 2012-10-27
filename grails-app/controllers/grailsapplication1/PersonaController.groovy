@@ -4,9 +4,12 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class PersonaController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST", inicioSesion: "POST"]
 
     def inicio = { 
+    }
+    
+    def ventanaInicio = { 
     }
     
     def inicioSesion = {
@@ -17,7 +20,7 @@ class PersonaController {
          if (persona)
           redirect(controller:'persona',action:'inicioSesion')
        else
-           redirect(controller:'persona',action:'inicio')
+           redirect(controller:'persona',action:'ventanaInicio')
     }
     
     def create() {
