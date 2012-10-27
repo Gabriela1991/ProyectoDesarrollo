@@ -32,10 +32,17 @@
 <div class="buttons">
                      <span class="formButton">
                         <input type="submit" value="Iniciar"></input>
-                        <input type="submit" value="Crear Cuenta"></input>
+                        
 </span>
                </div>
             </g:form>
+        <g:form action="create">
+          <div class="buttons">
+        <span class="formButton">     
+                                <input type="submit" value="Crear Cuenta"></input>
+        </span>
+             </div>
+        </g:form>
         </div>
 </body>
 </html>
