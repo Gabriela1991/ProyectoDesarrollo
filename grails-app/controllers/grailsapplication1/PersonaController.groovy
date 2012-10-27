@@ -11,7 +11,7 @@ class PersonaController {
     
     def inicioSesion = {
     def persona = Persona.findWhere(correo:params['correo'],
-         clave:params['clave'])
+        clave:params['clave'])
    println (params) 
     session.persona = persona
          if (persona)

@@ -22,11 +22,7 @@ class Persona {
         clavedropbox(blank:false, password:true, maxSize:15)
     }
     
-    public String getCorreo(){
-        return correo;
-    }
-    
-    public String getClave(){
-        return clave;
-    }
+    String toString()
+        { "$correo" }
+
 }
