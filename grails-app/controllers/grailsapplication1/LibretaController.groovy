@@ -11,8 +11,9 @@ class LibretaController {
     }
 
     def list(Integer max) {
+        def persona= Persona.findById(params.idpersona)
         params.max = Math.min(max ?: 10, 100)
-        [libretaInstanceList: Libreta.list(params), libretaInstanceTotal: Libreta.count()]
+        [libretaInstanceList: persona.libretas, libretaInstanceTotal: Libreta.count()]
     }
 
     def create() {

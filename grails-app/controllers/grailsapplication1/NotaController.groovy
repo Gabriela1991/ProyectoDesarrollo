@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class NotaController {
 //asjflafhsjfnasjf se ve?
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     def index() {
         redirect(action: "list", params: params)
@@ -14,7 +15,9 @@ class NotaController {
     }  
     
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+      //  def persona= Persona.findById(params.idpersona)
+        //def nota = Nota.findById()
+        params.max = Math.min(max ?: 10, 100) 
         [notaInstanceList: Nota.list(params), notaInstanceTotal: Nota.count()]
     }
     def search(){
@@ -23,40 +26,28 @@ class NotaController {
         
     }
     def listar () {  //este metodo tampoco hace falta
-     //   def objeto= Nota.executeQuery("select MAX (id) from Nota");
-        def notaInstance = Nota.find("from Nota where id= (Select MAX(id) from Nota)");
-        def notafinal= new Nota();
-        notafinal=notaInstance;
-        def listaetiquetas = notafinal.etiquetas.findAll();
-    //    def listaetiquetas = notafinal.etiquetas;
-     //   println();
-        
-
-      //  def query = Nota.where{ id == max(id) }
-      //  def fran= query.find();
-      [etiquetas: listaetiquetas]
-      //  [notas: notaInstance]
     }
 
     def create() {
         def nota= new Nota(params);
+        def persona= Persona.findById(params.idpersona);
         nota.fecha= new Date().format("dd/MM/yyyy");
-        [notaInstance: nota]
+        [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona] 
     }
 
     def save() { 
                 
         def params2= params.clone(); //los parametros del html los clono para poder modificarlos
-        println (params); 
+
         def numero = params.size();
         def x=0;
+       
 
         while (numero-- >8){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
             params.remove('etiquetas['+x+']');
             params.remove('etiqueta2');
             params2.remove('etiqueta2');
-        //    params.remove('libreta.id');
-        //    params.putAt('libreta.id',params2.getAt('libreta.id'))
+            params.remove();
             x++;
         }
 
@@ -77,7 +68,7 @@ class NotaController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
-        redirect(action: "show", id: notaInstance.id)        
+        redirect(action: "show", params:[id: notaInstance.id, sesion:session.persona])        
     }
 
         
@@ -101,6 +92,10 @@ class NotaController {
     }
 
     def edit(Long id) {
+      //  println("editaaar")
+      //  println (session.persona.id)
+        def persona= Persona.findById(session.persona.id);
+     //   personaglobal=session.persona;
         def notaInstance = Nota.get(id)
         if (!notaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'nota.label', default: 'Nota'), id])
@@ -108,7 +103,7 @@ class NotaController {
             return
         }
 
-        [notaInstance: notaInstance]
+        [notaInstance: notaInstance, libretasInstance: persona.libretas, sesion: session.persona]
     }
     
 
