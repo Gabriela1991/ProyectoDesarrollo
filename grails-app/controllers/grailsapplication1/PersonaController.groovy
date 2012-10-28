@@ -18,7 +18,7 @@ class PersonaController {
     session.persona = persona
          if (persona){
              println (persona.id);
-          redirect(controller:'persona',action:'ventanaInicio', params: [id: persona.id])
+          redirect(controller:'persona',action:'ventanaInicio', params: [idpersona: persona.id, correo:persona.correo])
           Dropbox x=new Dropbox();
           x.main();
       }

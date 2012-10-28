@@ -46,7 +46,7 @@
     <g:message code="nota.libreta.label" default="Libreta" />
     <span class="required-indicator">*</span>
   </label>
-  <g:select id="libreta" name="libreta.id" from="${grailsapplication1.Libreta.list()}" optionKey="id" required="" value="${notaInstance?.libreta?.id}" class="many-to-one"/>
+  <g:select id="libreta" name="libreta.id" from="${libretasInstance}" optionKey="id" required="" value="${notaInstance?.libreta?.id}" class="many-to-one"/> 
 
    <g:render template="etiquetasCombo" model="['notaInstance':notaInstance]" />  
 

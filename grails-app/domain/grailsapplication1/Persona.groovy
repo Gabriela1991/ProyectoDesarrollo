@@ -9,7 +9,7 @@ class Persona {
     String clave
   //  String cuentadropbox
    // String clavedropbox
-  //  static hasMany=[libretas:Libreta]
+    static hasMany=[libretas:Libreta]
 
     
     static constraints = {

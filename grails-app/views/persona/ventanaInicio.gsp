@@ -43,7 +43,7 @@
                         <td>
                           <p>Escriba sus notas y administre sus recordatorios</p>
                           <p>de la manera que m&aacute;s le agrade. As&oacute;cielos</p>
-                          <p>a una libreta y adjunte los archivos de interes. <a href="http://localhost:8080/GrailsApplication1/nota/create">.::Comenzar::.</a></p>
+                          <p>a una libreta y adjunte los archivos de interes. <a href="http://localhost:8080/GrailsApplication1/nota/create?idpersona=${params.idpersona}">.::Comenzar::.</a></p>
                         </td>
                       </tr>
                       <tr>
@@ -57,11 +57,11 @@
                       <tr>
                         <td>
                           <p>Consulte, edite o elimine una libreta ya creada.</p>
-                          <p><a href="http://localhost:8080/GrailsApplication1/libreta/list">.::Comenzar::.</a></p>
+                          <p><a href="http://localhost:8080/GrailsApplication1/libreta/list?idpersona=${params.idpersona}">.::Comenzar::.</a></p>
                         </td>
                         <td>
                           <p>Consulte, edite o elimine una nota ya creada.</p>
-                          <p><a href="http://localhost:8080/GrailsApplication1/nota/list">.::Comenzar::.</a></p>
+                          <p><a href="http://localhost:8080/GrailsApplication1/nota/list?idpersona=${params.idpersona}">.::Comenzar::.</a></p>
                         </td>
                       </tr>
                     </table> 
