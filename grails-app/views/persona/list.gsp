@@ -34,8 +34,6 @@
 					
 						<g:sortableColumn property="clave" title="${message(code: 'persona.clave.label', default: 'Clave')}" />
 					
-						<g:sortableColumn property="cuentadropbox" title="${message(code: 'persona.cuentadropbox.label', default: 'Cuentadropbox')}" />
-					
 					</tr>
 				</thead>
 				<tbody>
@@ -51,8 +49,6 @@
 						<td>${fieldValue(bean: personaInstance, field: "cuenta")}</td>
 					
 						<td>${fieldValue(bean: personaInstance, field: "clave")}</td>
-					
-						<td>${fieldValue(bean: personaInstance, field: "cuentadropbox")}</td>
 					
 					</tr>
 				</g:each>
