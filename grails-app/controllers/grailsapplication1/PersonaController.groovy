@@ -12,6 +12,8 @@ class PersonaController {
     def ventanaInicio = { 
     }
     
+    //Aqui comprobamos que la cuenta introducida por el usuario se la que se
+    //emcuentra almacenada en la BD y que le corresponde dicho password
     def inicioSesion = {
     def persona = Persona.findWhere(correo:params['correo'],
         clave:params['clave'])
@@ -19,10 +21,11 @@ class PersonaController {
          if (persona){
              println (persona.id);
           redirect(controller:'persona',action:'ventanaInicio', params: [idpersona: persona.id, correo:persona.correo])
-          Dropbox x=new Dropbox();
+          //establece la conexion con dropbox
+            Dropbox x=new Dropbox();
           x.main();
       }
-       else
+       else //si no se encuentra almacenado en la BD regresa a la ventana de login
            redirect(controller:'persona',action:'inicio')
     }
     
@@ -39,7 +42,7 @@ class PersonaController {
         [personaInstance: new Persona(params)]
     }
 
-    def save() {
+    def save() { //los parametros del html los clono para poder modificarlos
         def personaInstance = new Persona(params)
         if (!personaInstance.save(flush: true)) {
             render(view: "create", model: [personaInstance: personaInstance])
@@ -101,6 +104,7 @@ class PersonaController {
         redirect(action: "show", id: personaInstance.id)
     }
 
+    
     def delete(Long id) {
         def personaInstance = Persona.get(id)
         if (!personaInstance) {
