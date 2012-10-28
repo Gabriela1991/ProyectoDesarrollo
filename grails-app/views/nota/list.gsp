@@ -35,19 +35,23 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${notaInstanceList}" status="i" var="notaInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
+                                  <g:each in="${notaInstanceList}" status="k" var="notafinal">
+                                                  <tr class="${(k % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${notaInstance.id}">${notaInstance.libreta.nombre?.encodeAsHTML()}</g:link></td>
+						<td><g:link action="show" id="${notafinal.id}">${notafinal.libreta.nombre?.encodeAsHTML()}</g:link></td>
 					
-						<td>${fieldValue(bean: notaInstance, field: "texto")}</td>
+						<td>${fieldValue(bean: notafinal, field: "texto")}</td>
 					
-						<td>${fieldValue(bean: notaInstance, field: "titulo")}</td>
+						<td>${fieldValue(bean: notafinal, field: "titulo")}</td>
                                                 
-                                                <td>${fieldValue(bean: notaInstance, field: "fecha")}</td>
+                                                <td>${fieldValue(bean: notafinal, field: "fecha")}</td>
 					
-					</tr>
-				</g:each>
+                                                  </tr>
+                                  </g:each>
+
+             
+
 				</tbody>
 			</table>
 			<div class="pagination">

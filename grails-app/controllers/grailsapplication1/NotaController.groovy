@@ -15,10 +15,10 @@ class NotaController {
     }  
     
     def list(Integer max) {
-        def persona= Persona.findById(params.idpersona)
+      //  def persona= Persona.findById(params.idpersona)
         //def nota = Nota.findById()
         params.max = Math.min(max ?: 10, 100) 
-        [notaInstanceList: persona.libretas.notas, notaInstanceTotal: Nota.count()]
+        [notaInstanceList: Nota.list(params), notaInstanceTotal: Nota.count()]
     }
     def search(){
         def Etiqueta = Nota.executeQuery("SELECT distinct b.texto FROM Etiqueta b")
