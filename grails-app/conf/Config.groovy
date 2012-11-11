@@ -89,3 +89,4 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+images.location = "web-app/images/"
