@@ -33,8 +33,8 @@ public class Dropbox {
     final static private String APP_SECRET = "oarccj4xfs7tckh";
     final static private AccessType ACCESS_TYPE = AccessType.DROPBOX;
     static private DropboxAPI<WebAuthSession> mDBApi;
-    
-    public static void main(String[] args) throws DropboxException, IOException, URISyntaxException {
+    public void d(String x){}
+    public static void main(String[] args,String s) throws DropboxException, IOException, URISyntaxException {
         // TODO code application logic here
        
 
@@ -48,12 +48,16 @@ public class Dropbox {
         println(pair.key.toString());
         String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=http://www.dropbox.com";
         Desktop.getDesktop().browse(new URL(url).toURI());
-       JOptionPane.showMessageDialog(null, "Press ok to continue once you have authenticated.");
+        JOptionPane.showMessageDialog(null, "Press ok to continue once you have authenticated.");
         session.retrieveWebAccessToken(pair);
 
         AccessTokenPair tokens = session.getAccessTokenPair();
         
         mDBApi = new DropboxAPI<WebAuthSession>(session);
+        
+         DropboxAPI.Account account = mDBApi.accountInfo();
+        System.out.println("User Name: " + account.displayName);    
+            
         String fileContents = "Bienvenido a Block de Notas!              "+
         "Desarrollado por Keyla Hernandez, Maria Loreto, Angel Valderrama";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(fileContents.getBytes());
