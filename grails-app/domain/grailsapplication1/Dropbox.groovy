@@ -33,16 +33,61 @@ public class Dropbox {
     final static private String APP_SECRET = "oarccj4xfs7tckh";
     final static private AccessType ACCESS_TYPE = AccessType.DROPBOX;
     static private DropboxAPI<WebAuthSession> mDBApi;
-    public void d(String x){}
-    public static void main(String[] args,String s) throws DropboxException, IOException, URISyntaxException {
+    public static AppKeyPair appKeys ;
+    public static WebAuthSession session ;
+    public static  WebAuthInfo authInfo ;
+    
+    public void d(File file){
+        
+     //    try{
+               
+        mDBApi = new DropboxAPI<WebAuthSession>(session);
+        
+         DropboxAPI.Account account = mDBApi.accountInfo();
+        System.out.println("User Name: " + account.displayName);    
+            
+        //String fileContents = "Bienvenido a Block de Notas!              "+
+        //"Desarrollado por Keyla Hernandez, Maria Loreto, Angel Valderrama";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
+        Entry newEntry = mDBApi.putFile("/"+file.getName()+"."+getExtension(file), inputStream, file.length(), null, null);
+        
+        
+ //  }
+//   catch (DropboxException ex)
+//        {
+//            System.out.println("fue al dropbox");
+//        }
+
+
+        
+    }
+  
+    public static String getExtension(File f)
+{
+String ext = null;
+String s = f.getName();
+int i = s.lastIndexOf('.');
+
+if (i > 0 && i < s.length() - 1)
+ext = s.substring(i+1).toLowerCase();
+
+if(ext == null)
+return "";
+return ext;
+}
+    
+    
+    
+    
+    public static void main(String[] args) throws DropboxException, IOException, URISyntaxException {
         // TODO code application logic here
        
 
    try{
-        AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
-        WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
-        WebAuthInfo authInfo = session.getAuthInfo();
-//fshjdhfhsdf
+         appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
+        session = new WebAuthSession(appKeys, ACCESS_TYPE);
+        authInfo = session.getAuthInfo();
+
         RequestTokenPair pair = authInfo.requestTokenPair;
         //String url = authInfo.url;
         println(pair.key.toString());
@@ -53,16 +98,16 @@ public class Dropbox {
 
         AccessTokenPair tokens = session.getAccessTokenPair();
         
-        mDBApi = new DropboxAPI<WebAuthSession>(session);
-        
-         DropboxAPI.Account account = mDBApi.accountInfo();
-        System.out.println("User Name: " + account.displayName);    
-            
-        String fileContents = "Bienvenido a Block de Notas!              "+
-        "Desarrollado por Keyla Hernandez, Maria Loreto, Angel Valderrama";
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(fileContents.getBytes());
-        Entry newEntry = mDBApi.putFile("/notebook.txt", inputStream, fileContents.length(), null, null);
-        
+//        mDBApi = new DropboxAPI<WebAuthSession>(session);
+//        
+//         DropboxAPI.Account account = mDBApi.accountInfo();
+//        System.out.println("User Name: " + account.displayName);    
+//            
+//        String fileContents = "Bienvenido a Block de Notas!              "+
+//        "Desarrollado por Keyla Hernandez, Maria Loreto, Angel Valderrama";
+//        ByteArrayInputStream inputStream = new ByteArrayInputStream(fileContents.getBytes());
+//        Entry newEntry = mDBApi.putFile("/notebook.txt", inputStream, fileContents.length(), null, null);
+//        
         
    }
    catch (DropboxException ex)
