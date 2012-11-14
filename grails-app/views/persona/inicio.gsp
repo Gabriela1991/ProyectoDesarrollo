@@ -6,7 +6,7 @@
 <title>Inicio de Sesion</title>
 </head>
 <div class="body">
-           <g:form action="inicioSesion" method="post">
+           <g:form action="ventanaInicio" method="post">
                <div class="dialog">
     <p>Ingrese sus datos para Iniciar Sesión aquí:</p>
                 <table  class="personaForm">

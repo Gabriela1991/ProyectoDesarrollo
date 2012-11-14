@@ -9,4 +9,9 @@ static belongsTo= Persona
 static hasMany = [notas: Nota]
     static constraints = {
     }
+    
+    def String toString() {
+        return "${nombre}"
+    
+      }
 }

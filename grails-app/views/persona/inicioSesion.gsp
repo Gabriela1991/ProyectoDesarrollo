@@ -29,7 +29,7 @@
                         
                         <h2> .::Modificar Perfil::.</h2> </td>
                       <td> 
-                        <g:render template="inicio.gsp" />_inicio
+                        <g:render template="inicio" />
                         <h2 style="color: brown">.::Cerrar Sesion::.</h2> </td>
                     </tr>
                   </table>

@@ -16,7 +16,6 @@
                    <div class="dialog">
                      <p></p>
                      <p style="color: forestgreen; font-size: xx-large">BIENVENIDO</p></br></br>
-                     
                      <table  class="personaForm">
                        <tr>
                          <td style="background: darkseagreen">
@@ -24,7 +23,6 @@
                          </td>
                        </tr>
                      </table>
-                     
                     <table  class="personaForm">
                       <tr>
                         <td style="background: chocolate">
@@ -38,12 +36,13 @@
                         <td>
                           <p>Administre sus notas y recordatorios personales,</p>
                           <p>agrupandolos por un tema especifico mediante el</p>
-                          <p>uso de libretas <a href="http://localhost:8080/GrailsApplication1/libreta/create">.::Comenzar::.</a></p>
+                          <p>uso de libretas <g:link controller="libreta" action="create">.::Comenzar::.</g:link></p>
                         </td>
                         <td>
                           <p>Escriba sus notas y administre sus recordatorios</p>
                           <p>de la manera que m&aacute;s le agrade. As&oacute;cielos</p>
-                          <p>a una libreta y adjunte los archivos de interes. <a href="http://localhost:8080/GrailsApplication1/nota/create?idpersona=${params.idpersona}">.::Comenzar::.</a></p>
+                          <p>a una libreta y adjunte los archivos de interes. 
+                      <g:link controller="nota" action="create">.::Comenzar::.</g:link>
                         </td>
                       </tr>
                       <tr>
@@ -57,11 +56,11 @@
                       <tr>
                         <td>
                           <p>Consulte, edite o elimine una libreta ya creada.</p>
-                          <p><a href="http://localhost:8080/GrailsApplication1/libreta/list?idpersona=${params.idpersona}">.::Comenzar::.</a></p>
+                          <p><g:link controller="libreta" action="list">.::Comenzar::.</g:link></p>
                         </td>
                         <td>
                           <p>Consulte, edite o elimine una nota ya creada.</p>
-                          <p><a href="http://localhost:8080/GrailsApplication1/nota/list?idpersona=${params.idpersona}">.::Comenzar::.</a></p>
+                          <p><g:link controller="nota" action="list">.::Comenzar::.</g:link></p>
                         </td>
                       </tr>
                     </table> 

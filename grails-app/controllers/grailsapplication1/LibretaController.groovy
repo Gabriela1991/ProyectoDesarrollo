@@ -11,17 +11,20 @@ class LibretaController {
     }
 
     def list(Integer max) {
-        def persona= Persona.findById(params.idpersona)
+        def persona= Persona.findById(session.persona.id)
         params.max = Math.min(max ?: 10, 100)
         [libretaInstanceList: persona.libretas, libretaInstanceTotal: Libreta.count()]
     }
 
     def create() {
+        // def persona= Persona.findById(session.persona.id);
         [libretaInstance: new Libreta(params)]
     }
 
     def save() {
+        def persona= Persona.findById(session.persona.id);
         def libretaInstance = new Libreta(params)
+        libretaInstance.persona= persona
         if (!libretaInstance.save(flush: true)) {
             render(view: "create", model: [libretaInstance: libretaInstance])
             return

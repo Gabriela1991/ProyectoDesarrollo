@@ -36,7 +36,7 @@
 				</thead>
 				<tbody>
 
-                                  <g:each in="${notaInstanceList}" status="k" var="notafinal">
+                                  <g:each in="${notaInstance}" status="k" var="notafinal">
                                                   <tr class="${(k % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${notafinal.id}">${notafinal.libreta.nombre?.encodeAsHTML()}</g:link></td>

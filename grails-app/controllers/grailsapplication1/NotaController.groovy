@@ -3,9 +3,8 @@ package grailsapplication1
 import org.springframework.dao.DataIntegrityViolationException
 
 class NotaController {
-//asjflafhsjfnasjf se ve?
-
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST", create: "GET"]
     def index() {
         redirect(action: "list", params: params)
     }
@@ -15,10 +14,9 @@ class NotaController {
     }  
     
     def list(Integer max) {
-      //  def persona= Persona.findById(params.idpersona)
-        //def nota = Nota.findById()
+        def persona= Persona.findById(session.persona.id)
         params.max = Math.min(max ?: 10, 100) 
-        [notaInstanceList: Nota.list(params), notaInstanceTotal: Nota.count()]
+        [notaInstance: Nota.list(params), notaInstanceTotal: Nota.count(), libretas:persona.libretas.notas]
     }
     def search(){
         def Etiqueta = Nota.executeQuery("SELECT distinct b.texto FROM Etiqueta b")
@@ -29,8 +27,8 @@ class NotaController {
     }
 
     def create() {
-        def nota= new Nota(params);
-        def persona= Persona.findById(params.idpersona);
+        def nota= new Nota();
+        def persona= Persona.findById(session.persona.id);
         nota.fecha= new Date().format("dd/MM/yyyy");
         [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona] 
     }

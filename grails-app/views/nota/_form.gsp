@@ -53,16 +53,6 @@
  
 </div>
 
-
-
-<div class="fieldcontain ${hasErrors(bean: notaInstance, field: 'fecha', 'error')} ">
-	<label for="fecha">
-		<g:message code="nota.fecha.label" default="Fecha" />
-		
-	</label>
-	<g:textField name="fecha" readonly="readonly" value="${notaInstance?.fecha}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: notaInstance, field: 'titulo', 'error')} ">
 	<label for="titulo">
 		<g:message code="nota.titulo.label" default="Titulo" />

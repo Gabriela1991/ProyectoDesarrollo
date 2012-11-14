@@ -9,26 +9,39 @@ class PersonaController {
     def inicio = { 
     }
     
-    def ventanaInicio = { 
+    def ventanaInicio (){
+        def persona = Persona.findWhere(correo:params['correo'],
+        clave:params['clave'])
+        session.persona = persona
+         if (persona){
+           [persona:persona]
+           //establece la conexion con dropbox
+        //    Dropbox x=new Dropbox();
+         // x.main();
+      }
+       else //si no se encuentra almacenado en la BD regresa a la ventana de login
+           redirect(controller:'persona',action:'inicio')
+       //     println (persona.id)
+       //     [idpersona:persona.id]
     }
     
     //Aqui comprobamos que la cuenta introducida por el usuario se la que se
     //emcuentra almacenada en la BD y que le corresponde dicho password
-    def inicioSesion = {
+  /*  def inicioSesion = {
     def persona = Persona.findWhere(correo:params['correo'],
         clave:params['clave'])
-    session.persona = persona
+        session.persona = persona
          if (persona){
-             println (persona.id);
-          redirect(controller:'persona',action:'ventanaInicio', params: [idpersona: persona.id, correo:persona.correo])
-          //establece la conexion con dropbox
-            Dropbox x=new Dropbox();
-          x.main();
+            redirect (controller:'Persona', action:'ventanaInicio')
+           // ventanaInicio(persona)
+                      //establece la conexion con dropbox
+        //    Dropbox x=new Dropbox();
+         // x.main();
       }
        else //si no se encuentra almacenado en la BD regresa a la ventana de login
            redirect(controller:'persona',action:'inicio')
     }
-    
+*/    
     def index() {
         redirect(action: "list", params: params)
     }
