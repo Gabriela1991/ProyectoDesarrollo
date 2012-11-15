@@ -11,7 +11,7 @@
 		<a href="#list-nota" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href=http://localhost:8080/GrailsApplication1/persona/ventanaInicio/?idpersona=${params.id}'><g:message code="default.home.label"/></a></li>
+                          <li><a class="home" href="../../persona/ventanaInicio"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="Crear nueva nota" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
