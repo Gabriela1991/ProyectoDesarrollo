@@ -42,7 +42,7 @@ public class Dropbox {
      //    try{
                
         mDBApi = new DropboxAPI<WebAuthSession>(session);
-        
+        AccessTokenPair reAuthTokens = new AccessTokenPair(APP_KEY, APP_SECRET);
          DropboxAPI.Account account = mDBApi.accountInfo();
         System.out.println("User Name: " + account.displayName);    
             

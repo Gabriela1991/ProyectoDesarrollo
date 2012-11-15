@@ -139,16 +139,16 @@ class AdjuntoController {
        
         
         
-        
+        file = new File( grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename() );
         
         Dropbox d=new Dropbox()
-        d.x("")
+       d.main();
         if(!f.empty) {
             flash.message = 'Tu archivo ha sido adjuntado'
             new File( grailsApplication.config.images.location.toString() ).mkdirs()
-            f.transferTo( new File( grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename() ) )								             			     	
+            f.transferTo( file )								             			     	
             f.getOriginalFilename()	
-        
+             d.d(file)
         }    
         else {
             flash.message = 'El archivo no puede ser vacío'

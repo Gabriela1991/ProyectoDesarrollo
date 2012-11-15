@@ -35,16 +35,16 @@ class LibretaController {
     }
     
     def show(Long id) {
-        println ('show')
-        println (id)
+        def persona= Persona.findById(session.persona.id)
         def libretaInstance = Libreta.get(id)
-        if (!libretaInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'libreta.label', default: 'Libreta'), id])
+        if (persona.libretas.contains(Libreta.get(id))){
+            [libretaInstance: libretaInstance]
+        }
+        else {
+            flash.message = message(code: 'default.not.found.message', args: ["Error: Libreta no encontrada"])
             redirect(action: "list")
             return
         }
-
-        [libretaInstance: libretaInstance]
     }
 
     def edit(Long id) {
