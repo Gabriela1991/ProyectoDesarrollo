@@ -35,9 +35,8 @@
 				<tbody>
 				<g:each in="${libretaInstanceList}" status="i" var="libretaInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${libretaInstance.id}">${fieldValue(bean: libretaInstance, field: "nombre")}</g:link></td>
-					
+                                                
+                                                <td><g:link action="show" controller="libreta" id="${libretaInstance?.id}">${fieldValue(bean: libretaInstance, field: "nombre")}</g:link></td>
 						
 					
 						<td>${fieldValue(bean: libretaInstance, field: "tema")}</td>

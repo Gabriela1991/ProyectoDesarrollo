@@ -33,8 +33,10 @@ class LibretaController {
         flash.message = message(code: 'default.created.message', args: [message(code: 'libreta.label', default: 'Libreta'), libretaInstance.id])
         redirect(action: "show", id: libretaInstance.id)
     }
-
+    
     def show(Long id) {
+        println ('show')
+        println (id)
         def libretaInstance = Libreta.get(id)
         if (!libretaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'libreta.label', default: 'Libreta'), id])
@@ -46,6 +48,7 @@ class LibretaController {
     }
 
     def edit(Long id) {
+        println (id)
         def libretaInstance = Libreta.get(id)
         if (!libretaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'libreta.label', default: 'Libreta'), id])

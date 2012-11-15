@@ -67,7 +67,7 @@ class PersonaController {
     }
 
     def show(Long id) {
-        def personaInstance = Persona.get(id)
+        def personaInstance = Persona.get(session.persona.id)
         if (!personaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "list")
@@ -78,7 +78,7 @@ class PersonaController {
     }
 
     def edit(Long id) {
-        def personaInstance = Persona.get(id)
+        def personaInstance = Persona.get(session.persona.id)
         if (!personaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "list")

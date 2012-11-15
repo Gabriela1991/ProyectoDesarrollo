@@ -32,5 +32,6 @@ class Nota {
         return "${titulo}, ${texto}, ${fecha}"
     
       }
+      
 }
 

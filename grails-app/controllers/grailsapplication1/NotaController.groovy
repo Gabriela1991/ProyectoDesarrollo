@@ -23,13 +23,11 @@ class NotaController {
         [ Etiqueta:Etiqueta]
         
     }
-    def listar () {  //este metodo tampoco hace falta
-    }
 
     def create() {
         def nota= new Nota();
         def persona= Persona.findById(session.persona.id);
-        nota.fecha= new Date().format("dd/MM/yyyy");
+        //nota.fecha= new Date().format("dd/MM/yyyy");
         [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona] 
     }
 
@@ -48,11 +46,13 @@ class NotaController {
             params.remove();
             x++;
         }
-
+        
         def notaInstance = new Nota(params) //creo la nueva nota
+        notaInstance.fecha=new Date().format("dd/MM/yyyy");
         numero= params2.size();
         x=0;
-      while (numero > 8){
+        
+      while (numero >= 8){
          if (params2.getAt('etiquetas['+x+']')){
              
           notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]); //y aqui se le añaden los hijos a esa nota 
@@ -76,7 +76,6 @@ class NotaController {
         notaInstance.getEtiquetas().println();
         
     }
-    
     
     def show(Long id) {
         def notaInstance = Nota.get(id)

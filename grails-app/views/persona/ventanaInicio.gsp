@@ -88,11 +88,15 @@
                         <td>
                      
                           <p>Consulte la informacion que ha sido almacenada</p>
-                          <p>al momento de la creacion de su cuenta<a href='http://localhost:8080/GrailsApplication1/persona/show/${params.idpersona}'>.::Ver::.</a></p>
+                          <p>al momento de la creacion de su cuenta
+                            <p><g:link controller="persona" action="show">.::Ver::.</g:link></p>
+                           
                         </td>
                         <td>
                           <p>Edite su informacion de contacto con la idea de mantener</p>
-                          <p>su perfil constantemente actualizado <a href='http://localhost:8080/GrailsApplication1/persona/edit/${params.idpersona}'>.::Editar::.</a></p>
+                          <p>su perfil constantemente actualizado 
+                            <p><g:link controller="persona" action="edit">.::Editar::.</g:link></p>
+                          
                         </td>
                       </tr>
                     </table> 
