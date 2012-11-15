@@ -41,7 +41,7 @@ class LibretaController {
             [libretaInstance: libretaInstance]
         }
         else {
-            flash.message = message(code: 'default.not.found.message', args: ["Error: Libreta no encontrada"])
+            flash.message = message(code: 'default.not.found.message', args: ["Error: Lo sentimos la libreta solicitada no existe"])
             redirect(action: "list")
             return
         }

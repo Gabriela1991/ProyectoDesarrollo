@@ -13,10 +13,13 @@ class NotaController {
             [Etiqueta: etiquetas];
     }  
     
-    def list(Integer max) {
+    def list(Integer max, Long id) {
         def persona= Persona.findById(session.persona.id)
-        params.max = Math.min(max ?: 10, 100) 
-        [notaInstance: Nota.list(params), notaInstanceTotal: Nota.count(), libretas:persona.libretas.notas]
+        def libreta = Libreta.findById (id)
+        if (persona.libretas.contains(libreta)){
+            params.max = 10
+            [libretaInstance: libreta.notas, notaInstanceTotal: libreta.notas.size()]   
+        }
     }
     def search(){
         def Etiqueta = Nota.executeQuery("SELECT distinct b.texto FROM Etiqueta b")
@@ -78,21 +81,25 @@ class NotaController {
     }
     
     def show(Long id) {
+        def persona= Persona.findById(session.persona.id)
         def notaInstance = Nota.get(id)
-        if (!notaInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'nota.label', default: 'Nota'), id])
-            redirect(action: "list")
-            return
+        def existeNota=false;
+        
+        for (int i=0; i< persona.libretas.notas.size(); i++){
+            existeNota = persona.libretas.notas.get(i).contains(notaInstance)     
+            if (existeNota) break
         }
-
-        [notaInstance: notaInstance]
+        if (!existeNota){
+              flash.message = message(code: 'default.not.found.message', args: ["Error: Lo sentimos la nota que busca no existe"])
+              redirect (controller:"libreta",action:"list")
+              return
+        }else {
+            [notaInstance: notaInstance]
+        }
     }
 
     def edit(Long id) {
-      //  println("editaaar")
-      //  println (session.persona.id)
         def persona= Persona.findById(session.persona.id);
-     //   personaglobal=session.persona;
         def notaInstance = Nota.get(id)
         if (!notaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'nota.label', default: 'Nota'), id])

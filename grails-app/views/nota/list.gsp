@@ -23,29 +23,24 @@
 			<table>
 				<thead>
 					<tr>
-					
-						<th><g:message code="nota.libreta.label" default="Libretas" /></th>                                      
-                                                                                      					
+					                             
+                                                <g:sortableColumn property="titulo" title="${message(code: 'nota.titulo.label', default: 'Titulo')}" />
+                                                
 						<g:sortableColumn property="texto" title="${message(code: 'nota.texto.label', default: 'Texto')}" />
-					
-						<g:sortableColumn property="titulo" title="${message(code: 'nota.titulo.label', default: 'Titulo')}" />
                                                 
                                                 <g:sortableColumn property="fecha" title="${message(code: 'nota.fecha.label', default: 'Fecha de Creación')}" />
 					
 					</tr>
 				</thead>
 				<tbody>
-
-                                  <g:each in="${notaInstance}" status="k" var="notafinal">
+                                  <g:each in="${libretaInstance}" status="k" var="nota">
                                                   <tr class="${(k % 2) == 0 ? 'even' : 'odd'}">
+                                                    
+						<td><g:link action="show" id="${nota.id}">${nota.titulo?.encodeAsHTML()}</g:link></td> 			
+                                  
+                                                <td>${fieldValue(bean: nota, field: "texto")}</td>
 					
-						<td><g:link action="show" id="${notafinal.id}">${notafinal.libreta.nombre?.encodeAsHTML()}</g:link></td>
-					
-						<td>${fieldValue(bean: notafinal, field: "texto")}</td>
-					
-						<td>${fieldValue(bean: notafinal, field: "titulo")}</td>
-                                                
-                                                <td>${fieldValue(bean: notafinal, field: "fecha")}</td>
+                                                <td>${fieldValue(bean: nota, field: "fecha")}</td>
 					
                                                   </tr>
                                   </g:each>
