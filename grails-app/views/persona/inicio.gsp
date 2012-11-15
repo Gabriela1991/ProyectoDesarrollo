@@ -6,7 +6,10 @@
 <title>Inicio de Sesion</title>
 </head>
 <div class="body">
-           <g:form action="ventanaInicio" method="post">
+  <g:if test="${flash.message}">
+      <div class="message" role="status">${flash.message}</div>
+  </g:if>
+           <g:form action="inicioSesion" method="post">
                <div class="dialog">
     <p>Ingrese sus datos para Iniciar Sesión aquí:</p>
                 <table  class="personaForm">
