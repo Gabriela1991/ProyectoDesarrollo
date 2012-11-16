@@ -53,10 +53,11 @@ class PersonaController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
-        redirect(action: "show", id: personaInstance.id)
+        session.persona=personaInstance
+        redirect(action: "show")
     }
 
-    def show(Long id) {
+    def show() {
         def personaInstance = Persona.get(session.persona.id)
         if (!personaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])

@@ -32,14 +32,14 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${libretaInstance?.persona}">
+			<!--	<g:if test="${libretaInstance?.persona}">
 				<li class="fieldcontain">
 					<span id="persona-label" class="property-label"><g:message code="libreta.persona.label" default="Persona" /></span>
 					
 						<span class="property-value" aria-labelledby="persona-label"><g:link controller="persona" action="show" id="${libretaInstance?.persona?.id}">${libretaInstance?.persona?.encodeAsHTML()}</g:link></span>
 					
 				</li>
-				</g:if>
+				</g:if> -->
 			
 				<g:if test="${libretaInstance?.tema}">
 				<li class="fieldcontain">
