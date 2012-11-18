@@ -118,6 +118,19 @@ class PersonaController {
          if (persona){
             redirect (controller:'Persona', action:'ventanaInicio')
         //establece la conexion con dropbox
+         Dropbox d=new Dropbox()
+         println("verificar si ya se ha auth"+session.persona.keysdropbox)
+         String claves=d.auth(session.persona.keysdropbox);
+          if(claves!=null){
+                //personaInstance.keysdropbox=claves
+                 println("CLAVES 1 "+claves.split('/')[0].toString())
+                persona.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+persona.id)
+                 
+            }
+            else {
+                claves=session.persona.keysdropbox
+                println("CLAVES 2 "+claves.split('/')[0].toString())
+            }
         //  Dropbox x=new Dropbox();
          // x.main();
       }

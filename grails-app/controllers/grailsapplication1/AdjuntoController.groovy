@@ -140,24 +140,21 @@ class AdjuntoController {
             file = new File( grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename() );
 			
             Dropbox d=new Dropbox()
-            String claves=d.auth(session.persona.keysdropbox);
-           
+            String claves=session.persona.keysdropbox;
+           println("verificar si ya se ha auth"+session.persona.keysdropbox)
             def personaInstance=session.persona
-            if(claves!=null){
+            if(session.persona.keysdropbox!=null){
                 //personaInstance.keysdropbox=claves
-                 println("CLAVES 1 "+claves.split('/')[0].toString())
-                personaInstance.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+personaInstance.id)
+                 println("CLAVES 3 "+session.persona.keysdropbox)
+                //personaInstance.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+personaInstance.id)
             }
-            else {
-                claves=session.persona.keysdropbox
-                 println("CLAVES 2 "+claves.split('/')[0].toString())
-            }
-			
-            flash.message = 'Tu archivo ha sido adjuntado'
+           			
+            
             new File( grailsApplication.config.images.location.toString() ).mkdirs()
             f.transferTo( file )								             			     	
             f.getOriginalFilename()	
             d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+            flash.message = 'Tu archivo ha sido adjuntado'
         }    
         else {
             flash.message = 'El archivo no puede ser vacío'
