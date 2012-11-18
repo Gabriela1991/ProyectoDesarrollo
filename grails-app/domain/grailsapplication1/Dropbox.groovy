@@ -37,38 +37,8 @@ public class Dropbox {
     public static WebAuthSession session ;
     public static  WebAuthInfo authInfo ;
     
-    public void d(File file){
-    
-        AccessTokenPair reAuthTokens = new AccessTokenPair(APP_KEY, APP_SECRET);
-        DropboxAPI.Account account = mDBApi.accountInfo();
-        System.out.println("User Name: " + account.displayName);    
-            
-        
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
-        Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
-   AccessTokenPair tokens = session.getAccessTokenPair();
-            System.out.println("key "+tokens.key)
-            System.out.println("secret "+ tokens.secret)
-    }
   
-    public static String getExtension(File f)
-    {
-        String ext = null;
-        String s = f.getName();
-        int i = s.lastIndexOf('.');
-
-        if (i > 0 && i < s.length() - 1)
-        ext = s.substring(i+1).toLowerCase();
-
-        if(ext == null)
-        return "";
-        return ext;
-    }
-    
-    
-    
-    
-    public static void main(String[] args) throws DropboxException, IOException, URISyntaxException {
+    public static String auth(String keys) throws DropboxException, IOException, URISyntaxException {
         // TODO code application logic here
        
 
@@ -76,38 +46,55 @@ public class Dropbox {
             appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
             session = new WebAuthSession(appKeys, ACCESS_TYPE);
             authInfo = session.getAuthInfo();
-
-            RequestTokenPair pair = authInfo.requestTokenPair;
+println(keys);
+            if(keys==null){ // si persona no ha autorizado a dropbox. key y secret estan vacias
+                RequestTokenPair pair = authInfo.requestTokenPair;
             
-            println(pair.key.toString());
-            String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=http://www.dropbox.com";
-            Desktop.getDesktop().browse(new URL(url).toURI());
-            JOptionPane.showMessageDialog(null, "Press ok to continue once you have authenticated.");
-            session.retrieveWebAccessToken(pair);
-
-            AccessTokenPair tokens = session.getAccessTokenPair();
-            println("key ",tokens.key)
-            println("secret ", tokens.secret)
-            mDBApi = new DropboxAPI<WebAuthSession>(session);
-            //        mDBApi = new DropboxAPI<WebAuthSession>(session);
-            //        
-            //         DropboxAPI.Account account = mDBApi.accountInfo();
-            //        System.out.println("User Name: " + account.displayName);    
-            //            
-            //        String fileContents = "Bienvenido a Block de Notas!              "+
-            //        "Desarrollado por Keyla Hernandez, Maria Loreto, Angel Valderrama";
-            //        ByteArrayInputStream inputStream = new ByteArrayInputStream(fileContents.getBytes());
-            //        Entry newEntry = mDBApi.putFile("/notebook.txt", inputStream, fileContents.length(), null, null);
-            //        
-        
+                println(pair.key.toString());
+                String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=http://www.dropbox.com";
+                Desktop.getDesktop().browse(new URL(url).toURI());
+                JOptionPane.showMessageDialog(null, "Press ok to continue once you have authenticated.");
+                session.retrieveWebAccessToken(pair);
+                AccessTokenPair tokens = session.getAccessTokenPair();
+                println("key "+tokens.key)
+                println("secret "+ tokens.secret)
+                mDBApi = new DropboxAPI<WebAuthSession>(session);
+                 DropboxAPI.Account account = mDBApi.accountInfo();
+        System.out.println("User Name: " + account.displayName);
+        println(tokens.key.toString()+"/"+tokens.secret.toString())
+        return (tokens.key.toString()+"/"+tokens.secret.toString())
+            }
+            return null;
+//            else // ya se ha autorizado a dropbox. key y secret no son vacias
+//            {
+//                  mDBApi = new DropboxAPI<WebAuthSession>(session);
+//                AccessTokenPair reAuthTokens = new AccessTokenPair("zr1kvtzefrkf339", "f7y6rns0aw731ma");
+//                mDBApi.getSession().setAccessTokenPair(reAuthTokens);
+//               
+//              
+//                System.out.println("Re-authentication Sucessful!");
+//               println( mDBApi.accountInfo());
+//            }
         }
         catch (DropboxException ex)
         {
             System.out.println("fue al dropbox");
         }
-
-
-        
+      
     }
     
+      public void subirArchivo(File file, String key, String secret){
+        
+        mDBApi = new DropboxAPI<WebAuthSession>(session);
+                AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
+                mDBApi.getSession().setAccessTokenPair(reAuthTokens);
+                System.out.println("Re-authentication Sucessful!");
+         
+//        System.out.println("User Name: " + account.displayName); 
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
+        Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
+        AccessTokenPair tokens = session.getAccessTokenPair();
+        System.out.println("key "+tokens.key)
+        System.out.println("secret "+ tokens.secret)
+    }
 }

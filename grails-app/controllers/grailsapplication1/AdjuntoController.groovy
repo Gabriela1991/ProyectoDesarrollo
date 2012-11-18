@@ -104,7 +104,7 @@ class AdjuntoController {
     [adjuntoInstanceList: Adjunto.list(params), adjuntoInstanceTotal: Adjunto.count()]
     }
      */
-      
+    //   params="['nota.id': notaInstance?.id]
     def list = {
         def adjuntoInstanceList = []
         def f = new File( grailsApplication.config.images.location.toString() )
@@ -127,28 +127,37 @@ class AdjuntoController {
 
     def upload = {
         def f = request.getFile('fileUpload')
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        MultipartFile multipartFile =(MultipartFile) multipartRequest.getFile("fileUpload");
-        String fileNameToCreate = grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename();
-        File file
-     
-         //   logger.info(fileNameToCreate);
+       
+        if(!f.empty) {
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            MultipartFile multipartFile =(MultipartFile) multipartRequest.getFile("fileUpload");
+            String fileNameToCreate = grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename();
+            File file
+		 
+            //   logger.info(fileNameToCreate);
             file = new File(fileNameToCreate);
             FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
-
-       
-        
-        
-        file = new File( grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename() );
-        
-        Dropbox d=new Dropbox()
-       d.main();
-        if(!f.empty) {
+            file = new File( grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename() );
+			
+            Dropbox d=new Dropbox()
+            String claves=d.auth(session.persona.keysdropbox);
+           
+            def personaInstance=session.persona
+            if(claves!=null){
+                //personaInstance.keysdropbox=claves
+                 println("CLAVES 1 "+claves.split('/')[0].toString())
+                personaInstance.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+personaInstance.id)
+            }
+            else {
+                claves=session.persona.keysdropbox
+                 println("CLAVES 2 "+claves.split('/')[0].toString())
+            }
+			
             flash.message = 'Tu archivo ha sido adjuntado'
             new File( grailsApplication.config.images.location.toString() ).mkdirs()
             f.transferTo( file )								             			     	
             f.getOriginalFilename()	
-             d.d(file)
+            d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
         }    
         else {
             flash.message = 'El archivo no puede ser vacío'

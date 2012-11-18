@@ -12,7 +12,7 @@
     <li><g:link controller="adjunto" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
 </g:each>
 <li class="add">
-<g:link controller="adjunto" action="create" params="['nota.id': notaInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'adjunto.label', default: 'Adjunto')])}</g:link>
+<g:link controller="adjunto" action="list" >${message(code: 'default.add.label', args: [message(code: 'adjunto.label', default: 'Adjunto')])}</g:link>
 </li>
 </ul>
 

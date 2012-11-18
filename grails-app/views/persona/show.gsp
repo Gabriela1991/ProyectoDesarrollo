@@ -11,8 +11,7 @@
 		<a href="#show-persona" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="../persona/ventanaInicio"
-><g:message code="default.home.label"/></a></li>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
@@ -51,11 +50,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${personaInstance?.cuenta}">
+				<g:if test="${personaInstance?.keysdropbox}">
 				<li class="fieldcontain">
-					<span id="cuenta-label" class="property-label"><g:message code="persona.cuenta.label" default="Cuenta" /></span>
+					<span id="keysdropbox-label" class="property-label"><g:message code="persona.keysdropbox.label" default="Keysdropbox" /></span>
 					
-						<span class="property-value" aria-labelledby="cuenta-label"><g:fieldValue bean="${personaInstance}" field="cuenta"/></span>
+						<span class="property-value" aria-labelledby="keysdropbox-label"><g:fieldValue bean="${personaInstance}" field="keysdropbox"/></span>
 					
 				</li>
 				</g:if>
@@ -65,6 +64,17 @@
 					<span id="clave-label" class="property-label"><g:message code="persona.clave.label" default="Clave" /></span>
 					
 						<span class="property-value" aria-labelledby="clave-label"><g:fieldValue bean="${personaInstance}" field="clave"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personaInstance?.libretas}">
+				<li class="fieldcontain">
+					<span id="libretas-label" class="property-label"><g:message code="persona.libretas.label" default="Libretas" /></span>
+					
+						<g:each in="${personaInstance.libretas}" var="l">
+						<span class="property-value" aria-labelledby="libretas-label"><g:link controller="libreta" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></span>
+						</g:each>
 					
 				</li>
 				</g:if>

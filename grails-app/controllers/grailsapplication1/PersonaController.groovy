@@ -6,32 +6,6 @@ class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def inicio = { 
-    }
-    
-    def ventanaInicio (){
-        def persona = Persona.findById(session.persona.id)
-  
-    }
-    
-    //Aqui comprobamos que la cuenta introducida por el usuario se la que se
-    //emcuentra almacenada en la BD y que le corresponde dicho password
-    def inicioSesion = {
-    def persona = Persona.findWhere(correo:params['correo'],
-        clave:params['clave'])
-        session.persona = persona
-         if (persona){
-            redirect (controller:'Persona', action:'ventanaInicio')
-        //establece la conexion con dropbox
-        //  Dropbox x=new Dropbox();
-         // x.main();
-      }
-       else{ //si no se encuentra almacenado en la BD regresa a la ventana de login
-           flash.message = message(code: 'default.not.found.message', args: ["Correo o clave incorrectas, intente de nuevo"])
-            redirect(controller:'persona',action:'inicio')
-       }
-    }
-    
     def index() {
         redirect(action: "list", params: params)
     }
@@ -45,7 +19,7 @@ class PersonaController {
         [personaInstance: new Persona(params)]
     }
 
-    def save() { //los parametros del html los clono para poder modificarlos
+    def save() {
         def personaInstance = new Persona(params)
         if (!personaInstance.save(flush: true)) {
             render(view: "create", model: [personaInstance: personaInstance])
@@ -53,12 +27,11 @@ class PersonaController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
-        session.persona=personaInstance
-        redirect(action: "show")
+        redirect(action: "show", id: personaInstance.id)
     }
 
-    def show() {
-        def personaInstance = Persona.get(session.persona.id)
+    def show(Long id) {
+        def personaInstance = Persona.get(id)
         if (!personaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "list")
@@ -69,7 +42,7 @@ class PersonaController {
     }
 
     def edit(Long id) {
-        def personaInstance = Persona.get(session.persona.id)
+        def personaInstance = Persona.get(id)
         if (!personaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "list")
@@ -108,7 +81,6 @@ class PersonaController {
         redirect(action: "show", id: personaInstance.id)
     }
 
-    
     def delete(Long id) {
         def personaInstance = Persona.get(id)
         if (!personaInstance) {
@@ -126,5 +98,32 @@ class PersonaController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "show", id: id)
         }
+    }
+    
+    
+     def inicio = { 
+    }
+    
+    def ventanaInicio (){
+        def persona = Persona.findById(session.persona.id)
+  
+    }
+    
+    //Aqui comprobamos que la cuenta introducida por el usuario se la que se
+    //emcuentra almacenada en la BD y que le corresponde dicho password
+    def inicioSesion = {
+    def persona = Persona.findWhere(correo:params['correo'],
+        clave:params['clave'])
+        session.persona = persona
+         if (persona){
+            redirect (controller:'Persona', action:'ventanaInicio')
+        //establece la conexion con dropbox
+        //  Dropbox x=new Dropbox();
+         // x.main();
+      }
+       else{ //si no se encuentra almacenado en la BD regresa a la ventana de login
+           flash.message = message(code: 'default.not.found.message', args: ["Correo o clave incorrectas, intente de nuevo"])
+            redirect(controller:'persona',action:'inicio')
+       }
     }
 }

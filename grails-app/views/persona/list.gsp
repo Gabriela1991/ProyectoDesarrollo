@@ -11,7 +11,7 @@
 		<a href="#list-persona" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href=http://localhost:8080/GrailsApplication1/persona/ventanaInicio/?idpersona=${params.id}'><g:message code="default.home.label"/></a></li>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
@@ -30,7 +30,7 @@
 					
 						<g:sortableColumn property="correo" title="${message(code: 'persona.correo.label', default: 'Correo')}" />
 					
-						<g:sortableColumn property="cuenta" title="${message(code: 'persona.cuenta.label', default: 'Cuenta')}" />
+						<g:sortableColumn property="keysdropbox" title="${message(code: 'persona.keysdropbox.label', default: 'Keysdropbox')}" />
 					
 						<g:sortableColumn property="clave" title="${message(code: 'persona.clave.label', default: 'Clave')}" />
 					
@@ -46,7 +46,7 @@
 					
 						<td>${fieldValue(bean: personaInstance, field: "correo")}</td>
 					
-						<td>${fieldValue(bean: personaInstance, field: "cuenta")}</td>
+						<td>${fieldValue(bean: personaInstance, field: "keysdropbox")}</td>
 					
 						<td>${fieldValue(bean: personaInstance, field: "clave")}</td>
 					
