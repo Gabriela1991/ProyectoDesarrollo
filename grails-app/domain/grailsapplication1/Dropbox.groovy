@@ -93,8 +93,25 @@ println(keys);
 //        System.out.println("User Name: " + account.displayName); 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
         Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
-        AccessTokenPair tokens = session.getAccessTokenPair();
-        System.out.println("key "+tokens.key)
-        System.out.println("secret "+ tokens.secret)
+          System.out.println("parent: "+newEntry.parentPath()+" filename"+ newEntry.fileName());
+              System.out.println("antes"+newEntry.hash);
+newEntry.hash='1'
+ System.out.println("despues"+newEntry.hash);
+//        AccessTokenPair tokens = session.getAccessTokenPair();
+//        System.out.println("key "+tokens.key)
+//        System.out.println("secret "+ tokens.secret)
+    }
+
+     public void eliminarArchivo(File file,String key, String secret){
+        
+        mDBApi = new DropboxAPI<WebAuthSession>(session);
+                AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
+                mDBApi.getSession().setAccessTokenPair(reAuthTokens);
+                System.out.println("Re-authentication Sucessful!");
+         
+//        System.out.println("User Name: " + account.displayName); 
+      
+        Entry newEntry = mDBApi.delete("/"+file.getName());
+        
     }
 }

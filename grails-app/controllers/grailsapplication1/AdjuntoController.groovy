@@ -10,6 +10,8 @@ class AdjuntoController {
 
     //  static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     static allowedMethods = []
+    
+      
     def index() {
         redirect(action: "list", params: params)
     }
@@ -82,28 +84,7 @@ class AdjuntoController {
         redirect(action: "show", id: adjuntoInstance.id)
     }
 
-    /* def delete(Long id) {
-    def adjuntoInstance = Adjunto.get(id)
-    if (!adjuntoInstance) {
-    flash.message = message(code: 'default.not.found.message', args: [message(code: 'adjunto.label', default: 'Adjunto'), id])
-    redirect(action: "list")
-    return
-    }
 
-    try {
-    adjuntoInstance.delete(flush: true)
-    flash.message = message(code: 'default.deleted.message', args: [message(code: 'adjunto.label', default: 'Adjunto'), id])
-    redirect(action: "list")
-    }
-    catch (DataIntegrityViolationException e) {
-    flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'adjunto.label', default: 'Adjunto'), id])
-    redirect(action: "show", id: id)
-    }
-    def list(Integer max) {
-    params.max = Math.min(max ?: 10, 100)
-    [adjuntoInstanceList: Adjunto.list(params), adjuntoInstanceTotal: Adjunto.count()]
-    }
-     */
     //   params="['nota.id': notaInstance?.id]
     def list = {
         def adjuntoInstanceList = []
@@ -118,14 +99,20 @@ class AdjuntoController {
     } 
 
     def delete = {
+        def Dropbox d=new Dropbox();
+        String claves=session.persona.keysdropbox;
         def filename = params.id.replace('###', '.')
         def file = new File( grailsApplication.config.images.location.toString() + File.separatorChar +   filename )
+         d.eliminarArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
         file.delete()
+       
         flash.message = "El archivo ' ${filename}' ha sido eliminado" 
         redirect( action:list )
     }
 
     def upload = {
+        def Dropbox d=new Dropbox();
+        String claves=session.persona.keysdropbox;
         def f = request.getFile('fileUpload')
        
         if(!f.empty) {
@@ -139,8 +126,8 @@ class AdjuntoController {
             FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
             file = new File( grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename() );
 			
-            Dropbox d=new Dropbox()
-            String claves=session.persona.keysdropbox;
+          
+          
            println("verificar si ya se ha auth"+session.persona.keysdropbox)
             def personaInstance=session.persona
             if(session.persona.keysdropbox!=null){
