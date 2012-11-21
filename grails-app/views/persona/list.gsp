@@ -30,10 +30,10 @@
 					
 						<g:sortableColumn property="correo" title="${message(code: 'persona.correo.label', default: 'Correo')}" />
 					
-						<g:sortableColumn property="keysdropbox" title="${message(code: 'persona.keysdropbox.label', default: 'Keysdropbox')}" />
+					<!--	<g:sortableColumn property="keysdropbox" title="${message(code: 'persona.keysdropbox.label', default: 'Keysdropbox')}" />
 					
 						<g:sortableColumn property="clave" title="${message(code: 'persona.clave.label', default: 'Clave')}" />
-					
+					-->
 					</tr>
 				</thead>
 				<tbody>
@@ -46,10 +46,10 @@
 					
 						<td>${fieldValue(bean: personaInstance, field: "correo")}</td>
 					
-						<td>${fieldValue(bean: personaInstance, field: "keysdropbox")}</td>
+					<!--	<td>${fieldValue(bean: personaInstance, field: "keysdropbox")}</td>
 					
 						<td>${fieldValue(bean: personaInstance, field: "clave")}</td>
-					
+					-->
 					</tr>
 				</g:each>
 				</tbody>

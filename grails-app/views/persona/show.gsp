@@ -50,7 +50,7 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${personaInstance?.keysdropbox}">
+			<!--	<g:if test="${personaInstance?.keysdropbox}">
 				<li class="fieldcontain">
 					<span id="keysdropbox-label" class="property-label"><g:message code="persona.keysdropbox.label" default="Keysdropbox" /></span>
 					
@@ -67,8 +67,7 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${personaInstance?.libretas}">
+			-->				<g:if test="${personaInstance?.libretas}">
 				<li class="fieldcontain">
 					<span id="libretas-label" class="property-label"><g:message code="persona.libretas.label" default="Libretas" /></span>
 					
@@ -84,7 +83,7 @@
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${personaInstance?.id}" />
 					<g:link class="edit" action="edit" id="${personaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Esta seguro de eliminar??')}');" />
 				</fieldset>
 			</g:form>
 		</div>

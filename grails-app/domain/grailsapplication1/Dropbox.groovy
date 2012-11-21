@@ -18,7 +18,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import javax.swing.JOptionPane;
+import javax.swing.JOptionPane
+import java.awt.List;
 
 /**
  *
@@ -93,13 +94,11 @@ println(keys);
 //        System.out.println("User Name: " + account.displayName); 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
         Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
-          System.out.println("parent: "+newEntry.parentPath()+" filename"+ newEntry.fileName());
-              System.out.println("antes"+newEntry.hash);
-newEntry.hash='1'
- System.out.println("despues"+newEntry.hash);
-//        AccessTokenPair tokens = session.getAccessTokenPair();
-//        System.out.println("key "+tokens.key)
-//        System.out.println("secret "+ tokens.secret)
+          newEntry.hash='1'  //para el id de la nota
+  List<Entry> newEntry1= mDBApi.search("/", "contactos.txt", 1, false);
+//       System.out.println("parent: "+newEntry.parentPath()+" filename"+ newEntry.fileName());
+              
+System.out.println("buscado "+newEntry1.getItemCount())
     }
 
      public void eliminarArchivo(File file,String key, String secret){

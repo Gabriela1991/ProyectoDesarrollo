@@ -10,8 +10,7 @@ class Persona {
     String correo
     String keysdropbox
     String clave
-  //  String cuentadropbox
-   // String clavedropbox
+  
     static hasMany=[libretas:Libreta]
 
     
@@ -21,8 +20,7 @@ class Persona {
         correo(blank:false, maxSize:45, unique:true)
        keysdropbox(blank:true, maxSize:40)
         clave(blank:false, password:true, maxSize:15)
-     //   cuentadropbox(blank:false, maxSize:45)
-       // clavedropbox(blank:false, password:true, maxSize:15)
+     
     }
     
     String toString()
