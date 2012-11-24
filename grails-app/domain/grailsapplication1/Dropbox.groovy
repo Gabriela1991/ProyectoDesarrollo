@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import javax.swing.JOptionPane
 import java.awt.List;
+import com.dropbox.client2.exception.DropboxServerException
 
 /**
  *
@@ -84,33 +85,53 @@ println(keys);
       
     }
     
-      public void subirArchivo(File file, String key, String secret){
+      public String subirArchivo(File file, String key, String secret){
         
         mDBApi = new DropboxAPI<WebAuthSession>(session);
                 AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
                 System.out.println("Re-authentication Sucessful!");
          
-//        System.out.println("User Name: " + account.displayName); 
+ 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
         Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
           newEntry.hash='1'  //para el id de la nota
-  List<Entry> newEntry1= mDBApi.search("/", "contactos.txt", 1, false);
-//       System.out.println("parent: "+newEntry.parentPath()+" filename"+ newEntry.fileName());
-              
-System.out.println("buscado "+newEntry1.getItemCount())
+  //List<Entry> newEntry1= mDBApi.search("/", "contactos.txt", 1, false);
+      
+         return  (newEntry.fileName());    
+//System.out.println("buscado "+newEntry1.getItemCount())
     }
-
-     public void eliminarArchivo(File file,String key, String secret){
+    
+    public void eliminarArchivo(String nombrefile,String key, String secret){
         
-        mDBApi = new DropboxAPI<WebAuthSession>(session);
+       try { 
+           mDBApi = new DropboxAPI<WebAuthSession>(session);
                 AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
                 System.out.println("Re-authentication Sucessful!");
          
 //        System.out.println("User Name: " + account.displayName); 
       
-        Entry newEntry = mDBApi.delete("/"+file.getName());
+        Entry newEntry = mDBApi.delete("/"+nombrefile);
+        } catch (DropboxServerException e) {
+			System.out.println("El archivo no esta en dropbox con ese nombre");
+		}
+    }
+    
+    public Entry buscarArchivo(String nombreadj,String key, String secret){
         
+       try { 
+           mDBApi = new DropboxAPI<WebAuthSession>(session);
+                AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
+                mDBApi.getSession().setAccessTokenPair(reAuthTokens);
+                System.out.println("Re-authentication Sucessful!");
+         
+//        System.out.println("User Name: " + account.displayName); 
+      
+            Entry newEntry = mDBApi.search("/",nombreadj,1,false);
+            return newEntry;
+        } catch (DropboxServerException e) {
+			System.out.println("El archivo no esta en dropbox con ese nombre");
+		}
     }
 }

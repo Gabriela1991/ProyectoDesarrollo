@@ -84,9 +84,10 @@ class AdjuntoController {
         redirect(action: "show", id: adjuntoInstance.id)
     }
 
-
-    //   params="['nota.id': notaInstance?.id]
     def list = {
+    
+       
+    
         def adjuntoInstanceList = []
         def f = new File( grailsApplication.config.images.location.toString() )
         if( f.exists() ){
@@ -102,10 +103,12 @@ class AdjuntoController {
         def Dropbox d=new Dropbox();
         String claves=session.persona.keysdropbox;
         def filename = params.id.replace('###', '.')
+        println(params)
+        println(filename)
         def file = new File( grailsApplication.config.images.location.toString() + File.separatorChar +   filename )
-         d.eliminarArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+        d.eliminarArchivo(file.getName(),claves.split('/')[0].toString(),claves.split('/')[1].toString())
         file.delete()
-       
+       def adjuntoInstance=Adjunto.get(Adjunto.executeQuery("SELECT cast(Id as integer) FROM Adjunto where Archivo='"+filename+"'"))
         flash.message = "El archivo ' ${filename}' ha sido eliminado" 
         redirect( action:list )
     }
@@ -121,7 +124,6 @@ class AdjuntoController {
             String fileNameToCreate = grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename();
             File file
 		 
-            //   logger.info(fileNameToCreate);
             file = new File(fileNameToCreate);
             FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
             file = new File( grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename() );
@@ -134,14 +136,19 @@ class AdjuntoController {
                 //personaInstance.keysdropbox=claves
                  println("CLAVES 3 "+session.persona.keysdropbox)
                 //personaInstance.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+personaInstance.id)
-            }
-           			
+            }		
             
             new File( grailsApplication.config.images.location.toString() ).mkdirs()
             f.transferTo( file )								             			     	
             f.getOriginalFilename()	
-            d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+            def nombreArchivo=d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
             flash.message = 'Tu archivo ha sido adjuntado'
+            def adjuntoInstance=new Adjunto(params)
+            adjuntoInstance.archivo=nombreArchivo
+            adjuntoInstance.nombre='adj1'
+            def notaInstance=Nota.get(21)
+            adjuntoInstance.nota=notaInstance//
+            adjuntoInstance.save(flush: true)
         }    
         else {
             flash.message = 'El archivo no puede ser vacío'
