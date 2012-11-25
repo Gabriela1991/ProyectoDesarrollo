@@ -6,12 +6,13 @@ import org.springframework.web.multipart.MultipartFile
 import org.apache.commons.io.FileUtils
 import java.io.File
 import com.dropbox.client2.DropboxAPI.Entry;
+import org.apache.commons.logging.*
 
 class AdjuntoController {
 
     //  static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     static allowedMethods = []
-    
+    private static Log log = LogFactory.getLog("bitacora."+AdjuntoController.class.getName())
       
     def index() {
         redirect(action: "list", params: params)
@@ -108,6 +109,7 @@ class AdjuntoController {
         def adjuntoInstance=Adjunto.findByArchivo(filename)
         adjuntoInstance.delete();
         flash.message = "El archivo ' ${filename}' ha sido eliminado" 
+        log.info "Se ha eliminado un adjunto de base de datos y de dropbox"
         redirect( action:list )
     }
     
@@ -129,21 +131,21 @@ class AdjuntoController {
             File file 
             file = new File(fileNameToCreate);
             FileUtils.writeByteArrayToFile(file, f.getBytes());
-
+            f.transferTo( file )
             def personaInstance=session.persona
-           
-           f.transferTo( file )								             			     	
+            								             			     	
             def nombreArchivo=d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+            file.delete()
             flash.message = 'Tu archivo ha sido adjuntado'
             def adjuntoInstance=new Adjunto(params)
             adjuntoInstance.archivo=nombreArchivo
-           
             // OJO CAMBIAR NOMBRE DE ARCHIVO E ID DE LA NOTA
             
             adjuntoInstance.nombre='adj1'
             def notaInstance=Nota.get(21)
-            adjuntoInstance.nota=notaInstance//
+            adjuntoInstance.nota=notaInstance
             adjuntoInstance.save(flush: true)
+            log.info "Se ha agregado un adjunto a la base de datos y a dropbox"
         }    
         else {
             flash.message = 'El archivo no puede ser vacío'

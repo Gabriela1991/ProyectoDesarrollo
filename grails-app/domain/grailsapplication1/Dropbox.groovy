@@ -83,6 +83,10 @@ println(keys);
         {
             System.out.println("fue al dropbox");
         }
+        
+       catch (UnknownHostException e){
+            System.out.println("No hay conexion con internet/dropbox");
+        }
       
     }
     /**
@@ -90,6 +94,7 @@ println(keys);
      **/
       public String subirArchivo(File file, String key, String secret){
         
+        try{
         mDBApi = new DropboxAPI<WebAuthSession>(session);
                 AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
@@ -100,7 +105,10 @@ println(keys);
         Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
            
         return  (newEntry.fileName());    
-
+        }
+        catch (UnknownHostException e){
+            System.out.println("No hay conexion con internet/dropbox");
+        }
     }
     
     public void eliminarArchivo(String nombrefile,String key, String secret){
@@ -117,6 +125,10 @@ println(keys);
         } catch (DropboxServerException e) {
 			System.out.println("El archivo no esta en dropbox con ese nombre");
 		}
+                 
+        catch (UnknownHostException e){
+            System.out.println("No hay conexion con internet/dropbox");
+        }
     }
     
     public String buscarArchivo(String nombreadj,String key, String secret){
@@ -131,10 +143,9 @@ println(keys);
         
             ArrayList  newEntry = (ArrayList) mDBApi.search("/",nombreadj,1,true);
             DropboxLink share= mDBApi.share("/"+nombreadj);
-             System.out.println("URL: " + share.url);
+             
             share=mDBApi.media("/"+nombreadj, true);
-            System.out.println("URL: " + share.url); 
-            
+                        
             return share.url
         } catch (DropboxServerException e) {
 			System.out.println("El archivo no esta en dropbox con ese nombre");

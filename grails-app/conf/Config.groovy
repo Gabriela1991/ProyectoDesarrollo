@@ -73,10 +73,14 @@ environments {
 log4j = {
     // Example of changing the log pattern for the default console appender:
     //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
-
+    appenders {
+        console name:'stdout', layout:pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss}')
+        
+        rollingFile name:'bitacoraAppender', file: "/tmp/bitacora.log", append: true,
+            layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n')
+    }
+    info bitacoraAppender:'bitacora', additivity:false
+    
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
@@ -88,5 +92,7 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
 }
-images.location = "web-app/images/"
+
+//images.location = "web-app/images/"
