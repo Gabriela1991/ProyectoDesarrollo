@@ -21,6 +21,7 @@ import java.net.URL;
 import javax.swing.JOptionPane
 import java.awt.List;
 import com.dropbox.client2.exception.DropboxServerException
+import com.dropbox.client2.DropboxAPI.DropboxLink
 
 /**
  *
@@ -84,7 +85,9 @@ println(keys);
         }
       
     }
-    
+    /**
+     *@param 
+     **/
       public String subirArchivo(File file, String key, String secret){
         
         mDBApi = new DropboxAPI<WebAuthSession>(session);
@@ -95,11 +98,9 @@ println(keys);
  
         ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
         Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
-          newEntry.hash='1'  //para el id de la nota
-  //List<Entry> newEntry1= mDBApi.search("/", "contactos.txt", 1, false);
-      
-         return  (newEntry.fileName());    
-//System.out.println("buscado "+newEntry1.getItemCount())
+           
+        return  (newEntry.fileName());    
+
     }
     
     public void eliminarArchivo(String nombrefile,String key, String secret){
@@ -118,7 +119,7 @@ println(keys);
 		}
     }
     
-    public Entry buscarArchivo(String nombreadj,String key, String secret){
+    public String buscarArchivo(String nombreadj,String key, String secret){
         
        try { 
            mDBApi = new DropboxAPI<WebAuthSession>(session);
@@ -126,12 +127,21 @@ println(keys);
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
                 System.out.println("Re-authentication Sucessful!");
          
-//        System.out.println("User Name: " + account.displayName); 
-      
-            Entry newEntry = mDBApi.search("/",nombreadj,1,false);
-            return newEntry;
+        System.out.println("User Name: " + nombreadj); 
+        
+            ArrayList  newEntry = (ArrayList) mDBApi.search("/",nombreadj,1,true);
+            DropboxLink share= mDBApi.share("/"+nombreadj);
+             System.out.println("URL: " + share.url);
+            share=mDBApi.media("/"+nombreadj, true);
+            System.out.println("URL: " + share.url); 
+            
+            return share.url
         } catch (DropboxServerException e) {
 			System.out.println("El archivo no esta en dropbox con ese nombre");
 		}
+                catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println("El archivo no esta en dropbox");
+            
+                }
     }
 }

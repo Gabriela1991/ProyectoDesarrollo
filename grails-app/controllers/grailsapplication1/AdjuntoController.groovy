@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.MultipartFile
 import org.apache.commons.io.FileUtils
 import java.io.File
+import com.dropbox.client2.DropboxAPI.Entry;
 
 class AdjuntoController {
 
@@ -85,66 +86,60 @@ class AdjuntoController {
     }
 
     def list = {
-    
-       
-    
+       //OJO COLOCAR ID DE LA NOTA
+        def adjuntos=Adjunto.executeQuery("select cast(archivo as string)from Adjunto where nota_id=21");
         def adjuntoInstanceList = []
-        def f = new File( grailsApplication.config.images.location.toString() )
-        if( f.exists() ){
-            f.eachFile(){ file->
-                if( !file.isDirectory() )
-                adjuntoInstanceList.add( file.name )
+       
+        if( adjuntos.toList() ){
+            adjuntos.each(){ archivo->
+               
+                adjuntoInstanceList.add( archivo )
             }
         }
         [ adjuntoInstanceList: adjuntoInstanceList ]
+
     } 
 
     def delete = {
         def Dropbox d=new Dropbox();
         String claves=session.persona.keysdropbox;
-        def filename = params.id.replace('###', '.')
-        println(params)
-        println(filename)
-        def file = new File( grailsApplication.config.images.location.toString() + File.separatorChar +   filename )
-        d.eliminarArchivo(file.getName(),claves.split('/')[0].toString(),claves.split('/')[1].toString())
-        file.delete()
-       def adjuntoInstance=Adjunto.get(Adjunto.executeQuery("SELECT cast(Id as integer) FROM Adjunto where Archivo='"+filename+"'"))
+        def filename = params.id.replace('###', '.')    
+        d.eliminarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+        def adjuntoInstance=Adjunto.findByArchivo(filename)
+        adjuntoInstance.delete();
         flash.message = "El archivo ' ${filename}' ha sido eliminado" 
         redirect( action:list )
+    }
+    
+    def download = {
+        def Dropbox d=new Dropbox();
+        String claves=session.persona.keysdropbox;
+        def filename = params.id.replace('###', '.')
+        String busqueda=d.buscarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+        redirect (url:busqueda)        
     }
 
     def upload = {
         def Dropbox d=new Dropbox();
         String claves=session.persona.keysdropbox;
         def f = request.getFile('fileUpload')
-       
+        String fileNameToCreate
         if(!f.empty) {
-            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-            MultipartFile multipartFile =(MultipartFile) multipartRequest.getFile("fileUpload");
-            String fileNameToCreate = grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename();
-            File file
-		 
+            fileNameToCreate =  f.getOriginalFilename();
+            File file 
             file = new File(fileNameToCreate);
-            FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
-            file = new File( grailsApplication.config.images.location.toString() + File.separatorChar + f.getOriginalFilename() );
-			
-          
-          
-           println("verificar si ya se ha auth"+session.persona.keysdropbox)
+            FileUtils.writeByteArrayToFile(file, f.getBytes());
+
             def personaInstance=session.persona
-            if(session.persona.keysdropbox!=null){
-                //personaInstance.keysdropbox=claves
-                 println("CLAVES 3 "+session.persona.keysdropbox)
-                //personaInstance.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+personaInstance.id)
-            }		
-            
-            new File( grailsApplication.config.images.location.toString() ).mkdirs()
-            f.transferTo( file )								             			     	
-            f.getOriginalFilename()	
+           
+           f.transferTo( file )								             			     	
             def nombreArchivo=d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
             flash.message = 'Tu archivo ha sido adjuntado'
             def adjuntoInstance=new Adjunto(params)
             adjuntoInstance.archivo=nombreArchivo
+           
+            // OJO CAMBIAR NOMBRE DE ARCHIVO E ID DE LA NOTA
+            
             adjuntoInstance.nombre='adj1'
             def notaInstance=Nota.get(21)
             adjuntoInstance.nota=notaInstance//

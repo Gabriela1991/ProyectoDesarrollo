@@ -14,6 +14,8 @@
 <li class="add">
 <g:link controller="adjunto" action="list" >${message(code: 'default.add.label', args: [message(code: 'adjunto.label', default: 'Adjunto')])}</g:link>
 </li>
+
+
 </ul>
 
 </div>
@@ -27,7 +29,7 @@
       <tr class="prop">
         <td valign="top" class="name"><label for="textoetiqueta">Etiquetas:</label></td>
         <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'texto','errors')}">
-
+        <g:render template="etiquetasCombo" model="['notaInstance':notaInstance]" />  
         </td>
         <td valign="top" class="value ${hasErrors(bean:notaInstance,field:'etiquetas','errors')}">
     <g:render template="etiquetas" model="['notaInstance':notaInstance]" />
@@ -48,7 +50,7 @@
   </label>
   <g:select id="libreta" name="libreta.id" from="${libretasInstance}" optionKey="id" required="" value="${notaInstance?.libreta?.id}" class="many-to-one"/> 
 
-   <g:render template="etiquetasCombo" model="['notaInstance':notaInstance]" />  
+ <!-- <g:render template="etiquetasCombo" model="['notaInstance':notaInstance]" />  -->
 
  
 </div>

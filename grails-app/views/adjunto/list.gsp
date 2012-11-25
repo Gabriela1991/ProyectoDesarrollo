@@ -43,16 +43,17 @@
         <table>
           <thead>
             <tr>
-          <g:sortableColumn property="files" title="file"/>
-          <g:sortableColumn property="path" title="path" colspan="3"/>
+          <g:sortableColumn property="files" title="Archivos"/>
+          <g:sortableColumn property="path" title="Opciones" colspan="3"/>
           </tr>
           </thead>
           <tbody>
           <g:each in="${adjuntoInstanceList}" status="i" var="adjuntoInstance">
             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
               <td>${adjuntoInstance.decodeURL()}</td>
-              <td> <input type="text" value="/images/${adjuntoInstance.decodeURL()}"></input></td>
-              <td><a href="${createLinkTo( dir:'images' , file: adjuntoInstance.decodeURL(), absolute:true )}" target="_new">Ver</a></td>
+             <!-- <td> <input type="text" value="${adjuntoInstance.decodeURL()}"></input></td> -->
+              <td><g:link action="download" id="${adjuntoInstance.replace('.','###')}"  > Ver </g:link></td>
+              
               <td><g:link action="delete" id="${adjuntoInstance.replace('.','###')}" onclick="return confirm('¿Esta Seguro?');"> Eliminar </g:link></td>
             </tr>
           </g:each>
