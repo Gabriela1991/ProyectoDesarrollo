@@ -36,34 +36,37 @@ class NotaController {
 
     def save() { 
 
+        
         def params2= params.clone(); //los parametros del html los clono para poder modificarlos
 
         def numero = params.size();
         def x=0;
        
 
-        while (numero-- >9){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
+        while (numero >=9){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
             params.remove('etiquetas['+x+']');
             params.remove('etiqueta2');
             params2.remove('etiqueta2');
             params.remove();
+            numero= numero-1;
             x++;
         }
-        
+
         def notaInstance = new Nota(params) //creo la nueva nota
         notaInstance.fecha=new Date().format("dd/MM/yyyy");
         numero= params2.size();
+
         x=0;
        
-      while (numero >= 9){
+      while (numero >= 8){
          if (params2.getAt('etiquetas['+x+']')){
-             
+             println (params2.getAt('etiquetas['+x+']'))
           notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]); //y aqui se le añaden los hijos a esa nota 
           numero=numero-1;
          }
           x++;
       }
-        if (!notaInstance.save(flush: true)) { //aqui solo guardo en la bd y listo
+        if (!notaInstance.save(flush: true)) { 
             render(view: "create", model: [notaInstance: notaInstance])
             return
         }
@@ -194,16 +197,38 @@ class NotaController {
     
     def buscar () {
         def persona= Persona.findById(session.persona.id);
-       // println(persona.libretas.notas)
-         //   println(params);
-         for (int i=0; i< persona.libretas.notas.size(); i++){
-             println(persona.libretas.get(i))
-                //for (int j=0)
-         }
-         //   [palabra: params.campo, libreta: persona.libretas] 
-        redirect (controller:"persona", action:"ventanaInicio")
+        def notas= persona.libretas.notas
+        for (int i=0; i<notas.size(); i++){
+            Iterator k = notas[i].iterator();
+            if (notas[i].size()>1) {
+               for (int j=0; j<notas[i].size(); j++){
+                        while (k.hasNext()) {
+                            Object elemento= k.next();
+                            if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo))
+                                   k.remove();
+                        }                 
+                }
+            }
+            else {
+                 while (k.hasNext()) {
+                            Object elemento= k.next();
+                            if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo))
+                                   k.remove();
+                        }         
+            }
+        }
         
+        Iterator i= notas.iterator();
+        while (i.hasNext()) {
+            Object elemento= i.next();
+            if (!elemento)
+                 i.remove();
+        }
+        
+        println (notas);
+        [libretaInstance: notas]
+       // redirect (controller:"persona", action:"ventanaInicio")
+
     }
-    
-    
+
 }
