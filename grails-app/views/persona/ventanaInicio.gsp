@@ -16,6 +16,10 @@
                    <div class="dialog">
                      <p></p>
                      <p style="color: forestgreen; font-size: xx-large">BIENVENIDO</p></br></br>
+                     <g:form action="buscar" controller="nota">
+                         <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
+                         <g:submitButton name="submit" value="Buscar"/>
+                     </g:form>
                      <table  class="personaForm">
                        <tr>
                          <td style="background: darkseagreen">
