@@ -60,7 +60,6 @@ class NotaController {
        
       while (numero >= 8){
          if (params2.getAt('etiquetas['+x+']')){
-             println (params2.getAt('etiquetas['+x+']'))
           notaInstance.addToEtiquetas([texto:params2.getAt('etiquetas['+x+']')]); //y aqui se le añaden los hijos a esa nota 
           numero=numero-1;
          }

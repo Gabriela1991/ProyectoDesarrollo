@@ -5,6 +5,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'libreta.label', default: 'Libreta')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+                
 	</head>
 	<body>
 		<a href="#create-libreta" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -13,6 +14,10 @@
 				<li><a class="home" href="../persona/ventanaInicio"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 			</ul>
+                  <g:form action="buscar" controller="nota">
+                         <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
+                         <g:submitButton name="submit" value="Buscar"/>
+                     </g:form>
 		</div>
 		<div id="create-libreta" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>

@@ -15,6 +15,10 @@
 				<li><a class="home" href="../persona/ventanaInicio"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 			</ul>
+                  <g:form action="buscar" controller="nota">
+                         <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
+                         <g:submitButton name="submit" value="Buscar"/>
+                     </g:form>
 		</div>
                                
 		<div id="create-nota" class="content scaffold-create" role="main">

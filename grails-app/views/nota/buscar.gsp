@@ -5,13 +5,13 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'nota.label', default: 'Nota')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<title><g:message code="default.list.label" args="[entityName]" /></title>           
 	</head>
-	<body>
+        <body>
 		<a href="#list-nota" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-                          <li><a class="home" href="../../persona/ventanaInicio"><g:message code="default.home.label"/></a></li>
+                          <li><a class="home" href="../persona/ventanaInicio"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="Crear nueva nota" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
@@ -32,16 +32,23 @@
 					
 					</tr>
 				</thead>
+                                
+                                
 				<tbody>
-                                  <g:each in="${libreta}" status="k" var="nota">
+                                  <g:each in="${libretaInstance}" status="k" var="libreta">
                                                  <tr class="${(k % 2) == 0 ? 'even' : 'odd'}">
-                                                    
-						<td><g:link action="show" id="${nota.id}">${nota.titulo?.encodeAsHTML()}</g:link></td> 			
-                                  
-                                                <td>${fieldValue(bean: nota, field: "texto")}</td>
-					
-                                                <td>${fieldValue(bean: nota, field: "fecha")}</td>
-					
+                                                        <g:each in="${libreta}" status="i" var="nota">
+                                                          
+                                                              <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                                   
+                                                                    <td><g:link action="show" id="${nota.id}">${nota.titulo?.encodeAsHTML()}</g:link></td> 			
+
+                                                                    <td>${fieldValue(bean: nota, field: "texto")}</td>
+
+                                                                    <td>${fieldValue(bean: nota, field: "fecha")}</td>
+
+                                                              </tr>
+                                                        </g:each>
                                                  </tr>
                                   </g:each>
 
@@ -50,7 +57,7 @@
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${notaInstanceTotal}" />
+				<g:paginate total="10" />
 			</div>
 		</div>
 	</body>
