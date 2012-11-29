@@ -27,7 +27,7 @@
 			</g:if>
 			<ol class="property-list nota">
 			
-				<g:link controller="adjunto" action="list" >${message(code: 'default.add.label', args: [message(code: 'adjunto.label', default: 'Adjunto')])}</g:link>
+				<g:link controller="adjunto" action="list" id="${notaInstance?.id}">${message(code: 'default.add.label', args: [message(code: 'adjunto.label', default: 'Adjunto')])}</g:link>
 
 			
 				<g:if test="${notaInstance?.etiquetas}">

@@ -86,7 +86,7 @@ class AdjuntoController {
         redirect(action: "show", id: adjuntoInstance.id)
     }
 
-    def list = {
+    def list (Long id) {
        //OJO COLOCAR ID DE LA NOTA
         def adjuntos=Adjunto.executeQuery("select cast(archivo as string)from Adjunto where nota_id=21");
         def adjuntoInstanceList = []
@@ -110,7 +110,7 @@ class AdjuntoController {
         adjuntoInstance.delete();
         flash.message = "El archivo ' ${filename}' ha sido eliminado" 
         log.info "Se ha eliminado un adjunto de base de datos y de dropbox"
-        redirect( action:list )
+        redirect( action:"list", [id:21] )
     }
     
     def download = {
@@ -121,7 +121,7 @@ class AdjuntoController {
         redirect (url:busqueda)        
     }
 
-    def upload = {
+    def upload (Long id) {
         def Dropbox d=new Dropbox();
         String claves=session.persona.keysdropbox;
         def f = request.getFile('fileUpload')
@@ -150,6 +150,6 @@ class AdjuntoController {
         else {
             flash.message = 'El archivo no puede ser vacío'
         }
-        redirect( action:list)
+        redirect( action:"list", [id:21])
     }
 }

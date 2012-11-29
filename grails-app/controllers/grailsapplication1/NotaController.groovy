@@ -71,7 +71,7 @@ class NotaController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
-        redirect(action: "show", params:[id: notaInstance.id, sesion:session.persona])        
+        redirect(action: "show1", params:[id: notaInstance.id, sesion:session.persona])        
     }
 
         
@@ -229,4 +229,21 @@ class NotaController {
 
     }
 
+    def show1(Long id) {
+        def persona= Persona.findById(session.persona.id)
+        def notaInstance = Nota.get(id)
+        def existeNota=false;
+        
+        for (int i=0; i< persona.libretas.notas.size(); i++){
+            existeNota = persona.libretas.notas.get(i).contains(notaInstance)     
+            if (existeNota) break
+        }
+        if (!existeNota){
+              flash.message = message(code: 'default.not.found.message', args: ["Error: Lo sentimos la nota que busca no existe"])
+              redirect (controller:"libreta",action:"list")
+              return
+        }else {
+            [notaInstance: notaInstance]
+        }
+    }
 }
