@@ -33,7 +33,7 @@
                 <div id="show-persona" class="content scaffold-show" role="main">
 		   
 		   <ol class="property-list persona">
-                     <table style="alignment-adjust: central">
+                <table>
                   <tr>
                     <td>Nombre de Usuario: </td>
                     <td>
