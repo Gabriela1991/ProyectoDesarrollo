@@ -12,6 +12,7 @@
     <title>.::Perfil de Usuario::.</title>
     </head>
     
+<body>
     <div id="wrap">
       <div id="header">
         <h1><a href="#">Block de Notas</a></h1>
@@ -78,7 +79,7 @@
         <h3>Búsqueda de Notas: </h3>
         <g:form action="buscar" controller="nota">
            <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
-           <g:submitButton name="submit" value="Buscar"/>
+           <g:submitButton name="submit" value=".::Buscar::."/>
         </g:form>
         
         <h3>Opciones: </h3>
@@ -88,7 +89,7 @@
               <img src="../images/home.png" width="25" height="25" />
             </td>
             <td>
-              <li><a href="#">.::HOME::.</a></li>
+              <li><g:link controller="persona" action="ventanaInicio">.::HOME::.</g:link></li>
             </td>
           </tr>
           <tr>
