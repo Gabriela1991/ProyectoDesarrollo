@@ -16,6 +16,7 @@ class PersonaController {
     }
 
     def create() {
+        if (session.persona) session.invalidate();
         [personaInstance: new Persona(params)]
     }
 
@@ -26,8 +27,8 @@ class PersonaController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
-        redirect(action: "show", id: personaInstance.id)
+        flash.message = message(code: 'default.created.message', args: ["El usuario ", personaInstance.correo+" ha sido"])
+        redirect(action: "inicio")
     }
 
     def show(Long id) {
