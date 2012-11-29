@@ -223,8 +223,7 @@ class NotaController {
             if (!elemento)
                  i.remove();
         }
-        
-        println (notas);
+
         [libretaInstance: notas]
        // redirect (controller:"persona", action:"ventanaInicio")
 
