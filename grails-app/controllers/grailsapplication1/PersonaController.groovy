@@ -31,7 +31,10 @@ class PersonaController {
     }
 
     def show(Long id) {
-        def personaInstance= Persona.findById(session.persona.id)
+        def personaInstance
+        if (session.persona)
+        personaInstance= Persona.findById(session.persona.id)
+        else personaInstance= Persona.get(id)
         if (!personaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "list")
