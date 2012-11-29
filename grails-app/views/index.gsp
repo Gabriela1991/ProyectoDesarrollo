@@ -71,6 +71,37 @@ congue nulla diam non urna.
 </div>
 <div style="clear: both;"> </div>
 
+<div id="footer">
+Designed by <a href="http://www.free-css-templates.com/">Free CSS Templates</a>, Thanks to <a href="http://www.openwebdesign.org/">Web Design Firm</a>
+</div>
+</div>
+
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Home</title>
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/cufon-replace.js"></script> 
+<script type="text/javascript" src="js/Butter_500.font.js"></script>
+<!--[if lt IE 9]>
+        <script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
+        <script type="text/javascript" src="js/html5.js"></script>
+<![endif]-->
+</head>
+<body id="page1">  
+
+
 <div class="body1">
                 <div class="main">
 <!-- / header-->
@@ -109,13 +140,6 @@ congue nulla diam non urna.
 <!-- / footer -->
         </div>
 </div>
-
-<div id="footer">
-Designed by <a href="http://www.free-css-templates.com/">Free CSS Templates</a>, Thanks to <a href="http://www.openwebdesign.org/">Web Design Firm</a>
-</div>
-</div>
-
-
+<script type="text/javascript"> Cufon.now(); </script>
 </body>
-</html>
-
+  </html>

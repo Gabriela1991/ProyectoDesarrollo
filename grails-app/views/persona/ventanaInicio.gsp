@@ -11,109 +11,110 @@
     <meta name="layout" content="main" />
     <title>.::Perfil de Usuario::.</title>
     </head>
-    <div class="body">
-               
-                   <div class="dialog">
-                     <p></p>
-                     <p style="color: forestgreen; font-size: xx-large">BIENVENIDO</p></br></br>
-                     <g:form action="buscar" controller="nota">
-                         <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
-                         <g:submitButton name="submit" value="Buscar"/>
-                     </g:form>
-                     <table  class="personaForm">
-                       <tr>
-                         <td style="background: darkseagreen">
-                           <p><strong>.:: Gestion de Notas ::.</strong></p>
-                         </td>
-                       </tr>
-                     </table>
-                    <table  class="personaForm">
-                      <tr>
-                        <td style="background: chocolate">
-                          <p><strong>Crear Libreta</strong></p>
-                        </td>  
-                        <td style="background: deepskyblue">
-                          <p><strong>Crear Nota</strong></p>
-                        </td>     
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>Administre sus notas y recordatorios personales,</p>
-                          <p>agrupandolos por un tema especifico mediante el</p>
-                          <p>uso de libretas <g:link controller="libreta" action="create">.::Comenzar::.</g:link></p>
-                        </td>
-                        <td>
-                          <p>Escriba sus notas y administre sus recordatorios</p>
-                          <p>de la manera que m&aacute;s le agrade. As&oacute;cielos</p>
-                          <p>a una libreta y adjunte los archivos de interes. 
-                      <g:link controller="nota" action="create">.::Comenzar::.</g:link>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="background: orchid">
-                          <p><strong>Ver Libretas</strong></p>
-                        </td>  
-                        <td style="background: lightpink">
-                          <p><strong>Ver Notas</strong></p>
-                        </td>   
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>Consulte, edite o elimine una libreta ya creada.</p>
-                          <p><g:link controller="libreta" action="list">.::Comenzar::.</g:link></p>
-                        </td>
-                        <td>
-                          <p>Consulte, edite o elimine una nota ya creada.</p>
-                          <p><g:link controller="nota" action="list">.::Comenzar::.</g:link></p>
-                        </td>
-                      </tr>
-                    </table> 
-                     
-                    </br></br>
-                    
-                    <table  class="personaForm">
-                       <tr>
-                         <td style="background: darkseagreen">
-                           <p><strong>.:: Configuracion de Cuenta ::.</strong></p>
-                         </td>
-                       </tr>
-                     </table>
-                    
-                    <table  class="personaForm">
-                      <tr>
-                        <td style="background: chocolate">
-                          <p><strong>Ver Datos del Perfil</strong></p>
-                        </td>  
-                        <td style="background: deepskyblue">
-                          <p><strong>Editar Perfil</strong></p>
-                        </td>     
-                      </tr>
-                      <tr>
-                        <td>
-                     
-                          <p>Consulte la informacion que ha sido almacenada</p>
-                          <p>al momento de la creacion de su cuenta
-                            <p><g:link controller="persona" action="show">.::Ver::.</g:link></p>
-                           
-                        </td>
-                        <td>
-                          <p>Edite su informacion de contacto con la idea de mantener</p>
-                          <p>su perfil constantemente actualizado 
-                            <p><g:link controller="persona" action="edit">.::Editar::.</g:link></p>
-                          
-                        </td>
-                      </tr>
-                    </table> 
-                    
+    
+    <div id="wrap">
+      <div id="header">
+        <h1><a href="#">Block de Notas</a></h1>
+        <h2>Administra tus recordatorios y Notas personales</h2>
+      </div>
+      
+      <div id="right">
+        
+        <table>
+          <tr>
+            <td>.:: Bienvenido ::.</td>
+            <td> ||nombre de usuario|| </td>
+            <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
+            <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
+                 <img src="../images/cerrarSesion.png" width="25" height="25" />
+                </g:link>
+            </td>
+          </tr>
+        </table>
+        
+        
+        <div class="articles">
+                       
+          <table  class="personaForm">
+             <tr>
+                <td>
+                   <img src="../images/libreta (1).jpg" width="65" height="65" />
+                </td>
+                <td>
+                   <h2>.::Crear Libreta::.</h2>
+                </td>  
+                <td>
+                   <img src="../images/notebook1.png" width="60" height="60" />
+                </td>
+                <td>
+                   <h2>.::Crear Nota::.</h2>
+                </td>     
+                   </tr>
+          </table> 
+          
+          <table>
+             <tr>
+                <td>
+                   <p><img src="../images/comillasA.jpg" width="10" height="10" />
+                     Agrupe sus notas por un tema específico mediante el uso de libretas
+                     <img src="../images/comillasC.jpg" width="10" height="10" /></p>
+                   <p><g:link controller="libreta" action="create">.::Comenzar::.</g:link></p>
+                </td>
+                <td>
+                   <p><img src="../images/comillasA.jpg" width="10" height="10" />
+                     Administre sus recordatorios en una libreta y adjunte archivos de interes. 
+                   <img src="../images/comillasC.jpg" width="10" height="10" /></p>
+                   <p><g:link controller="nota" action="create">.::Comenzar::.</g:link></p>
+                </td>
+             </tr>
+          </table>
+      
+        </div>
+        
     </div>
-      <g:form action="inicio">
-                  <div class="buttons">
-                         <span class="formButton">
-                            <input type="submit" value="Cerrar Sesion"></input>                      
-                         </span>
-                   </div>
-      </g:form>
-                                 
-            </div>
+    
+<div id="left">
+
+        <h3>Búsqueda de Notas: </h3>
+        <g:form action="buscar" controller="nota">
+           <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
+           <g:submitButton name="submit" value="Buscar"/>
+        </g:form>
+        
+        <h3>Opciones: </h3>
+        <table>
+          <tr>
+            <td>
+              <img src="../images/home.png" width="25" height="25" />
+            </td>
+            <td>
+              <li><a href="#">.::HOME::.</a></li>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="../images/book.png" width="25" height="25" />
+            </td>
+            <td>
+              <li><g:link controller="libreta" action="list">.::Libretas::.</g:link></li>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="../images/perfil.png" width="25" height="25" />
+            </td>
+            <td>
+              <li><g:link controller="persona" action="show">.::Configurar Cuenta::.</g:link></li>
+            </td>
+          </tr>
+        </table>        
+      </div>
+      
+    <div style="clear: both;"> </div>
+    
+    <div id="footer">
+          Desarroladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
+      </div>
+      
    </body>
 </html>

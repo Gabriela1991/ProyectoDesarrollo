@@ -8,88 +8,110 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#show-persona" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="../persona/VentanaInicio"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-                  <g:form action="buscar" controller="nota">
-                         <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
-                         <g:submitButton name="submit" value="Buscar"/>
-                     </g:form>
+          
+          <div id="wrap">
+
+            <div id="header">
+              <h1><a href="#">Block de Notas</a></h1>
+              <h2>Administra tus recordatorios y Notas personales</h2>
+            </div>
+            
+            <div id="right">
+              
+              <table>
+                <tr>
+                  <td>.:: Bienvenido ::.</td>
+                  <td> ||nombre de usuario|| </td>
+                  <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
+                  <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
+                       <img src="../images/cerrarSesion.png" width="25" height="25" />
+                      </g:link>
+                  </td>
+                </tr>
+              </table>
+              <div class="articles">
+                <div id="show-persona" class="content scaffold-show" role="main">
+		   
+		   <ol class="property-list persona">
+                     <table style="alignment-adjust: central">
+                  <tr>
+                    <td>Nombre de Usuario: </td>
+                    <td>
+                      <g:if test="${personaInstance?.nombre}">
+			  <li class="fieldcontain">
+			     <span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${personaInstance}" field="nombre"/></span>
+			  </li>
+		       </g:if>
+                    </td>
+                  </tr>
+                </table>
+                
+                
+		       
+		       <g:if test="${personaInstance?.apellido}">
+			  <li class="fieldcontain">
+			      <span id="apellido-label" class="property-label"><g:message code="persona.apellido.label" default="Apellido" /></span>
+			      <span class="property-value" aria-labelledby="apellido-label"><g:fieldValue bean="${personaInstance}" field="apellido"/></span>
+			  </li>
+		       </g:if>
+		       <g:if test="${personaInstance?.correo}">
+			  <li class="fieldcontain">
+			      <span id="correo-label" class="property-label"><g:message code="persona.correo.label" default="Correo" /></span>
+			      <span class="property-value" aria-labelledby="correo-label"><g:fieldValue bean="${personaInstance}" field="correo"/></span>
+			  </li>
+		       </g:if>
+		   </ol>
+		   <g:form>
+                         <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: 'Edit')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de editar??')}');" />
+		   </g:form>
 		</div>
-		<div id="show-persona" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<ol class="property-list persona">
-			
-				<g:if test="${personaInstance?.nombre}">
-				<li class="fieldcontain">
-					<span id="nombre-label" class="property-label"><g:message code="persona.nombre.label" default="Nombre" /></span>
-					
-						<span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${personaInstance}" field="nombre"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${personaInstance?.apellido}">
-				<li class="fieldcontain">
-					<span id="apellido-label" class="property-label"><g:message code="persona.apellido.label" default="Apellido" /></span>
-					
-						<span class="property-value" aria-labelledby="apellido-label"><g:fieldValue bean="${personaInstance}" field="apellido"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${personaInstance?.correo}">
-				<li class="fieldcontain">
-					<span id="correo-label" class="property-label"><g:message code="persona.correo.label" default="Correo" /></span>
-					
-						<span class="property-value" aria-labelledby="correo-label"><g:fieldValue bean="${personaInstance}" field="correo"/></span>
-					
-				</li>
-				</g:if>
-			
-			<!--	<g:if test="${personaInstance?.keysdropbox}">
-				<li class="fieldcontain">
-					<span id="keysdropbox-label" class="property-label"><g:message code="persona.keysdropbox.label" default="Keysdropbox" /></span>
-					
-						<span class="property-value" aria-labelledby="keysdropbox-label"><g:fieldValue bean="${personaInstance}" field="keysdropbox"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${personaInstance?.clave}">
-				<li class="fieldcontain">
-					<span id="clave-label" class="property-label"><g:message code="persona.clave.label" default="Clave" /></span>
-					
-						<span class="property-value" aria-labelledby="clave-label"><g:fieldValue bean="${personaInstance}" field="clave"/></span>
-					
-				</li>
-				</g:if>
-			-->				<g:if test="${personaInstance?.libretas}">
-				<li class="fieldcontain">
-					<span id="libretas-label" class="property-label"><g:message code="persona.libretas.label" default="Libretas" /></span>
-					
-						<g:each in="${personaInstance.libretas}" var="l">
-						<span class="property-value" aria-labelledby="libretas-label"><g:link controller="libreta" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-			</ol>
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${personaInstance?.id}" />
-					<g:link class="edit" action="edit" id="${personaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Esta seguro de eliminar??')}');" />
-				</fieldset>
-			</g:form>
-		</div>
+              </div>
+            </div>
+            
+          <div id="left">
+
+            <h3>Búsqueda de Notas: </h3>
+            <g:form action="buscar" controller="nota">
+               <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
+               <g:submitButton name="submit" value="Buscar"/>
+            </g:form>
+
+            <h3>Opciones: </h3>
+            <table>
+              <tr>
+                <td>
+                  <img src="../images/home.png" width="25" height="25" />
+                </td>
+                <td>
+                  <li><g:link controller="persona" action="ventanaInicio">.::HOME::.</g:link></li>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="../images/book.png" width="25" height="25" />
+                </td>
+                <td>
+                  <li><g:link controller="libreta" action="list">.::Libretas::.</g:link></li>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="../images/perfil.png" width="25" height="25" />
+                </td>
+                <td>
+                  <li><g:link controller="persona" action="show">.::Configurar Cuenta::.</g:link></li>
+                </td>
+              </tr>
+            </table>        
+        </div>
+            
+        <div style="clear: both;"> </div>
+
+      <div id="footer">
+          Desarroladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
+      </div>
+        
+</div>
+
 	</body>
 </html>
