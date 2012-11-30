@@ -204,16 +204,34 @@ class NotaController {
                for (int j=0; j<notas[i].size(); j++){
                         while (k.hasNext()) {
                             Object elemento= k.next();
-                            if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo))
-                                   k.remove();
+                            def bandera=0;
+                            if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo)) {
+                                for (int h=0; h<elemento.etiquetas.size(); h++){
+                                    if (elemento.etiquetas.get(h).texto.contains(params.campo)){
+                                        bandera=1
+                                        break
+                                    }
+                                    else bandera=0;               
+                                }
+                                 if (bandera==0) k.remove();     
+                            }
                         }                 
                 }
             }
             else {
                  while (k.hasNext()) {
                             Object elemento= k.next();
-                            if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo))
-                                   k.remove();
+                            def bandera=0;
+                            if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo)) {
+                                for (int h=0; h<elemento.etiquetas.size(); h++){
+                                    if (elemento.etiquetas.get(h).texto.contains(params.campo)){
+                                        bandera=1
+                                        break
+                                    }
+                                    else bandera=0;               
+                                }
+                                 if (bandera==0) k.remove();     
+                            }
                         }         
             }
         }
@@ -226,7 +244,6 @@ class NotaController {
         }
 
         [libretaInstance: notas]
-       // redirect (controller:"persona", action:"ventanaInicio")
 
     }
 
