@@ -15,11 +15,25 @@
               <h2>Administra tus recordatorios y Notas personales</h2>
             </div>
             
+            
             <div id="right">
+              
+              <table>
+                <tr>
+                  <td style="color: transparent">.:: Bienvenido ::.</td>
+                  <td style="color: transparent"> ||nombre de usuario|| </td>
+                  <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
+                  <td><g:link controller="persona" action="inicio">.::Volver::.
+                       <img src="../images/cerrarSesion.png" width="25" height="25" />
+                      </g:link>
+                  </td>
+                </tr>
+              </table>
+              
               <div class="articles">
                 <table>
                   <tr>
-                    <td style="color: transparent">fgghghghghjkdfgh</td>
+                    <td style="color: transparent">fgghjkdfgh</td>
                     <td>
                       <img src="../images/perfil.png" width="35" height="35" />
                     </td>
@@ -45,6 +59,7 @@
 			<g:form action="save" >
                           <table>
                             <tr>
+                              <td style="color: transparent">fgghjkdfgh</td>
                               <td style="color: cornflowerblue; font-size: medium">
                                 <g:render template="form"/>
                               </td>
@@ -52,7 +67,7 @@
                           </table>
                           <table>
                             <tr>
-                              <td style="color: transparent">dfghjkfghj</td>
+                              <td style="color: transparent">dfghjkfghjdfghjkfghjghghjghjg</td>
                               <td>
                                 <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: '.::Crear Cueenta::.')}" />
                               </td>
