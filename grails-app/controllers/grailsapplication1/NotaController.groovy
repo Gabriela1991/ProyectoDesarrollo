@@ -71,6 +71,7 @@ class NotaController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
+        session.nota= notaInstance
         redirect(action: "show1", params:[id: notaInstance.id, sesion:session.persona])        
     }
 
