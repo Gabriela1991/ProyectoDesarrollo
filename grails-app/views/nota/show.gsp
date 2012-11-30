@@ -22,7 +22,7 @@
                   <td> ||nombre de usuario|| </td>
                   <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
                   <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
-                       <img src="../../images/cerrarSesion.png" width="25" height="25" />
+                       <img src="../images/cerrarSesion.png" width="25" height="25" />
                       </g:link>
                   </td>
                 </tr>
@@ -33,7 +33,7 @@
                   <tr>
                     <td style="color: transparent">fgghghghghjkdfgh</td>
                     <td>
-                      <img src="../../images/notebook1.png" width="55" height="55" />
+                      <img src="../images/notebook1.png" width="55" height="55" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
                     <td><h2>.::Ver Nota::.</h2></td>
@@ -52,7 +52,7 @@
                     <g:if test="${notaInstance?.adjuntos}">
                       <li class="fieldcontain">
                         <tr>
-                          <td style="color: transparent">dfjljkljk</td>
+                          <td style="color: transparent">dfjllkjlkjlkjlkjjkljk</td>
                           <td>
                             <span id="adjuntos-label" class="property-label"><g:message code="nota.adjuntos.label" default="Adjuntos: " /></span>
                           </td>
@@ -67,7 +67,8 @@
                     <g:if test="${notaInstance?.etiquetas}">
                        <li class="fieldcontain">
                          <tr>
-                           <td style="color: cornflowerblue; font-size: medium">
+                           <td style="color: transparent">dfjljlkjlkjkljk</td>
+                           <td style="color: cornflowerblue; fonlkjlkjt-size: medium">
                               <span id="etiquetas-label" class="property-label"><g:message code="nota.etiquetas.label" default="Etiquetas: " /></span>
                            </td>
                            <td style="color: black; font-size: medium">
@@ -81,6 +82,7 @@
                      <g:if test="${notaInstance?.libreta}">
 			<li class="fieldcontain"> 
                           <tr>
+                            <td style="color: transparent">dfjljlkjlkjkllkjlkjjk</td>
                             <td style="color: cornflowerblue; font-size: medium">
                               <span id="libreta-label" class="property-label"><g:message code="nota.libreta.label" default="Libreta: " /></span>
                             </td>
@@ -93,6 +95,7 @@
                      <g:if test="${notaInstance?.texto}">
                        <li class="fieldcontain">
                           <tr>
+                            <td style="color: transparent">dfjljkllkjlkjlkjlkjjk</td>
                             <td style="color: cornflowerblue; font-size: medium">
                               <span id="texto-label" class="property-label"><g:message code="nota.texto.label" default="Texto: " /></span>
                             </td>
@@ -105,6 +108,7 @@
                      <g:if test="${notaInstance?.titulo}">
                        <li class="fieldcontain">
                           <tr>
+                            <td style="color: transparent">dfjljkljlkjlkjlkjlkjk</td>
                             <td style="color: cornflowerblue; font-size: medium">
                               <span id="titulo-label" class="property-label"><g:message code="nota.titulo.label" default="Titulo: " /></span>
                             </td>
@@ -117,6 +121,7 @@
                      <g:if test="${notaInstance?.titulo}">
                        <li class="fieldcontain">
                           <tr>
+                            <td style="color: transparent">dfjljkljlklkjlkjjlkjk</td>
                             <td style="color: cornflowerblue; font-size: medium">
                               <span id="fecha-label" class="property-label"><g:message code="nota.fecha.label" default="Fecha de Creación: " /></span>
                             </td>
@@ -132,7 +137,7 @@
 			<g:form>
                           <table>
                             <tr>
-                              <td style="color: transparent">hjklhjkl,</td>
+                              <td style="color: transparent">hjklhjkl,klkjlkjlkjkljjhkjh</td>
                               <td>
                                 <g:hiddenField name="id" value="${notaInstance?.id}" />
                                 <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: 'Modificar Nota')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar la nota?')}');" />
@@ -162,7 +167,7 @@
             <table>
               <tr>
                 <td>
-                  <img src="../../images/home.png" width="25" height="25" />
+                  <img src="../images/home.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="persona" action="ventanaInicio">.::HOME::.</g:link></li>
@@ -170,7 +175,7 @@
               </tr>
               <tr>
                 <td>
-                  <img src="../../images/book.png" width="25" height="25" />
+                  <img src="../images/book.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="libreta" action="list">.::Libretas::.</g:link></li>
@@ -178,7 +183,7 @@
               </tr>
               <tr>
                 <td>
-                  <img src="../../images/perfil.png" width="25" height="25" />
+                  <img src="../images/perfil.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="persona" action="show">.::Configurar Cuenta::.</g:link></li>
