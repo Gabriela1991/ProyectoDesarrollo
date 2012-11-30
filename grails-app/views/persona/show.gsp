@@ -5,7 +5,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'persona.label', default: 'Persona')}" />
-		<title>.::Perfil de Usuario :: Configurar Cuenta::.</title>
+		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
           
@@ -30,66 +30,39 @@
                 </tr>
               </table>
               <div class="articles">
+                <div id="show-persona" class="content scaffold-show" role="main">
+		   
+		   <ol class="property-list persona">
                 <table>
                   <tr>
-                    <td style="color: transparent">ghghj</td>
+                    <td>Nombre de Usuario: </td>
                     <td>
-                      <img src="../images/perfil.png" width="35" height="35" />
-                    </td>
-                    <td style="color: transparent">ghghj</td>
-                    <td>
-                      <h2 style="color: cornflowerblue">.::Configuración de Cuenta::.</h2>
+                      <g:if test="${personaInstance?.nombre}">
+			  <li class="fieldcontain">
+			     <span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${personaInstance}" field="nombre"/></span>
+			  </li>
+		       </g:if>
                     </td>
                   </tr>
-                </table>                
-              </div>
-              <div class="articles">
-                <div id="show-persona" class="content scaffold-show" role="main">
-		   <ol class="property-list persona">
-                      <table>
-                        <tr>
-                          <td style="color: transparent">ghjhkjhjhjkhjkhjk</td>
-                          <td style="color: darkseagreen; font: bold; font-size: medium">Nombre: </td>
-                          <td>
-                            <g:if test="${personaInstance?.nombre}">
-                                <li class="fieldcontain">
-                                  <span class="property-value" aria-labelledby="nombre-label" style="font: bold; font-size: medium">
-                                  <g:fieldValue bean="${personaInstance}" field="nombre"/></span>
-                                </li>
-                             </g:if>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="color: transparent">ghjhkjhjhjkhjkhjk</td>
-                          <td style="color: darkseagreen; font: bold; font-size: medium">Apellido: </td>
-                          <td>
-                             <g:if test="${personaInstance?.apellido}">
-                                <li class="fieldcontain">
-                                  <span class="property-value" aria-labelledby="apellido-label" style="font: bold; font-size: medium">
-                                      <g:fieldValue bean="${personaInstance}" field="apellido"/></span>
-                                </li>
-                             </g:if>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="color: transparent">ghjhkjhjhjkhjkhjk</td>
-                          <td style="color: darkseagreen; font: bold; font-size: medium">Correo: </td>
-                          <td>
-                            <g:if test="${personaInstance?.correo}">
-                                <li class="fieldcontain">
-                                  <span class="property-value" aria-labelledby="correo-label" style="font: bold; font-size: medium">
-                                    <g:fieldValue bean="${personaInstance}" field="correo"/></span>
-                                </li>
-                             </g:if>
-                          </td>
-                        </tr>
-                      </table>
-                    </ol>
-                  <br/>
+                </table>
+                
+                
+		       
+		       <g:if test="${personaInstance?.apellido}">
+			  <li class="fieldcontain">
+			      <span id="apellido-label" class="property-label"><g:message code="persona.apellido.label" default="Apellido" /></span>
+			      <span class="property-value" aria-labelledby="apellido-label"><g:fieldValue bean="${personaInstance}" field="apellido"/></span>
+			  </li>
+		       </g:if>
+		       <g:if test="${personaInstance?.correo}">
+			  <li class="fieldcontain">
+			      <span id="correo-label" class="property-label"><g:message code="persona.correo.label" default="Correo" /></span>
+			      <span class="property-value" aria-labelledby="correo-label"><g:fieldValue bean="${personaInstance}" field="correo"/></span>
+			  </li>
+		       </g:if>
+		   </ol>
 		   <g:form>
-                         <g:actionSubmit class="edit" action="edit" 
-                         value="${message(code: 'default.button.edite.label', default: '.::Modificar Perfil::.')}" 
-                         onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar su Perfil?')}');" />
+                         <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: 'Edit')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de editar??')}');" />
 		   </g:form>
 		</div>
               </div>
@@ -100,7 +73,7 @@
             <h3>Búsqueda de Notas: </h3>
             <g:form action="buscar" controller="nota">
                <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
-               <g:submitButton name="submit" value=".::Buscar::."/>
+               <g:submitButton name="submit" value="Buscar"/>
             </g:form>
 
             <h3>Opciones: </h3>
