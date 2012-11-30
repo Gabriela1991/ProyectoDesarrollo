@@ -4,7 +4,6 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'persona.label', default: 'Persona')}" />
 		<title>.::Perfil Usuario :: Configurar Cuenta::.</title>
 	</head>
 	<body>

@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
     <title>.::Perfil de Usuario::.</title>
-    </head>
+  </head>
     
     <div id="wrap">
       <div id="header">

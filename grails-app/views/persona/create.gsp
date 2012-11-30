@@ -3,8 +3,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'persona.label', default: 'Persona')}" />
-		<title><g:message code="default.create.label" args="[entityName]" /></title>
+		<title>.::Crear Cuenta::.</title>
 	</head>
 	<body>
           
