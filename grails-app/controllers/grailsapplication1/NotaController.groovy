@@ -43,7 +43,7 @@ class NotaController {
         def x=0;
        
 
-        while (numero >=9){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
+        while (numero >=8){  //aca le borro los parametros etiquetas[x] para poder insertar la nota
             params.remove('etiquetas['+x+']');
             params.remove('etiqueta2');
             params2.remove('etiqueta2');
@@ -51,7 +51,7 @@ class NotaController {
             numero= numero-1;
             x++;
         }
-
+      
         def notaInstance = new Nota(params) //creo la nueva nota
         notaInstance.fecha=new Date().format("dd/MM/yyyy");
         numero= params2.size();
