@@ -3,96 +3,197 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'nota.label', default: 'Nota')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<meta name="layout" content="main">		
+		<title>.::Perfil Usuario :: Ver Nota::.</title>
 	</head>
 	<body>
-		<a href="#show-nota" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="../../persona/ventanaInicio"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-                  <g:form action="buscar" controller="nota">
-                         <input type="text" name="campo" id="campo" value="Escriba su busqueda" onClick="this.value=''"/>                                      
-                         <g:submitButton name="submit" value="Buscar"/>
-                     </g:form>
-		</div>
-		<div id="show-nota" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+		<div id="wrap">
+
+            <div id="header">
+              <h1><a href="#">Block de Notas</a></h1>
+              <h2>Administra tus recordatorios y Notas personales</h2>
+            </div>
+            
+            <div id="right">
+              
+              <table>
+                <tr>
+                  <td>.:: Bienvenido ::.</td>
+                  <td> ||nombre de usuario|| </td>
+                  <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
+                  <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
+                       <img src="../../images/cerrarSesion.png" width="25" height="25" />
+                      </g:link>
+                  </td>
+                </tr>
+              </table>
+              
+              <div class="articles">
+                <table>
+                  <tr>
+                    <td style="color: transparent">fgghghghghjkdfgh</td>
+                    <td>
+                      <img src="../../images/notebook1.png" width="55" height="55" />
+                    </td>
+                    <td style="color: transparent">fgghgh</td>
+                    <td><h2>.::Ver Nota::.</h2></td>
+                  </tr>
+                </table>
+              </div>
+              
+              <div class="articles">
+                <div id="show-nota" class="content scaffold-show" role="main">
+			
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list nota">
-			
-				<g:if test="${notaInstance?.adjuntos}">
-				<li class="fieldcontain">
-					<span id="adjuntos-label" class="property-label"><g:message code="nota.adjuntos.label" default="Adjuntos" /></span>
-					
-						<g:each in="${notaInstance.adjuntos}" var="a">
-						<span class="property-value" aria-labelledby="adjuntos-label"><g:link controller="adjunto" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${notaInstance?.etiquetas}">
-				<li class="fieldcontain">
-					<span id="etiquetas-label" class="property-label"><g:message code="nota.etiquetas.label" default="Etiquetas" /></span>
-					
-						<g:each in="${notaInstance.etiquetas}" var="e">
-						<span class="property-value" aria-labelledby="etiquetas-label"><g:link controller="etiqueta" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${notaInstance?.libreta}">
-				<li class="fieldcontain">
-					<span id="libreta-label" class="property-label"><g:message code="nota.libreta.label" default="Libreta" /></span>
-					
-						<span class="property-value" aria-labelledby="libreta-label"><g:link controller="libreta" action="show" id="${notaInstance?.libreta?.id}">${notaInstance?.libreta?.nombre.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${notaInstance?.texto}">
-				<li class="fieldcontain">
-					<span id="texto-label" class="property-label"><g:message code="nota.texto.label" default="Texto" /></span>
-					
-						<span class="property-value" aria-labelledby="texto-label"><g:fieldValue bean="${notaInstance}" field="texto"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${notaInstance?.titulo}">
-				<li class="fieldcontain">
-					<span id="titulo-label" class="property-label"><g:message code="nota.titulo.label" default="Titulo" /></span>
-					
-						<span class="property-value" aria-labelledby="titulo-label"><g:fieldValue bean="${notaInstance}" field="titulo"/></span>
-					
-				</li>
-				</g:if>
-                          
-                                <g:if test="${notaInstance?.titulo}">
-				<li class="fieldcontain">
-					<span id="fecha-label" class="property-label"><g:message code="nota.fecha.label" default="Fecha de Creación" /></span>
-					
-						<span class="property-value" aria-labelledby="fecha-label"><g:fieldValue bean="${notaInstance}" field="fecha"/></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
+                  <ol class="property-list nota">
+                  <table>
+                    <g:if test="${notaInstance?.adjuntos}">
+                      <li class="fieldcontain">
+                        <tr>
+                          <td style="color: transparent">dfjljkljk</td>
+                          <td>
+                            <span id="adjuntos-label" class="property-label"><g:message code="nota.adjuntos.label" default="Adjuntos: " /></span>
+                          </td>
+                          <td>
+                            <g:each in="${notaInstance.adjuntos}" var="a">
+                               <span class="property-value" aria-labelledby="adjuntos-label"><g:link controller="adjunto" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+                            </g:each>
+                          </td>
+                        </tr>
+                       </li>
+                    </g:if>
+                    <g:if test="${notaInstance?.etiquetas}">
+                       <li class="fieldcontain">
+                         <tr>
+                           <td style="color: cornflowerblue; font-size: medium">
+                              <span id="etiquetas-label" class="property-label"><g:message code="nota.etiquetas.label" default="Etiquetas: " /></span>
+                           </td>
+                           <td style="color: black; font-size: medium">
+                             <g:each in="${notaInstance.etiquetas}" var="e">
+	     		        <span class="property-value" aria-labelledby="etiquetas-label"><g:link controller="etiqueta" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
+			     </g:each>
+                           </td>
+                         </tr>
+			</li>
+		     </g:if>
+                     <g:if test="${notaInstance?.libreta}">
+			<li class="fieldcontain"> 
+                          <tr>
+                            <td style="color: cornflowerblue; font-size: medium">
+                              <span id="libreta-label" class="property-label"><g:message code="nota.libreta.label" default="Libreta: " /></span>
+                            </td>
+                            <td style="color: black; font-size: medium">
+                              <span class="property-value" aria-labelledby="libreta-label"><g:link controller="libreta" action="show" id="${notaInstance?.libreta?.id}">${notaInstance?.libreta?.nombre.encodeAsHTML()}</g:link></span>
+                            </td>
+                          </tr>
+                         </li>
+		     </g:if>
+                     <g:if test="${notaInstance?.texto}">
+                       <li class="fieldcontain">
+                          <tr>
+                            <td style="color: cornflowerblue; font-size: medium">
+                              <span id="texto-label" class="property-label"><g:message code="nota.texto.label" default="Texto: " /></span>
+                            </td>
+                            <td style="color: black; font-size: medium">
+                              <span class="property-value" aria-labelledby="texto-label"><g:fieldValue bean="${notaInstance}" field="texto"/></span>
+                            </td>
+                          </tr>
+                       </li>
+                     </g:if>
+                     <g:if test="${notaInstance?.titulo}">
+                       <li class="fieldcontain">
+                          <tr>
+                            <td style="color: cornflowerblue; font-size: medium">
+                              <span id="titulo-label" class="property-label"><g:message code="nota.titulo.label" default="Titulo: " /></span>
+                            </td>
+                            <td style="color: black; font-size: medium">
+                              <span class="property-value" aria-labelledby="titulo-label"><g:fieldValue bean="${notaInstance}" field="titulo"/></span>
+                            </td>
+                          </tr>
+                       </li>
+                     </g:if>
+                     <g:if test="${notaInstance?.titulo}">
+                       <li class="fieldcontain">
+                          <tr>
+                            <td style="color: cornflowerblue; font-size: medium">
+                              <span id="fecha-label" class="property-label"><g:message code="nota.fecha.label" default="Fecha de Creación: " /></span>
+                            </td>
+                            <td style="color: black; font-size: medium">
+                              <span class="property-value" aria-labelledby="fecha-label"><g:fieldValue bean="${notaInstance}" field="fecha"/></span>
+                            </td>
+                          </tr>
+                       </li>
+                     </g:if>
+                  </table>
+                  </ol>
+                  </br>
 			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${notaInstance?.id}" />
-					<g:link class="edit" action="edit" id="${notaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
+                          <table>
+                            <tr>
+                              <td style="color: transparent">hjklhjkl,</td>
+                              <td>
+                                <g:hiddenField name="id" value="${notaInstance?.id}" />
+                                <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: 'Modificar Nota')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar la nota?')}');" />
+				<!-- <g:link class="edit" action="edit" id="${notaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link> -->				
+                              </td>
+                              <td>
+                                	<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                              </td>
+                            </tr>
+                          </table>
+					
+				
 			</g:form>
 		</div>
+              </div>
+            </div>
+                  
+                  <div id="left">
+
+            <h3>Búsqueda de Notas: </h3>
+            <g:form action="buscar" controller="nota">
+               <input type="text" name="campo" id="campo" value="Escriba su búsqueda" onClick="this.value=''"/>                                      
+               <g:submitButton name="submit" value=".::Buscar::."/>
+            </g:form>
+
+            <h3>Opciones: </h3>
+            <table>
+              <tr>
+                <td>
+                  <img src="../../images/home.png" width="25" height="25" />
+                </td>
+                <td>
+                  <li><g:link controller="persona" action="ventanaInicio">.::HOME::.</g:link></li>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="../../images/book.png" width="25" height="25" />
+                </td>
+                <td>
+                  <li><g:link controller="libreta" action="list">.::Libretas::.</g:link></li>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="../../images/perfil.png" width="25" height="25" />
+                </td>
+                <td>
+                  <li><g:link controller="persona" action="show">.::Configurar Cuenta::.</g:link></li>
+                </td>
+              </tr>
+            </table>        
+        </div>
+            
+        <div style="clear: both;"> </div>
+
+      <div id="footer">
+          Desarroladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
+      </div>
+                </div>
+                  
+		
 	</body>
 </html>

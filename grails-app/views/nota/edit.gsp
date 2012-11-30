@@ -22,7 +22,7 @@
                   <td> ||nombre de usuario|| </td>
                   <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
                   <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
-                       <img src="../images/cerrarSesion.png" width="25" height="25" />
+                       <img src="../../images/cerrarSesion.png" width="25" height="25" />
                       </g:link>
                   </td>
                 </tr>
@@ -33,10 +33,10 @@
                   <tr>
                     <td style="color: transparent">fgghghghghjkdfgh</td>
                     <td>
-                      <img src="../images/notebook1.png" width="55" height="55" />
+                      <img src="../../images/notebook1.png" width="55" height="55" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
-                    <td><h2>.::Buscar Nota::.</h2></td>
+                    <td><h2>.::Editar Nota::.</h2></td>
                   </tr>
                 </table>
               </div>
@@ -56,13 +56,21 @@
 			<g:form method="post" >
 				<g:hiddenField name="id" value="${notaInstance?.id}" />
 				<g:hiddenField name="version" value="${notaInstance?.version}" />
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
+				<g:render template="form"/>
+                                <table>
+                                  <tr>
+                                    <td style="color: transparent">hjjnkljslkkljkljkljkjlkjklj</td>
+                                    <td>
+                                        <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: '.::Guardar::.')}" />
+                                    </td>
+                                    <td>
+                                        <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: '.::Eliminar::.')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Seguro desea eliminar esta nota?')}');" />
+                                    </td>
+                                  </tr>
+                                </table>
+					
+					
+				
 			</g:form>
 		</div>
               </div>
@@ -79,7 +87,7 @@
             <table>
               <tr>
                 <td>
-                  <img src="../images/home.png" width="25" height="25" />
+                  <img src="../../images/home.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="persona" action="ventanaInicio">.::HOME::.</g:link></li>
@@ -87,7 +95,7 @@
               </tr>
               <tr>
                 <td>
-                  <img src="../images/book.png" width="25" height="25" />
+                  <img src="../../images/book.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="libreta" action="list">.::Libretas::.</g:link></li>
@@ -95,7 +103,7 @@
               </tr>
               <tr>
                 <td>
-                  <img src="../images/perfil.png" width="25" height="25" />
+                  <img src="../../images/perfil.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="persona" action="show">.::Configurar Cuenta::.</g:link></li>
