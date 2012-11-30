@@ -20,7 +20,7 @@
         <table>
           <tr>
             <td>.:: Bienvenido ::.</td>
-            <td> ||nombre de usuario|| </td>
+            <td> || ${session.persona.nombre} || </td>
             <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
             <td>.::Cerrar Sesion::. <img src="../images/cerrarSesion.png" width="25" height="25" /></td>
           </tr>
@@ -44,7 +44,10 @@
                 </tbody>
               </table>
             </div>
-            <span class="button"><g:actionSubmit class="upload" value="Adjuntar" action="upload" /></span>
+            <span class="button">
+              <g:actionSubmit class="upload" value="Adjuntar" action="upload" params="${notaInstance?.id}" />
+             
+            </span>
           </g:form>
           
           <g:if test="${flash.message}">
