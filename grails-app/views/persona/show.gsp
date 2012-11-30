@@ -83,9 +83,16 @@
                 </table>
               </ol>
                   </br>
-		   <g:form>
-                         <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: '.::Modificar Perfil::.')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar su Perfil?')}');" />
-		   </g:form>
+                  <table>
+                    <tr>
+                      <td style="color: transparent">fgghghghghjkdfgh</td>
+                      <td>
+                        <g:form>
+                           <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: '.::Modificar Perfil::.')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar su Perfil?')}');" />
+		        </g:form>
+                      </td>
+                    </tr>
+                  </table>
 		</div>
               </div>
             </div>
