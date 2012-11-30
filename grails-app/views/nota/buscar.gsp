@@ -49,41 +49,36 @@
                         <table>
                           <thead>
                             <tr>
+                              <td style="color: transparent">k</td>
                               <g:sortableColumn property="titulo" title="${message(code: 'nota.titulo.label', default: 'Titulo')}" />
+                              <td style="color: transparent">fgjkjh</td>
                               <g:sortableColumn property="texto" title="${message(code: 'nota.texto.label', default: 'Texto')}" />
-                              <g:sortableColumn property="fecha" title="${message(code: 'nota.fecha.label', default: 'Fecha de Creación')}" />
-
-                                            </tr>
-                                    </thead>
-
-
-                                    <tbody>
-                                      <g:each in="${libretaInstance}" status="k" var="libreta">
-                                                     <tr class="${(k % 2) == 0 ? 'even' : 'odd'}">
-                                                            <g:each in="${libreta}" status="i" var="nota">
-
-                                                                  <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-                                                                        <td><g:link action="show" id="${nota.id}">${nota.titulo?.encodeAsHTML()}</g:link></td> 			
-
-                                                                        <td>${fieldValue(bean: nota, field: "texto")}</td>
-
-                                                                        <td>${fieldValue(bean: nota, field: "fecha")}</td>
-
-                                                                  </tr>
-                                                            </g:each>
-                                                     </tr>
-                                      </g:each>
-
-
-
-                                    </tbody>
-                            </table>
-                            <div class="pagination">
-                                    <g:paginate total="10" />
-                            </div>
-                    </div>
-            </div>
+                              <td style="color: transparent">fgjkjh</td>
+                              <g:sortableColumn property="fecha" title="${message(code: 'nota.fecha.label', default: 'Fecha')}" />
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <g:each in="${libretaInstance}" status="k" var="libreta">
+                               <tr class="${(k % 2) == 0 ? 'even' : 'odd'}">
+                                  <g:each in="${libreta}" status="i" var="nota">
+                                    <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                      <td style="color: transparent">fgjkjhhhjk</td>
+                                      <td><g:link action="show" id="${nota.id}">${nota.titulo?.encodeAsHTML()}</g:link></td> 			
+                                      <td style="color: transparent">fgjkjhhhjk</td>
+                                      <td>${fieldValue(bean: nota, field: "texto")}</td>
+                                      <td style="color: transparent">fgjkjhhhjk</td>
+                                      <td>${fieldValue(bean: nota, field: "fecha")}</td>
+                                    </tr>
+                                  </g:each>
+                               </tr>
+                            </g:each>
+                          </tbody>
+                         </table>
+                        <div class="pagination">
+                                <g:paginate total="10" />
+                        </div>
+                  </div>
+              </div>
               
             </div>
             
@@ -118,7 +113,7 @@
                   <img src="../images/perfil.png" width="25" height="25" />
                 </td>
                 <td>
-                  <li><g:link controller="persona" action="show">.::Crear Nota::.</g:link></li>
+                  <li><g:link controller="persona" action="show">.::Configurar Cuenta::.</g:link></li>
                 </td>
               </tr>
             </table>        
