@@ -224,7 +224,6 @@ class NotaController {
                             def bandera=0;
                             if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo)) {
                                 for (int h=0; h<elemento.etiquetas.size(); h++){
-                                    println (elemento.etiquetas.get(h).texto);
                                     if (elemento.etiquetas.get(h).texto.contains(params.campo)){
                                         bandera=1
                                         break
