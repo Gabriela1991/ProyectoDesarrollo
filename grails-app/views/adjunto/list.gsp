@@ -22,7 +22,7 @@
             <td>.:: Bienvenido ::.</td>
             <td> || ${session.persona.nombre} || </td>
             <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
-            <td>.::Cerrar Sesion::. <img src="../images/cerrarSesion.png" width="25" height="25" /></td>
+            <td>.::Cerrar Sesion::. <img src="../../images/cerrarSesion.png" width="25" height="25" /></td>
           </tr>
         </table>
         <h2>Adjuntos</h2>
@@ -85,7 +85,7 @@
         <table>
           <tr>
             <td>
-              <img src="../images/home.png" width="25" height="25" />
+              <img src="../../images/home.png" width="25" height="25" />
             </td>
             <td>
               <li><a href="#">.::HOME::.</a></li>
@@ -93,7 +93,7 @@
           </tr>
           <tr>
             <td>
-              <img src="../images/book.png" width="25" height="25" />
+              <img src="../../images/book.png" width="25" height="25" />
             </td>
             <td>
               <li><a href="#">.::Libretas::.</a></li>
@@ -101,7 +101,7 @@
           </tr>
           <tr>
             <td>
-              <img src="../images/notitas.png" width="25" height="25" />
+              <img src="../../images/notitas.png" width="25" height="25" />
             </td>
             <td>
               <li><a href="#">.::Notas::.</a></li>
