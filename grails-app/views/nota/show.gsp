@@ -58,7 +58,7 @@
                           </td>
                           <td>
                             <g:each in="${notaInstance.adjuntos}" var="a">
-                               <span class="property-value" aria-labelledby="adjuntos-label"><g:link controller="adjunto" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+                               <span class="property-value" aria-labelledby="adjuntos-label"><g:link controller="adjunto" action="list" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
                             </g:each>
                           </td>
                         </tr>

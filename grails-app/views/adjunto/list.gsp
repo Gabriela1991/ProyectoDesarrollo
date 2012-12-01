@@ -75,7 +75,7 @@
           </tbody>
         </table>
       </div>
-          
+      <g:link action="show" controller="nota" id="${session.nota.id}"> Guardar </g:link> 
         </div>
         
       </div>
