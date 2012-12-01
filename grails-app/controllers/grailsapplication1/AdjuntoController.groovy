@@ -88,9 +88,9 @@ class AdjuntoController {
 
     def list (Long id) {
        //OJO COLOCAR ID DE LA NOTA
-        def adjuntos=Adjunto.executeQuery("select cast(archivo as string)from Adjunto where nota_id="+session.nota.id);
+         def adjuntos=Adjunto.executeQuery("select cast(archivo as string)from Adjunto where nota_id=:idnota",[idnota:session.nota.id]);
         def adjuntoInstanceList = []
-       
+       if (adjuntos!=null){
         if( adjuntos.toList() ){
             adjuntos.each(){ archivo->
                
@@ -98,7 +98,7 @@ class AdjuntoController {
             }
         }
         [ adjuntoInstanceList: adjuntoInstanceList ]
-
+       }
     } 
 
     def delete = {
@@ -142,8 +142,8 @@ class AdjuntoController {
             adjuntoInstance.archivo=nombreArchivo
             // OJO CAMBIAR NOMBRE DE ARCHIVO E ID DE LA NOTA
             
-            adjuntoInstance.nombre='adj1'
-            def notaInstance=Nota.get(21)
+            adjuntoInstance.nombre=session.nota.titulo
+            def notaInstance=Nota.get(session.nota.id)
             adjuntoInstance.nota=notaInstance
             adjuntoInstance.save(flush: true)
             log.info "Se ha agregado un adjunto a la base de datos y a dropbox"

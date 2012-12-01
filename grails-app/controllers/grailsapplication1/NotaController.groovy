@@ -1,9 +1,9 @@
 package grailsapplication1
 
 import org.springframework.dao.DataIntegrityViolationException
-
+import org.apache.commons.logging.*
 class NotaController {
-    
+     private static Log log = LogFactory.getLog("bitacora."+NotaController.class.getName())
     static allowedMethods = [save: "POST", update: "POST", delete: "POST", create: "GET"]
     def index() {
         redirect(action: "list", params: params)
@@ -72,6 +72,7 @@ class NotaController {
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
         session.nota= notaInstance
+         log.info "Se ha agregado una nota a la base de datos, con identificador: "+notaInstance.id
         redirect(action: "show1", params:[id: notaInstance.id, sesion:session.persona])        
     }
 
@@ -173,7 +174,8 @@ class NotaController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
-        redirect(action: "show", id: notaInstance.id)
+         log.info "Se ha editado la nota con identificador: "+notaInstance.id
+         redirect(action: "show", id: notaInstance.id)
     }
 
     def delete(Long id) {
@@ -187,7 +189,8 @@ class NotaController {
         try {
             notaInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'nota.label', default: 'Nota'), id])
-            redirect(action: "list")
+            log.info "Se ha eliminado la nota con identificador: "+notaInstance.id
+             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'nota.label', default: 'Nota'), id])
