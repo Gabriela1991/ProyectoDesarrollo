@@ -130,6 +130,15 @@ class AdjuntoController {
         String busqueda=d.buscarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
         redirect (url:busqueda)        
     }
+    
+    def descargar = {
+        println(params.nota)
+        def Dropbox d=new Dropbox();
+        String claves=session.persona.keysdropbox;
+        def filename = params.id.replace('###', '.')
+        String busqueda=d.descargarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+        redirect (url:busqueda)        
+    }
 
     def upload (Long id) {
         println(session.nota.id)

@@ -29,9 +29,6 @@ import com.dropbox.client2.DropboxAPI.DropboxLink
  */
 public class Dropbox {
 
-    /**
-     * @param args the command line arguments
-     */
     final static private String APP_KEY = "s6c9l9rdxibv9rj";
     final static private String APP_SECRET = "oarccj4xfs7tckh";
     final static private AccessType ACCESS_TYPE = AccessType.DROPBOX;
@@ -41,15 +38,19 @@ public class Dropbox {
     public static  WebAuthInfo authInfo ;
     
   
+    /**
+     * Metodo encargado de verificar si el usuario ya ha dado permisos a la aplicacion para acceder a dropbox.
+     * @param keys: atributo del usuario que guarda las llaves de dropbox
+     * si keys es null, el usuario no ha autorizado. dropbox genera lac claves y son retornadas
+     * si keys es distinto de null, el usuario ya ha permitido acceso. Por lo que el metodo retorna null
+     * */
     public static String auth(String keys) throws DropboxException, IOException, URISyntaxException {
-        // TODO code application logic here
        
-
         try{
             appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
             session = new WebAuthSession(appKeys, ACCESS_TYPE);
             authInfo = session.getAuthInfo();
-println(keys);
+            println(keys);
             if(keys==null){ // si persona no ha autorizado a dropbox. key y secret estan vacias
                 RequestTokenPair pair = authInfo.requestTokenPair;
             
@@ -68,16 +69,7 @@ println(keys);
         return (tokens.key.toString()+"/"+tokens.secret.toString())
             }
             return null;
-//            else // ya se ha autorizado a dropbox. key y secret no son vacias
-//            {
-//                  mDBApi = new DropboxAPI<WebAuthSession>(session);
-//                AccessTokenPair reAuthTokens = new AccessTokenPair("zr1kvtzefrkf339", "f7y6rns0aw731ma");
-//                mDBApi.getSession().setAccessTokenPair(reAuthTokens);
-//               
-//              
-//                System.out.println("Re-authentication Sucessful!");
-//               println( mDBApi.accountInfo());
-//            }
+
         }
         catch (DropboxException ex)
         {
@@ -90,7 +82,11 @@ println(keys);
       
     }
     /**
-     *@param 
+     * Metodo para almacenar un archivo en dropbox
+     *@param file: archivo a subir
+     *@param key: clave de acceso del usuario generada por dropbox
+     *@param secret: clave de acceso del usuario generada por dropbox
+     *@return nombre que uso dropbox para almacenar el archivo
      **/
       public String subirArchivo(File file, String key, String secret){
         
@@ -111,6 +107,12 @@ println(keys);
         }
     }
     
+    /**
+     * Metodo para eliminar un archivo de dropbox
+     *@param nombrefile: nombre de archivo a eliminar
+     *@param key: clave de acceso del usuario generada por dropbox
+     *@param secret: clave de acceso del usuario generada por dropbox
+     **/
     public void eliminarArchivo(String nombrefile,String key, String secret){
         
        try { 
@@ -119,8 +121,6 @@ println(keys);
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
                 System.out.println("Re-authentication Sucessful!");
          
-//        System.out.println("User Name: " + account.displayName); 
-      
         Entry newEntry = mDBApi.delete("/"+nombrefile);
         } catch (DropboxServerException e) {
 			System.out.println("El archivo no esta en dropbox con ese nombre");
@@ -131,6 +131,13 @@ println(keys);
         }
     }
     
+    /**
+     * Metodo que busca archivo en dropbox y retorna el url de vista previa del archivo
+     *@param nombreadj: nombre de archivo a buscar
+     *@param key: clave de acceso del usuario generada por dropbox
+     *@param secret: clave de acceso del usuario generada por dropbox
+     *@return url de vista previa del archivo
+     **/
     public String buscarArchivo(String nombreadj,String key, String secret){
         
        try { 
@@ -138,9 +145,7 @@ println(keys);
                 AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
                 System.out.println("Re-authentication Sucessful!");
-         
-        System.out.println("User Name: " + nombreadj); 
-        
+       
             ArrayList  newEntry = (ArrayList) mDBApi.search("/",nombreadj,1,true);
             DropboxLink share= mDBApi.share("/"+nombreadj);
              
@@ -154,5 +159,39 @@ println(keys);
                     System.out.println("El archivo no esta en dropbox");
             
                 }
+                catch (UnknownHostException e){
+            System.out.println("No hay conexion con internet/dropbox");
+        }
+    }
+    
+       /**
+     * Metodo que busca archivo en dropbox y retorna el url de descarga del archivo
+     *@param nombreadj: nombre de archivo a buscar
+     *@param key: clave de acceso del usuario generada por dropbox
+     *@param secret: clave de acceso del usuario generada por dropbox
+     *@return url de vista previa del archivo
+     **/
+    public String descargarArchivo(String nombreadj,String key, String secret){
+        
+       try { 
+           mDBApi = new DropboxAPI<WebAuthSession>(session);
+                AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
+                mDBApi.getSession().setAccessTokenPair(reAuthTokens);
+                System.out.println("Re-authentication Sucessful!");
+       
+            ArrayList  newEntry = (ArrayList) mDBApi.search("/",nombreadj,1,true);
+            DropboxLink share= mDBApi.share("/"+nombreadj);
+                        
+            return share.url
+        } catch (DropboxServerException e) {
+			System.out.println("El archivo no esta en dropbox con ese nombre");
+		}
+                catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println("El archivo no esta en dropbox");
+            
+                }
+                catch (UnknownHostException e){
+            System.out.println("No hay conexion con internet/dropbox");
+        }
     }
 }

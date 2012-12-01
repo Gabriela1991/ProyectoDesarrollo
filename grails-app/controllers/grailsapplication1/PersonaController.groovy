@@ -124,19 +124,19 @@ class PersonaController {
         //establece la conexion con dropbox
          Dropbox d=new Dropbox()
          println("verificar si ya se ha auth"+session.persona.keysdropbox)
-         String claves=d.auth(session.persona.keysdropbox);
-          if(claves!=null){
+         
+            String claves=d.auth(session.persona.keysdropbox);
+          if(claves!=null){  // Es porque la persona aun no tiene las claves de dropbox
                 session.persona.keysdropbox=claves
                  println("CLAVES 1 "+claves.split('/')[0].toString())
                 //persona.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+persona.id)
                 session.persona.save(flush:true) 
-            }
-            else {
+            } 
+            else { // la persona ya posee las claves de acceso a dropbox
                 claves=session.persona.keysdropbox
                 println("CLAVES 2 "+claves.split('/')[0].toString())
             }
-        //  Dropbox x=new Dropbox();
-         // x.main();
+        
       }
        else{ //si no se encuentra almacenado en la BD regresa a la ventana de login
            flash.message = message(code: 'default.not.found.message', args: ["Correo o clave incorrectas, intente de nuevo"])

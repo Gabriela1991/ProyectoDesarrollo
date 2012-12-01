@@ -12,6 +12,7 @@ import org.junit.*
 class PersonaTests {
 
     void testSomething() {
-       fail "Implement me"
+      Persona pprueba = new Persona(nombre:"juan",apellido:"apellido",correo:"correo",clave:"clave")
+      assertEquals "juan", pprueba.nombre
     }
 }

@@ -11,7 +11,11 @@ import org.junit.*
 @TestFor(Dropbox)
 class DropboxTests {
 
+    Dropbox d=new Dropbox();
+    Persona p=new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:null,clave:"123456");
+    
     void testSomething() {
-       fail "Implement me"
+     d.auth(p.keysdropbox);
+     
     }
 }
