@@ -57,9 +57,24 @@
                             <span id="adjuntos-label" class="property-label"><g:message code="nota.adjuntos.label" default="Adjuntos: " /></span>
                           </td>
                           <td>
-                            <g:each in="${notaInstance.adjuntos}" var="a">
+                           <!-- <g:each in="${notaInstance.adjuntos}" var="a">
                                <span class="property-value" aria-labelledby="adjuntos-label"><g:link controller="adjunto" action="list" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
                             </g:each>
+                           -->
+                           <table>
+         
+          <tbody>
+          <g:each in="${notaInstance.adjuntos}" status="i" var="adjuntoInstance">
+            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+              <td>${adjuntoInstance.archivo}</td>
+            
+             <td><g:link controller="adjunto" action="download" id="${adjuntoInstance.archivo}"  > Ver </g:link></td>
+              
+              <td><g:link controller="adjunto" action="delete" id="${adjuntoInstance.archivo}" onclick="return confirm('¿Esta Seguro?');"> Eliminar </g:link></td> 
+            </tr>
+          </g:each>
+          </tbody>
+        </table>
                           </td>
                         </tr>
                        </li>
