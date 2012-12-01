@@ -27,7 +27,7 @@
                 
                 <table  class="personaForm">
                    <tr class='prop'>
-                     <td><img src="../../images/llave.png" width="45" height="45" /></td>
+                     <td><img src="../images/llave.png" width="45" height="45" /></td>
                       <td valign='top' style='text-align:left;' width='20%'>
                         <label style="color: cornflowerblue; font-size: medium" for='correo'>Correo:</label>
                         </br>

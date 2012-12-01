@@ -30,7 +30,7 @@ class LibretaController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'libreta.label', default: 'Libreta'), libretaInstance.id])
+        flash.message = "Su libreta ha sido creada correctamente"
         redirect(action: "show", id: libretaInstance.id)
     }
     

@@ -70,8 +70,9 @@ class NotaController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
-        session.nota= notaInstance
+        flash.message = "Su nota se ha creado correctamente"
+        //message(code: 'default.created.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
+         session.nota= notaInstance
          log.info "Se ha agregado una nota a la base de datos, con identificador: "+notaInstance.id
         redirect(action: "show1", params:[id: notaInstance.id, sesion:session.persona])        
     }

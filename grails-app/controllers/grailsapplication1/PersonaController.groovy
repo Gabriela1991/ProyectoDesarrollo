@@ -126,10 +126,10 @@ class PersonaController {
          println("verificar si ya se ha auth"+session.persona.keysdropbox)
          String claves=d.auth(session.persona.keysdropbox);
           if(claves!=null){
-                //personaInstance.keysdropbox=claves
+                session.persona.keysdropbox=claves
                  println("CLAVES 1 "+claves.split('/')[0].toString())
-                persona.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+persona.id)
-                 
+                //persona.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+persona.id)
+                session.persona.save(flush:true) 
             }
             else {
                 claves=session.persona.keysdropbox
