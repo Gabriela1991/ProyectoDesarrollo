@@ -35,6 +35,8 @@ class LibretaController {
     }
     
     def show(Long id) {
+        NotaController.ultimoidlibreta=null;
+        NotaController.numero=0;
         def persona= Persona.findById(session.persona.id)
         def libretaInstance = Libreta.get(id)
         if (persona.libretas.contains(Libreta.get(id))){

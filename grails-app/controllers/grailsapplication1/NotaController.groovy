@@ -239,11 +239,12 @@ def list(Integer max, Long id) {
     def buscar () {
         def persona= Persona.findById(session.persona.id);
         def notas= persona.libretas.notas
+        ArrayList<Nota> notasaux= new ArrayList <Nota>()
         for (int i=0; i<notas.size(); i++){
             Iterator k = notas[i].iterator();
             if (notas[i].size()>1) {
                 for (int j=0; j<notas[i].size(); j++){
-                    while (k.hasNext()) {
+                    while (k.hasNext()) {    
                         Object elemento= k.next();
                         def bandera=0;
                         if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo)) {
@@ -254,8 +255,10 @@ def list(Integer max, Long id) {
                                 }
                                 else bandera=0;               
                             }
-                            if (bandera==0) k.remove();     
-                        }
+                            if (bandera==1){
+                                notasaux.add(elemento);    
+                            }
+                        } else notasaux.add(elemento)
                     }                 
                 }
             }
@@ -271,20 +274,13 @@ def list(Integer max, Long id) {
                             }
                             else bandera=0;               
                         }
-                        if (bandera==0) k.remove();     
-                    }
+                        if (bandera==1) notasaux.add(elemento);    
+                    } else notasaux.add(elemento)
                 }         
             }
         }
-        
-        Iterator i= notas.iterator();
-        while (i.hasNext()) {
-            Object elemento= i.next();
-            if (!elemento)
-            i.remove();
-        }
 
-        [libretaInstance: notas]
+        [libretaInstance: notasaux]
 
     }
 
