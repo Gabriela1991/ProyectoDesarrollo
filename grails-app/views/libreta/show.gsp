@@ -35,7 +35,7 @@
                       <img src="../../images/libreta (1).jpg" width="55" height="55" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
-                    <td><h2>.::Ver Etiqueta::.</h2></td>
+                    <td><h2>.::Ver Libreta::.</h2></td>
                   </tr>
                 </table>
               </div>
