@@ -190,7 +190,7 @@ class NotaController {
 
         try {
            
-            println("try")
+         
             def Dropbox d=new Dropbox();
             String claves=session.persona.keysdropbox;
        
@@ -199,7 +199,7 @@ class NotaController {
             def adjuntoInstanceList = []
             if (adjuntos!=null){
                 if( adjuntos.toList() ){
-                     println("voy a eliminar adj d db 2")
+                   
                     adjuntos.each(){ archivo->
             
                         d.eliminarArchivo(archivo,claves.split('/')[0].toString(),claves.split('/')[1].toString())
