@@ -59,7 +59,7 @@ public class Dropbox {
                 println(pair.key.toString());
                 String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=http://www.dropbox.com";
                 Desktop.getDesktop().browse(new URL(url).toURI());
-                JOptionPane.showMessageDialog(this, "Presione continuar cuando haya permitido el acceso a dropbox");
+                JOptionPane.showMessageDialog(null, "Presione continuar cuando haya permitido el acceso a dropbox");
                 session.retrieveWebAccessToken(pair);
                 AccessTokenPair tokens = session.getAccessTokenPair();
                 println("key "+tokens.key)
@@ -80,6 +80,7 @@ public class Dropbox {
         
        catch (UnknownHostException e){
             System.out.println("No hay conexion con internet/dropbox");
+             throw new DropboxException(e);
         }
       
     }

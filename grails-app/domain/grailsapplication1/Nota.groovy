@@ -14,7 +14,8 @@ class Nota {
   static hasMany = [etiquetas: Etiqueta,adjuntos: Adjunto]
  
     static mapping = {
-        etiquetas cascade:"all,delete-orphan"
+        etiquetas cascade:"all-delete-orphan"
+        adjuntos cascade:'all-delete-orphan'
     }
     
     static constraints = {

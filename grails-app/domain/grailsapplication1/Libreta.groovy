@@ -9,7 +9,9 @@ static belongsTo= Persona
 static hasMany = [notas: Nota]
     static constraints = {
     }
-    
+     static mapping = {
+        notas cascade:"all,delete-orphan"
+    }
     def String toString() {
         return "${nombre}"
     

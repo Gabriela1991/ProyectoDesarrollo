@@ -106,6 +106,8 @@ class PersonaController {
     
     
      def inicio = { 
+         session.persona=null
+     
     }
     
     def ventanaInicio (){
@@ -129,7 +131,6 @@ class PersonaController {
           if(claves!=null){  // Es porque la persona aun no tiene las claves de dropbox
                 session.persona.keysdropbox=claves
                  println("CLAVES 1 "+claves.split('/')[0].toString())
-                //persona.executeUpdate("update Persona set keysdropbox='"+claves+ "' where id="+persona.id)
                 session.persona.save(flush:true) 
             } 
             else { // la persona ya posee las claves de acceso a dropbox
