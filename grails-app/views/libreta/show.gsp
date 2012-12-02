@@ -35,7 +35,7 @@
                       <img src="../../images/libreta (1).jpg" width="55" height="55" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
-                    <td><h2>.::Ver Libreta::.</h2></td>
+                    <td><h2>.::Ver Etiqueta::.</h2></td>
                   </tr>
                 </table>
               </div>
@@ -103,7 +103,7 @@
               <h3>Búsqueda de Notas: </h3>
               <g:form action="buscar" controller="nota">
                  <input type="text" name="campo" id="campo" value="Escriba su búsqueda" onClick="this.value=''"/>                                      
-                 <g:submitButton name="submit" value=".::Buscar::."/>
+                 <g:submitButton name="submit" value="Ok"/>
               </g:form>
 
               <h3>Opciones: </h3>

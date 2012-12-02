@@ -3,6 +3,7 @@
    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
+    <title>.::Perfil de Usuario :: Nota::.</title>
   </head>
   <body>
     
@@ -19,10 +20,13 @@
         
         <table>
           <tr>
-            <td>.:: Bienvenido ::.</td>
-            <td> || ${session.persona.nombre} || </td>
-            <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
-            <td>.::Cerrar Sesion::. <img src="../../images/cerrarSesion.png" width="25" height="25" /></td>
+            <td style="color: cornflowerblue; font-size: medium">Bienvenido </td>
+            <td style="color: yellowgreen; font-size: medium">${session.persona.nombre}</td>
+            <td style="color: transparent">dfjljkljkjljcghkjdfghjkdfghdfghfghjkjlkjlkj</td>
+            <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
+                 <img src="../images/cerrarSesion.png" width="25" height="25" />
+                </g:link>
+            </td>
           </tr>
         </table>
         <h2>Adjuntos</h2>

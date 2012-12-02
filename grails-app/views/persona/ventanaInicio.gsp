@@ -24,7 +24,7 @@
           <tr>
             <td style="color: cornflowerblue; font-size: medium">Bienvenido </td>
             <td style="color: yellowgreen; font-size: medium">${session.persona.nombre}</td>
-            <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
+            <td style="color: transparent">dfjljkljkjljcghkjdfghjkdfghdfghfghjkjlkjlkj</td>
             <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
                  <img src="../images/cerrarSesion.png" width="25" height="25" />
                 </g:link>
@@ -41,7 +41,7 @@
                    <img src="../images/libreta (1).jpg" width="65" height="65" />
                 </td>
                 <td>
-                   <h2>.::Crear Libreta::.</h2>
+                  <h2>.::Crear Libreta::.</h2>
                 </td>  
                 <td>
                    <img src="../images/notebook1.png" width="60" height="60" />
@@ -78,7 +78,7 @@
         <h3>Búsqueda de Notas: </h3>
         <g:form action="buscar" controller="nota">
            <input type="text" name="campo" id="campo" value="Escriba su búsqueda" onClick="this.value=''"/>                                      
-           <g:submitButton name="submit" value=".::Buscar::."/>
+           <g:submitButton name="submit" value="Ok"/>
         </g:form>
         
         <h3>Opciones: </h3>
