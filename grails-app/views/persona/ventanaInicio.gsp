@@ -22,8 +22,8 @@
         
         <table>
           <tr>
-            <td>.:: Bienvenido ::.</td>
-            <td> || ${session.persona.nombre} || </td>
+            <td style="color: cornflowerblue; font-size: medium">Bienvenido </td>
+            <td style="color: yellowgreen; font-size: medium">${session.persona.nombre}</td>
             <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
             <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
                  <img src="../images/cerrarSesion.png" width="25" height="25" />
