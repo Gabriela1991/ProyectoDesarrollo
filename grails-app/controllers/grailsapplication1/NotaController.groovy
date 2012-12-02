@@ -26,7 +26,7 @@ def list(Integer max, Long id) {
         }
         else{ 
             libreta= Libreta.findById (ultimoidlibreta)
-            numero=numero+10;
+            numero=params.offset;
         }   
         def ls = Nota.executeQuery("from Nota a where a.libreta.id = ?",[ultimoidlibreta],[max: 10, offset: numero])
         def totalCount = Nota.executeQuery("from Nota a where a.libreta.id= ?",[ultimoidlibreta]).size()
