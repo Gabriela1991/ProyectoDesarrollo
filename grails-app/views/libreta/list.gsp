@@ -16,8 +16,8 @@
             <div id="right">
               <table>
                 <tr>
-                  <td>.:: Bienvenido ::.</td>
-                  <td> ||nombre de usuario|| </td>
+                  <td style="color: cornflowerblue; font-size: medium">Bienvenido </td>
+                  <td style="color: yellowgreen; font-size: medium">${session.persona.nombre}</td>
                   <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
                   <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
                        <img src="../images/cerrarSesion.png" width="25" height="25" />
@@ -42,7 +42,7 @@
               <div class="articles">
                 <div id="list-libreta" class="content scaffold-list" role="main">
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			<p<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<table>
                           <tr>
