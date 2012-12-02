@@ -212,7 +212,7 @@ def list(Integer max, Long id) {
        
              
             def adjuntos=Adjunto.executeQuery("select cast(archivo as string)from Adjunto where nota_id=:idnota",[idnota:id]);
-            def adjuntoInstanceList = []
+          
             if (adjuntos!=null){
                 if( adjuntos.toList() ){
                    
@@ -221,7 +221,7 @@ def list(Integer max, Long id) {
                         d.eliminarArchivo(archivo,claves.split('/')[0].toString(),claves.split('/')[1].toString())
                     }
                 }
-                [ adjuntoInstanceList: adjuntoInstanceList ]
+              
             }
              
              
