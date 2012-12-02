@@ -119,7 +119,7 @@
                 </g:if>
                
                   <g:link controller="adjunto" action="list" id="${notaInstance?.id}">${message(code: 'default.add.label', args: [message(code: 'adjunto.label', default: 'Adjunto')])}</g:link>
-                  
+                   <g:link action="show" controller="nota" id="${notaInstance?.id}"> Guardar </g:link> 
               </table>
             </ol>
             </br>
@@ -129,12 +129,14 @@
                   <td style="color: transparent">hjklhjkl,klkjlkjlkjkljjhkjh</td>
                   <td>
                 <g:hiddenField name="id" value="${notaInstance?.id}" />
-                <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: 'Modificar Nota')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar la nota?')}');" />
+               <!-- <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: 'Modificar Nota')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar la nota?')}');" />
                                                 <!-- <g:link class="edit" action="edit" id="${notaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link> -->				
+                
                 </td>
                 <td>
-                <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </td>
+        <!--        <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+        -->       
+        </td>
                 </tr>
               </table>
 

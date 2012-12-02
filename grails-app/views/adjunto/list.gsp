@@ -49,7 +49,7 @@
               </table>
             </div>
             <span class="button">
-              <g:actionSubmit class="upload" value="Adjuntar" action="upload" params="${notaInstance?.id}" />
+              <g:actionSubmit class="upload" value="Adjuntar" action="upload" params="${[idnota:notaInstance?.id]}" />
              
             </span>
           </g:form>

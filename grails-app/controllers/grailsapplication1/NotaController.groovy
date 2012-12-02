@@ -111,7 +111,7 @@ class NotaController {
             redirect(action: "list")
             return
         }
-
+session.nota= notaInstance
         [notaInstance: notaInstance, libretasInstance: persona.libretas, sesion: session.persona]
     }
     
@@ -173,7 +173,7 @@ class NotaController {
             render(view: "edit", model: [notaInstance: notaInstance])
             return
         }
-
+session.nota= notaInstance
         flash.message = message(code: 'default.updated.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
          log.info "Se ha editado la nota con identificador: "+notaInstance.id
          redirect(action: "show", id: notaInstance.id)
