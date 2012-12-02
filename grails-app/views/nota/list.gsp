@@ -68,8 +68,8 @@
                       </g:each>
                     </tbody>
                   </table>
-                  <div class="pagination">
-                          <g:paginate total="${notaInstanceTotal}" />
+                  <div class="pagination">          
+                        <g:paginate controller="nota" action="list" total="${notaInstanceTotal}" />
                   </div>
 		</div>
               </div>

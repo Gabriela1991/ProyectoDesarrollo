@@ -3,6 +3,8 @@ package grailsapplication1
 import org.springframework.dao.DataIntegrityViolationException
 import org.apache.commons.logging.*
 class NotaController {
+    private static ultimoidlibreta=null;
+    private static numero;
     private static Log log = LogFactory.getLog("bitacora."+NotaController.class.getName())
     static allowedMethods = [save: "POST", update: "POST", delete: "POST", create: "GET"]
     def index() {
@@ -13,14 +15,28 @@ class NotaController {
         [Etiqueta: etiquetas];
     }  
     
-    def list(Integer max, Long id) {
-        def persona= Persona.findById(session.persona.id)
-        def libreta = Libreta.findById (id)
-        if (persona.libretas.contains(libreta)){
-            params.max = 10
-            [libretaInstance: libreta.notas, notaInstanceTotal: libreta.notas.size()]   
+   
+def list(Integer max, Long id) {  
+        def persona= Persona.findById(session.persona.id)  
+        def libreta;
+        if (!ultimoidlibreta && id){
+         libreta= Libreta.findById (id)
+         ultimoidlibreta=id;
+         numero=0;
         }
-    }
+        else{ 
+            libreta= Libreta.findById (ultimoidlibreta)
+            numero=numero+10;
+        }   
+        def ls = Nota.executeQuery("from Nota a where a.libreta.id = ?",[ultimoidlibreta],[max: 10, offset: numero])
+        def totalCount = Nota.executeQuery("from Nota a where a.libreta.id= ?",[ultimoidlibreta]).size()
+        if (persona.libretas.contains(libreta)){
+            [libretaInstance: ls, notaInstanceTotal: totalCount]   
+        }
+ }
+
+
+    
     def search(){
         def Etiqueta = Nota.executeQuery("SELECT distinct b.texto FROM Etiqueta b")
         [ Etiqueta:Etiqueta]
