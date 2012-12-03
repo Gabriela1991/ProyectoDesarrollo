@@ -58,24 +58,20 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <g:each in="${libretaInstance}" status="k" var="libreta">
-                               <tr class="${(k % 2) == 0 ? 'even' : 'odd'}">
-                                  <g:each in="${libreta}" status="i" var="nota">
-                                    <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                      <td style="color: transparent">fgjkjhhhjk</td>
-                                      <td><g:link action="show" id="${nota.id}">${nota.titulo?.encodeAsHTML()}</g:link></td> 			
-                                      <td style="color: transparent">fgjkjhhhjk</td>
-                                      <td>${fieldValue(bean: nota, field: "texto")}</td>
-                                      <td style="color: transparent">fgjkjhhhjk</td>
-                                      <td>${fieldValue(bean: nota, field: "fecha")}</td>
-                                    </tr>
-                                  </g:each>
-                               </tr>
-                            </g:each>
+                          <g:each in="${libretaInstance}" status="k" var="nota">
+                              <tr class="${(k % 2) == 0 ? 'even' : 'odd'}">
+                                <td style="color: transparent">jnmhjnm</td>
+                                <td><g:link action="show" id="${nota.id}">${nota.titulo?.encodeAsHTML()}</g:link></td> 			
+                                <td style="color: transparent">jnmhjnm</td>
+                                <td>${fieldValue(bean: nota, field: "texto")}</td>
+                                <td style="color: transparent">jnmhjnm</td>
+                                <td>${fieldValue(bean: nota, field: "fecha")}</td>
+                              </tr>
+                            </g:each>                              
                           </tbody>
                          </table>
                         <div class="pagination">
-                                <g:paginate total="10" />
+                                <g:paginate controller="nota" action="buscar" total="${notasAuxTotal}" />
                         </div>
                   </div>
               </div>
@@ -87,7 +83,7 @@
             <h3>Búsqueda de Notas: </h3>
             <g:form action="buscar" controller="nota">
                <input type="text" name="campo" id="campo" value="Escriba su búsqueda" onClick="this.value=''"/>                                      
-               <g:submitButton name="submit" value="Ok"/>
+               <g:submitButton name="submit" value=".::Buscar::."/>
             </g:form>
 
             <h3>Opciones: </h3>
