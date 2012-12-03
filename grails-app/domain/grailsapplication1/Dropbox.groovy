@@ -55,8 +55,6 @@ public class Dropbox {
             println(keys);
             if(keys==null){ // si persona no ha autorizado a dropbox. key y secret estan vacias
                 RequestTokenPair pair = authInfo.requestTokenPair;
-            
-                println(pair.key.toString());
                 String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=http://www.dropbox.com";
                 Desktop.getDesktop().browse(new URL(url).toURI());
                 JOptionPane.showMessageDialog(null, "Presione continuar cuando haya permitido el acceso a dropbox");
@@ -66,8 +64,7 @@ public class Dropbox {
                 println("secret "+ tokens.secret)
                 mDBApi = new DropboxAPI<WebAuthSession>(session);
                  DropboxAPI.Account account = mDBApi.accountInfo();
-        System.out.println("User Name: " + account.displayName);
-        println(tokens.key.toString()+"/"+tokens.secret.toString())
+        System.out.println("Nombre Usuario Dropbox: " + account.displayName);
         return (tokens.key.toString()+"/"+tokens.secret.toString())
             }
             return null;
