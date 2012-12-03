@@ -5,6 +5,7 @@ import org.apache.commons.logging.*
 class NotaController {
     private static ultimoidlibreta=null;
     private static numero;
+    private static ArrayList <Nota> listaBuscar= new ArrayList <Nota>();
     private static Log log = LogFactory.getLog("bitacora."+NotaController.class.getName())
     static allowedMethods = [save: "POST", update: "POST", delete: "POST", create: "GET"]
     def index() {
