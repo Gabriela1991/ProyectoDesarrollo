@@ -24,7 +24,7 @@
             <td style="color: yellowgreen; font-size: medium">${session.persona.nombre}</td>
             <td style="color: transparent">dfjljkljkjljcghkjdfghjkdfghdfghfghjkjlkjlkj</td>
             <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
-                 <img src="../images/cerrarSesion.png" width="25" height="25" />
+                 <img src="../../images/cerrarSesion.png" width="25" height="25" />
                 </g:link>
             </td>
           </tr>
@@ -49,7 +49,7 @@
               </table>
             </div>
             <span class="button">
-              <g:actionSubmit class="upload" value="Adjuntar" action="upload" params="${notaInstance?.id}" />
+              <g:actionSubmit class="upload" value="Adjuntar" action="upload" params="${[idnota:notaInstance?.id]}" />
              
             </span>
           </g:form>
@@ -81,7 +81,7 @@
       </div>
       <g:link action="show" controller="nota" id="${session.nota.id}"> Guardar </g:link> 
         </div>
-        
+         <g:link action="edit" controller="nota" id="${session.nota.id}"> Actualizar </g:link> 
       </div>
     
       <div id="left">

@@ -11,7 +11,9 @@ static hasMany = [notas: Nota]
          nombre(blank:false, maxSize:30)
          tema(blank:false, maxSize:30)        
     }
-    
+     static mapping = {
+        notas cascade:"all,delete-orphan"
+    }
     def String toString() {
         return "${nombre}"
     

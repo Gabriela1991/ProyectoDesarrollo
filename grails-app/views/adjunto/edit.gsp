@@ -39,7 +39,8 @@
                 </div>
                 
                 <div class="articles">
-                  <div id="edit-adjunto" class="content scaffold-edit" role="main">			
+                  <div id="edit-adjunto" class="content scaffold-edit" role="main">	
+                     <g:link controller="adjunto" action="list" id="${notaInstance?.id}">${message(code: 'default.add.label', args: [message(code: 'adjunto.label', default: 'Adjunto')])}</g:link>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>

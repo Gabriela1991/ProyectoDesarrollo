@@ -22,7 +22,9 @@ import javax.swing.JOptionPane
 import java.awt.List;
 import com.dropbox.client2.exception.DropboxServerException
 import com.dropbox.client2.DropboxAPI.DropboxLink
-
+import com.dropbox.client2.exception.*
+import java.net.UnknownHostException;
+import java.rmi.UnknownHostException;
 /**
  *
  * @author Keyla
@@ -53,19 +55,16 @@ public class Dropbox {
             println(keys);
             if(keys==null){ // si persona no ha autorizado a dropbox. key y secret estan vacias
                 RequestTokenPair pair = authInfo.requestTokenPair;
-            
-                println(pair.key.toString());
                 String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=http://www.dropbox.com";
                 Desktop.getDesktop().browse(new URL(url).toURI());
-                JOptionPane.showMessageDialog(null, "Press ok to continue once you have authenticated.");
+                JOptionPane.showMessageDialog(null, "Presione continuar cuando haya permitido el acceso a dropbox");
                 session.retrieveWebAccessToken(pair);
                 AccessTokenPair tokens = session.getAccessTokenPair();
                 println("key "+tokens.key)
                 println("secret "+ tokens.secret)
                 mDBApi = new DropboxAPI<WebAuthSession>(session);
                  DropboxAPI.Account account = mDBApi.accountInfo();
-        System.out.println("User Name: " + account.displayName);
-        println(tokens.key.toString()+"/"+tokens.secret.toString())
+        System.out.println("Nombre Usuario Dropbox: " + account.displayName);
         return (tokens.key.toString()+"/"+tokens.secret.toString())
             }
             return null;
@@ -78,6 +77,7 @@ public class Dropbox {
         
        catch (UnknownHostException e){
             System.out.println("No hay conexion con internet/dropbox");
+             throw new DropboxException(e);
         }
       
     }
@@ -98,12 +98,15 @@ public class Dropbox {
          
  
         ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
-        Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
+       
+            Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
            
         return  (newEntry.fileName());    
+    
         }
         catch (UnknownHostException e){
             System.out.println("No hay conexion con internet/dropbox");
+            return null;
         }
     }
     

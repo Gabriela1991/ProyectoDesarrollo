@@ -141,7 +141,7 @@ class AdjuntoController {
     }
 
     def upload (Long id) {
-        println(session.nota.id)
+        
         def Dropbox d=new Dropbox();
         String claves=session.persona.keysdropbox;
         def f = request.getFile('fileUpload')
@@ -153,11 +153,13 @@ class AdjuntoController {
             FileUtils.writeByteArrayToFile(file, f.getBytes());
             f.transferTo( file )
             def personaInstance=session.persona
-            								             			     	
+           
             def nombreArchivo=d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+       
             file.delete()
             flash.message = 'Tu archivo ha sido adjuntado'
             def adjuntoInstance=new Adjunto(params)
+            
             adjuntoInstance.archivo=nombreArchivo
             // OJO CAMBIAR NOMBRE DE ARCHIVO E ID DE LA NOTA
             

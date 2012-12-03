@@ -133,7 +133,7 @@
                             <td>${adjuntoInstance.archivo}</td>
 
                             <td><g:link controller="adjunto" action="download" id="${adjuntoInstance.archivo}"  > Ver </g:link></td>
-                            <td><g:link controller="adjunto" action="ddescargar" id="${adjuntoInstance.archivo}"  > Descargar </g:link></td>
+                            <td><g:link controller="adjunto" action="descargar" id="${adjuntoInstance.archivo}"  > Descargar </g:link></td>
                          <!-- <td><g:link controller="adjunto" action="delete" id="${adjuntoInstance.archivo}" params="${[nota:notaInstance?.id]}"  onclick="return confirm('¿Esta Seguro?');"> Eliminar </g:link></td>  -->
                           </tr>
                         </g:each>
