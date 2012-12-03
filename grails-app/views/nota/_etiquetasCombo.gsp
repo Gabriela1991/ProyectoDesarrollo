@@ -25,7 +25,7 @@
      }
   </script>
   
-  <g:select id="etiquetaSelection" name="etiqueta2" from="${grailsapplication1?.Etiqueta?.list()}" onChange="addChild2()" optionValue="texto" optionKey="texto" noSelection="[Seleccione]" noSelection="${['null':'Seleccione una etiqueta...']}"/> 
+  <g:select id="etiquetaSelection" name="etiqueta2" from="${etiquetasInstance}" onChange="addChild2()" optionValue="texto" optionKey="texto" noSelection="[Seleccione]" noSelection="${['null':'Seleccione una etiqueta...']}"/> 
  
   
  <div id="childList">

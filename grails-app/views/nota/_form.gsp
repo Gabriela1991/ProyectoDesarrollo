@@ -28,7 +28,6 @@
 	<g:textArea name="texto" cols="40" rows="5" maxlength="1000" value="${notaInstance?.texto}"/>
 </div>
 
-
 <div class="fieldcontain ${hasErrors(bean: notaInstance, field: 'etiquetas', 'error')} ">
 
   <div class="dialog"> 
