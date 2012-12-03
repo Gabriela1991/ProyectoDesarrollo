@@ -5,6 +5,8 @@ import org.apache.commons.logging.*
 class NotaController {
     private static ultimoidlibreta=null;
     private static numero;
+    private static ultimocampo=null;
+    private static ArrayList <Nota> listaBuscar=new ArrayList <Nota>();
     private static Log log = LogFactory.getLog("bitacora."+NotaController.class.getName())
     static allowedMethods = [save: "POST", update: "POST", delete: "POST", create: "GET"]
     def index() {
@@ -240,6 +242,7 @@ def list(Integer max, Long id) {
         def persona= Persona.findById(session.persona.id);
         def notas= persona.libretas.notas
         ArrayList<Nota> notasaux= new ArrayList <Nota>()
+        if (params.campo){        
         for (int i=0; i<notas.size(); i++){
             Iterator k = notas[i].iterator();
             if (notas[i].size()>1) {
@@ -279,8 +282,20 @@ def list(Integer max, Long id) {
                 }         
             }
         }
-
-        [libretaInstance: notasaux]
+        
+        if (params.campo) listaBuscar=notasaux
+        }
+        
+        if (!params.offset){
+        [libretaInstance: notasaux.getAt(0..9), notasAuxTotal: notasaux.size()]
+        }
+       else{
+           def cantidad = Integer.parseInt(params.offset)
+           if (listaBuscar.size()-10<=cantidad)
+            [libretaInstance: listaBuscar.getAt(cantidad..listaBuscar.size()-1), notasAuxTotal: listaBuscar.size()]
+            else   [libretaInstance: listaBuscar.getAt(cantidad..cantidad+9), notasAuxTotal: listaBuscar.size()]
+               
+       }
 
     }
 
