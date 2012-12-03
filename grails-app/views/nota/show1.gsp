@@ -151,7 +151,7 @@
         <h3>Búsqueda de Notas: </h3>
         <g:form action="buscar" controller="nota">
           <input type="text" name="campo" id="campo" value="Escriba su búsqueda" onClick="this.value=''"/>                                      
-          <g:submitButton name="submit" value=".::Buscar::."/>
+          <g:submitButton name="submit" value="Ok"/>
         </g:form>
 
         <h3>Opciones: </h3>
