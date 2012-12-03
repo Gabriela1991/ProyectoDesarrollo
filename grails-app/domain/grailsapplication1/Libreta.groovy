@@ -8,6 +8,8 @@ static belongsTo= Persona
 // relationships
 static hasMany = [notas: Nota]
     static constraints = {
+         nombre(blank:false, maxSize:30)
+         tema(blank:false, maxSize:30)        
     }
     
     def String toString() {

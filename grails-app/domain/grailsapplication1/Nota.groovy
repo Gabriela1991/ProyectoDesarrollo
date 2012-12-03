@@ -18,8 +18,10 @@ class Nota {
     }
     
     static constraints = {
-        texto nullabe: true;
-        texto maxSize: 1000;
+        texto (blank: false, maxSize: 1000)
+        titulo(blank:false, maxSize:30)
+ //       tema(blank:false, maxSize:30)       
+     //   etiqueta(nullabe:false, maxSize:30)       
     }
     
      def getEtiquetasList() {

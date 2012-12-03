@@ -35,7 +35,7 @@
                       <img src="../../images/libreta (1).jpg" width="55" height="55" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
-                    <td><h2>.::Ver Etiqueta::.</h2></td>
+                    <td><h2>.::Ver Libreta::.</h2></td>
                   </tr>
                 </table>
               </div>
@@ -78,15 +78,15 @@
 			</ol>
 			<g:form>
                           </br>
+                          <g:hiddenField name="id" value="${libretaInstance?.id}" />
                                 <table>
                                   <tr>
                                     <td style="color: transparent">dfghjkghjkhjkdfghjkghjdffghjf</td>
                                     <td>
-                                        <g:hiddenField name="id" value="${libretaInstance?.id}" />
-                                        <g:link controller="nota" action="list" id="${libretaInstance?.id}"><g:message code="default.button.list.label" default="Ver notas" /></g:link>
+                                        <g:link controller="nota" action="list" id="${libretaInstance?.id}"><img src="../../images/bMostrar.png" width="95" height="26" /></g:link>
                                     </td>
                                     <td>
-                                        <g:link class="edit" action="edit" id="${libretaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                                        <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />
                                     </td>
                                     <td>
                                         <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />

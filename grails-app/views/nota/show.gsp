@@ -152,7 +152,7 @@
                   <td style="color: transparent">hjklhjkl,klkjlkjlkjkljjhkjh</td>
                   <td>
                 <g:hiddenField name="id" value="${notaInstance?.id}" />
-                <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: 'Modificar Nota')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar la nota?')}');" />
+                <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: '.::Modificar Nota::.')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar la nota?')}');" />
                                                 <!-- <g:link class="edit" action="edit" id="${notaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link> -->				
                 </td>
                 <td>
@@ -172,7 +172,7 @@
         <h3>Búsqueda de Notas: </h3>
         <g:form action="buscar" controller="nota">
           <input type="text" name="campo" id="campo" value="Escriba su búsqueda" onClick="this.value=''"/>                                      
-          <g:submitButton name="submit" value=".::Buscar::."/>
+          <g:submitButton name="submit" value="Ok"/>
         </g:form>
 
         <h3>Opciones: </h3>
