@@ -98,9 +98,13 @@ public class Dropbox {
          
  
         ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
-       
-            Entry newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
-           
+            Entry newEntry;
+            try {
+            newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
+            } catch (Exception e){
+                System.out.println("No hay conexion con internet/dropbox");
+            return null;
+            }
         return  (newEntry.fileName());    
     
         }

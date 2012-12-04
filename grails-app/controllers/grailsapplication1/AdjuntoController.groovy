@@ -157,17 +157,19 @@ class AdjuntoController {
             def nombreArchivo=d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
        
             file.delete()
-            flash.message = 'Tu archivo ha sido adjuntado'
-            def adjuntoInstance=new Adjunto(params)
-            
-            adjuntoInstance.archivo=nombreArchivo
-            // OJO CAMBIAR NOMBRE DE ARCHIVO E ID DE LA NOTA
-            
-            adjuntoInstance.nombre=session.nota.titulo
-            def notaInstance=Nota.get(session.nota.id)
-            adjuntoInstance.nota=notaInstance
-            adjuntoInstance.save(flush: true)
-            log.info "Se ha agregado un adjunto a la base de datos y a dropbox"
+            if (nombreArchivo){
+                flash.message = 'Tu archivo ha sido adjuntado'
+                def adjuntoInstance=new Adjunto(params)
+
+                adjuntoInstance.archivo=nombreArchivo
+                // OJO CAMBIAR NOMBRE DE ARCHIVO E ID DE LA NOTA
+
+                adjuntoInstance.nombre=session.nota.titulo
+                def notaInstance=Nota.get(session.nota.id)
+                adjuntoInstance.nota=notaInstance
+                adjuntoInstance.save(flush: true)
+                log.info "Se ha agregado un adjunto a la base de datos y a dropbox"
+            } else flash.message= message (code: 'default.error.adjunto')
         }    
         else {
             flash.message = 'El archivo no puede ser vacío'
