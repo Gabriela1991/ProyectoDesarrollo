@@ -135,7 +135,11 @@ class PersonaController {
             } 
             else { // la persona ya posee las claves de acceso a dropbox
                 claves=session.persona.keysdropbox
-                println("CLAVES 2 "+claves.split('/')[0].toString())
+                try {
+                   println("CLAVES 2 "+claves.split('/')[0].toString())
+                } catch (NullPointerException e){
+                flash.message = message (code: 'default.not.conection');                
+                }
             }
         
       }
