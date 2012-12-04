@@ -55,11 +55,11 @@
                   <tr>
                     <td style="color: transparent">dfjljlkjlkjkljk</td>
                     <td style="color: cornflowerblue; fonlkjlkjt-size: medium">
-                      <span id="etiquetas-label" class="property-label"><g:message code="nota.etiquetas.label" default="Etiquetas: " /></span>
+                      <span id="etiquetas-label" class="property-label" style="font-size: medium"><g:message code="nota.etiquetas.label" default="Etiquetas: " /></span>
                     </td>
                     <td style="color: black; font-size: medium">
                   <g:each in="${notaInstance.etiquetas}" var="e">
-                    <span class="property-value" aria-labelledby="etiquetas-label"><g:link controller="etiqueta" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
+                     <span class="property-value" aria-labelledby="etiquetas-label">${e?.encodeAsHTML()} </br> </span>                    
                   </g:each>
                   </td>
                   </tr>
@@ -122,7 +122,7 @@
                   <tr>
                     <td style="color: transparent">dfjllkjlkjlkjlkjjkljk</td>
                     <td>
-                      <span id="adjuntos-label" class="property-label"><g:message code="nota.adjuntos.label" default="Adjuntos: " /></span>
+                      <span id="adjuntos-label" class="property-label" style="color: cornflowerblue; font-size: medium"><g:message code="nota.adjuntos.label" default="Adjuntos: " /></span>
                     </td>
                     <td>
                      <table>
@@ -152,8 +152,7 @@
                   <td style="color: transparent">hjklhjkl,klkjlkjlkjkljjhkjh</td>
                   <td>
                 <g:hiddenField name="id" value="${notaInstance?.id}" />
-                <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: '.::Modificar Nota::.')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar la nota?')}');" />
-                                                <!-- <g:link class="edit" action="edit" id="${notaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link> -->				
+                <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: '.::Modificar Nota::.')}"/>                                               
                 </td>
                 <td>
                 <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />

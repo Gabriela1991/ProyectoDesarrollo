@@ -13,6 +13,7 @@ class PersonaTests {
 
     void testSomething() {
       Persona pprueba = new Persona(nombre:"juan",apellido:"apellido",correo:"correo",clave:"clave")
-      assertEquals "juan", pprueba.nombre
+      println("hola angel");
+      assertEquals "juan", pprueba.nombre      
     }
 }

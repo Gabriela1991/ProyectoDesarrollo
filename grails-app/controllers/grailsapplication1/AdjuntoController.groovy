@@ -143,37 +143,53 @@ class AdjuntoController {
     def upload (Long id) {
         
         def Dropbox d=new Dropbox();
-        String claves=session.persona.keysdropbox;
+        String claves;
+        
         def f = request.getFile('fileUpload')
         String fileNameToCreate
-        if(!f.empty) {
-            fileNameToCreate =  f.getOriginalFilename();
-            File file 
-            file = new File(fileNameToCreate);
-            FileUtils.writeByteArrayToFile(file, f.getBytes());
-            f.transferTo( file )
-            def personaInstance=session.persona
-           
-            def nombreArchivo=d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
-       
-            file.delete()
-            if (nombreArchivo){
-                flash.message = 'Tu archivo ha sido adjuntado'
-                def adjuntoInstance=new Adjunto(params)
-
-                adjuntoInstance.archivo=nombreArchivo
-                // OJO CAMBIAR NOMBRE DE ARCHIVO E ID DE LA NOTA
-
-                adjuntoInstance.nombre=session.nota.titulo
-                def notaInstance=Nota.get(session.nota.id)
-                adjuntoInstance.nota=notaInstance
-                adjuntoInstance.save(flush: true)
-                log.info "Se ha agregado un adjunto a la base de datos y a dropbox"
-            } else flash.message= message (code: 'default.error.adjunto')
-        }    
-        else {
-            flash.message = 'El archivo no puede ser vacío'
+        
+        if(session.persona.keysdropbox)
+            claves=session.persona.keysdropbox;
+        else{
+            def persona = Persona.findById(session.persona.id);
+            claves=d.auth(session.persona.keysdropbox);
+            persona.keysdropbox=claves;
+            persona.save(flush:true); 
         }
+            
+        if(claves){
+                if(!f.empty) {
+                fileNameToCreate =  f.getOriginalFilename();
+                File file 
+                file = new File(fileNameToCreate);
+                FileUtils.writeByteArrayToFile(file, f.getBytes());
+                f.transferTo( file )
+                def personaInstance=session.persona
+
+                def nombreArchivo=d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+
+                file.delete()
+                if (nombreArchivo){
+                    flash.message = 'Tu archivo ha sido adjuntado'
+                    def adjuntoInstance=new Adjunto(params)
+
+                    adjuntoInstance.archivo=nombreArchivo
+                    // OJO CAMBIAR NOMBRE DE ARCHIVO E ID DE LA NOTA
+
+                    adjuntoInstance.nombre=session.nota.titulo
+                    def notaInstance=Nota.get(session.nota.id)
+                    adjuntoInstance.nota=notaInstance
+                    adjuntoInstance.save(flush: true)
+                    log.info "Se ha agregado un adjunto a la base de datos y a dropbox"
+                } else flash.message= message (code: 'default.error.adjunto')
+            }    
+            else {
+                flash.message = 'El archivo no puede ser vacío'
+            }
+        }else{
+            flash.message= message (code: 'default.error.adjunto')
+        }
+        
         redirect( action:"list", id:session.nota.id)
     }
 }

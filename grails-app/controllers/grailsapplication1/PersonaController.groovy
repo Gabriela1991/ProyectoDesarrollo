@@ -127,7 +127,12 @@ class PersonaController {
          Dropbox d=new Dropbox()
          println("verificar si ya se ha auth"+session.persona.keysdropbox)
          
-            String claves=d.auth(session.persona.keysdropbox);
+         String claves;
+          if(session.persona.keysdropbox)
+            claves=session.persona.keysdropbox;
+          else
+            claves=d.auth(session.persona.keysdropbox);
+            
           if(claves!=null){  // Es porque la persona aun no tiene las claves de dropbox
                 session.persona.keysdropbox=claves
                  println("CLAVES 1 "+claves.split('/')[0].toString())
