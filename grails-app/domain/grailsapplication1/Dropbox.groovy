@@ -110,9 +110,9 @@ public class Dropbox {
         catch (UnknownHostException e){
             System.out.println("No hay conexion con internet/dropbox");
             return null;
-        } catch (IllegalArgumentException ee){
+        } /*catch (IllegalArgumentException ee){
             return null;
-        }
+        }*/
     }
     
     /**

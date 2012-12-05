@@ -148,8 +148,10 @@ class AdjuntoController {
         def f = request.getFile('fileUpload')
         String fileNameToCreate
         
-        if(session.persona.keysdropbox)
+        if(session.persona.keysdropbox){
+            claves=d.auth(session.persona.keysdropbox);
             claves=session.persona.keysdropbox;
+        }
         else{
             def persona = Persona.findById(session.persona.id);
             claves=d.auth(session.persona.keysdropbox);
