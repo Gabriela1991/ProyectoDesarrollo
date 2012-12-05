@@ -19,7 +19,7 @@
                   <td style="color: yellowgreen; font-size: medium">${session.persona.nombre}</td>
                   <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
                   <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
-                       <img src="../../images/cerrarSesion.png" width="25" height="25" />
+                       <img src="../images/cerrarSesion.png" width="25" height="25" />
                       </g:link>
                   </td>
                 </tr>
@@ -30,7 +30,7 @@
                   <tr>
                     <td style="color: transparent">fgghghghghjkdfgh</td>
                     <td>
-                      <img src="../../images/notebook1.png" width="55" height="55" />
+                      <img src="../images/notebook1.png" width="55" height="55" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
                     <td><h2>.::Ver Nota::.</h2></td>
@@ -72,7 +72,7 @@
                     <tr>
                       <td style="color: transparent">dfghjkghjkhjkdfghjkghjdffghjf</td>
                       <td>
-                          <g:link controller="nota" action="create" id="${libretaInstance?.id}"><img src="../../images/bagregar.png" width="95" height="26" /></g:link>
+                          <g:link controller="nota" action="create" id="${libretaInstance?.id}"><img src="../images/bagregar.png" width="95" height="26" /></g:link>
                       </td>
                     </tr>
                   </table>
@@ -94,7 +94,7 @@
             <table>
               <tr>
                 <td>
-                  <img src="../../images/home.png" width="25" height="25" />
+                  <img src="../images/home.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="persona" action="ventanaInicio">.::HOME::.</g:link></li>
@@ -102,7 +102,7 @@
               </tr>
               <tr>
                 <td>
-                  <img src="../../images/book.png" width="25" height="25" />
+                  <img src="../images/book.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="libreta" action="list">.::Libretas::.</g:link></li>
@@ -110,7 +110,7 @@
               </tr>
               <tr>
                 <td>
-                  <img src="../../images/perfil.png" width="25" height="25" />
+                  <img src="../images/perfil.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="persona" action="show">.::Configurar Cuenta::.</g:link></li>
@@ -122,7 +122,7 @@
             <div style="clear: both;"> </div>
 
             <div id="footer">
-                Desarroladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
+                Desarrolladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
             </div>
           </div>
 	</body>

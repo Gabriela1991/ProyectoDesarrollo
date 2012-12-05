@@ -305,7 +305,9 @@ def list(Integer max, Long id) {
         }
         
         if (!params.offset){
-        [libretaInstance: notasaux.getAt(0..9), notasAuxTotal: notasaux.size()]
+            if (notasaux.size()>=10)
+            [libretaInstance: notasaux.getAt(0..9), notasAuxTotal: notasaux.size()]
+            else [libretaInstance: notasaux.getAt(0..notasaux.size()-1), notasAuxTotal: notasaux.size()]
         }
        else{
            def cantidad = Integer.parseInt(params.offset)
