@@ -55,9 +55,9 @@
                   <tr>
                     <td style="color: transparent">dfjljlkjlkjkljk</td>
                     <td style="color: cornflowerblue; fonlkjlkjt-size: medium">
-                      <span id="etiquetas-label" class="property-label" style="font-size: medium"><g:message code="nota.etiquetas.label" default="Etiquetas: " /></span>
+                      <span id="etiquetas-label" class="property-label" style="font-size: small"><g:message code="nota.etiquetas.label" default="Etiquetas: " /></span>
                     </td>
-                    <td style="color: black; font-size: medium">
+                    <td style="color: black; font-size: small">
                   <g:each in="${notaInstance.etiquetas}" var="e">
                      <span class="property-value" aria-labelledby="etiquetas-label">${e?.encodeAsHTML()} </br> </span>                    
                   </g:each>
@@ -69,10 +69,10 @@
                   <li class="fieldcontain"> 
                   <tr>
                     <td style="color: transparent">dfjljlkjlkjkllkjlkjjk</td>
-                    <td style="color: cornflowerblue; font-size: medium">
+                    <td style="color: cornflowerblue; font-size: small">
                       <span id="libreta-label" class="property-label"><g:message code="nota.libreta.label" default="Libreta: " /></span>
                     </td>
-                    <td style="color: black; font-size: medium">
+                    <td style="color: black; font-size: small">
                       <span class="property-value" aria-labelledby="libreta-label"><g:link controller="libreta" action="show" id="${notaInstance?.libreta?.id}">${notaInstance?.libreta?.nombre.encodeAsHTML()}</g:link></span>
                     </td>
                   </tr>
@@ -82,10 +82,10 @@
                   <li class="fieldcontain">
                   <tr>
                     <td style="color: transparent">dfjljkllkjlkjlkjlkjjk</td>
-                    <td style="color: cornflowerblue; font-size: medium">
+                    <td style="color: cornflowerblue; font-size: small">
                       <span id="texto-label" class="property-label"><g:message code="nota.texto.label" default="Texto: " /></span>
                     </td>
-                    <td style="color: black; font-size: medium">
+                    <td style="color: black; font-size: small">
                       <span class="property-value" aria-labelledby="texto-label"><g:fieldValue bean="${notaInstance}" field="texto"/></span>
                     </td>
                   </tr>
@@ -95,10 +95,10 @@
                   <li class="fieldcontain">
                   <tr>
                     <td style="color: transparent">dfjljkljlkjlkjlkjlkjk</td>
-                    <td style="color: cornflowerblue; font-size: medium">
+                    <td style="color: cornflowerblue; font-size: small">
                       <span id="titulo-label" class="property-label"><g:message code="nota.titulo.label" default="Titulo: " /></span>
                     </td>
-                    <td style="color: black; font-size: medium">
+                    <td style="color: black; font-size: small">
                       <span class="property-value" aria-labelledby="titulo-label"><g:fieldValue bean="${notaInstance}" field="titulo"/></span>
                     </td>
                   </tr>
@@ -108,10 +108,10 @@
                   <li class="fieldcontain">
                   <tr>
                     <td style="color: transparent">dfjljkljlklkjlkjjlkjk</td>
-                    <td style="color: cornflowerblue; font-size: medium">
+                    <td style="color: cornflowerblue; font-size: small">
                       <span id="fecha-label" class="property-label"><g:message code="nota.fecha.label" default="Fecha de Creación: " /></span>
                     </td>
-                    <td style="color: black; font-size: medium">
+                    <td style="color: black; font-size: small">
                       <span class="property-value" aria-labelledby="fecha-label"><g:fieldValue bean="${notaInstance}" field="fecha"/></span>
                     </td>
                   </tr>
@@ -122,7 +122,7 @@
                   <tr>
                     <td style="color: transparent">dfjllkjlkjlkjlkjjkljk</td>
                     <td>
-                      <span id="adjuntos-label" class="property-label" style="color: cornflowerblue; font-size: medium"><g:message code="nota.adjuntos.label" default="Adjuntos: " /></span>
+                      <span id="adjuntos-label" class="property-label" style="color: cornflowerblue; font-size: small"><g:message code="nota.adjuntos.label" default="Adjuntos: " /></span>
                     </td>
                     <td>
                      <table>
@@ -206,7 +206,7 @@
       <div style="clear: both;"> </div>
 
       <div id="footer">
-        Desarroladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
+        Desarrolladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
       </div>
     </div>
 

@@ -60,7 +60,7 @@
                                 <table>
                                   <tr>
                                     <td style="color: transparent">hjjnkljslkkljkljk</td>
-                                    <td><g:link controller="adjunto" action="list" id="${notaInstance?.id}"><img src="../images/badministrar.png"></g:link></td>
+                                    <td><g:link controller="adjunto" action="list" id="${notaInstance?.id}"><img src="../../images/badministrar.png"></g:link></td>
                                     <td>
                                         <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: '.::Guardar::.')}" />
                                     </td>
@@ -116,7 +116,7 @@
         <div style="clear: both;"> </div>
 
       <div id="footer">
-          Desarroladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
+          Desarrolladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
       </div>
          </div>          
 	</body>

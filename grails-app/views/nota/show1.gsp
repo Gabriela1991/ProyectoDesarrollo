@@ -36,7 +36,7 @@
                 <img src="../../images/notebook1.png" width="55" height="55" />
               </td>
               <td style="color: transparent">fgghgh</td>
-              <td><h2>.::Ver Nota::.</h2></td>
+              <td><h2>.::Crear Nota::.</h2></td>
             </tr>
           </table>
         </div>
@@ -123,7 +123,7 @@
       <div style="clear: both;"> </div>
 
       <div id="footer">
-        Desarroladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
+        Desarrolladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
       </div>
     </div>
 

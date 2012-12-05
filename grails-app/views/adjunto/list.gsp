@@ -29,7 +29,19 @@
             </td>
           </tr>
         </table>
-        <h2>Adjuntos</h2>
+        
+        <div class="articles">
+          <table>
+            <tr>
+              <td style="color: transparent">fgghghghghjkdfgh</td>
+              <td>
+                <img src="../../images/adjuntar.png" width="55" height="55" />
+              </td>
+              <td style="color: transparent">fgghgh</td>
+              <td><h2>.::Agregar Adjuntos::.</h2></td>
+            </tr>
+          </table>
+        </div>
         
         <div class="articles">
           
@@ -39,8 +51,9 @@
                 <tbody>
                   <tr class="prop">
                     <td valign="top" class="name">
-                      <label for="fileUpload">Archivo</label>
+                      <label for="fileUpload" style="color: cornflowerblue; font-size: medium">Archivo: </label>
                     </td>
+                    <td><img src="../../images/espacios.png" width="20"></td>
                     <td valign="top" class="value ${hasErrors(bean:adjuntoInstance,field:'upload','errors')}">
                       <input type="file" id="fileUpload" name="fileUpload" />
                     </td>
@@ -48,10 +61,17 @@
                 </tbody>
               </table>
             </div>
-            <span class="button">
-              <g:actionSubmit class="upload" value="Adjuntar" action="upload" params="${[idnota:notaInstance?.id]}" />
-             
-            </span>
+            <table>
+              <tr>
+                <td style="color: transparent">dcgfvhbhkkm,lcvb</td>
+                <td>
+                  <span class="button">
+                    <g:actionSubmit class="upload" value="Adjuntar" action="upload" params="${[idnota:notaInstance?.id]}" />
+                  </span>
+                </td>
+              </tr>
+            </table>
+            
           </g:form>
           
           <g:if test="${flash.message}">
@@ -79,9 +99,9 @@
           </tbody>
         </table>
       </div>
+      
       <g:link action="show" controller="nota" id="${session.nota.id}"> Guardar </g:link> 
-        </div>
-         <g:link action="edit" controller="nota" id="${session.nota.id}"> Actualizar </g:link> 
+        </div>         
       </div>
     
       <div id="left">
