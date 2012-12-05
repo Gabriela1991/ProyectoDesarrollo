@@ -113,23 +113,34 @@ class AdjuntoController {
                 String claves=session.persona.keysdropbox;
                 def filename = params.id.replace('###', '.')    
                 println("filen"+filename)
-                d.eliminarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
-                log.info "Se ha eliminado un adjunto de dropbox"
-                def adjuntoInstance=Adjunto.findByArchivo(filename)
-                adjuntoInstance.delete();
-                log.info "Se ha eliminado un adjunto de base de datos"
-                flash.message = "El archivo ' ${filename}' ha sido eliminado" 
+                int resp = d.eliminarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+                    
+                    if (resp==0){
+                        flash.message= "Parece haber un problema de conexion, no se puede eliminar tu archivo en este momento";
+                        redirect( action:"list", id:idnota )
+                    } else {                  
+                        log.info "Se ha eliminado un adjunto de dropbox"
+                        def adjuntoInstance=Adjunto.findByArchivo(filename)
+                        adjuntoInstance.delete();
+                        log.info "Se ha eliminado un adjunto de base de datos"
+                        flash.message = "El archivo ' ${filename}' ha sido eliminado" 
 
-                redirect( action:"list", id:idnota )
+                        redirect( action:"list", id:idnota )
+                    }
     }
     
     def download = {
-        println(params.nota)
+        println(session.nota.id)
         def Dropbox d=new Dropbox();
         String claves=session.persona.keysdropbox;
         def filename = params.id.replace('###', '.')
         String busqueda=d.buscarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
-        redirect (url:busqueda)        
+        if (!busqueda){
+            flash.message = "Parece no tener conexion en este momento, no se puede ver su archivo; intente de nuevo mas tarde"
+             redirect(controller:"Nota", action:"show", id:session.nota.id)
+        } else {
+            redirect (url:busqueda)    
+        }
     }
     
     def descargar = {
@@ -138,7 +149,12 @@ class AdjuntoController {
         String claves=session.persona.keysdropbox;
         def filename = params.id.replace('###', '.')
         String busqueda=d.descargarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
-        redirect (url:busqueda)        
+         if (!busqueda){
+            flash.message = "Parece no tener conexion en este momento, no se puede descargar su archivo; intente de nuevo mas tarde"
+            redirect(controller:"Nota", action:"show", id:session.nota.id)
+        } else {
+            redirect (url:busqueda)    
+        }        
     }
 
     def upload (Long id) {

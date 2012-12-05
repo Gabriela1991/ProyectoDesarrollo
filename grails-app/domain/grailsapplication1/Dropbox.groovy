@@ -121,7 +121,7 @@ public class Dropbox {
      *@param key: clave de acceso del usuario generada por dropbox
      *@param secret: clave de acceso del usuario generada por dropbox
      **/
-    public void eliminarArchivo(String nombrefile,String key, String secret){
+    public int eliminarArchivo(String nombrefile,String key, String secret){
         
        try { 
            mDBApi = new DropboxAPI<WebAuthSession>(session);
@@ -129,7 +129,15 @@ public class Dropbox {
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
                 System.out.println("Re-authentication Sucessful!");
          
-        Entry newEntry= mDBApi.delete("/"+nombrefile);   
+        Entry newEntry;
+            
+            try{
+                newEntry= mDBApi.delete("/"+nombrefile);   
+            } catch (Exception e){
+                return 0;
+            } 
+            return 1;
+            
         } catch (DropboxServerException e) {
 			System.out.println("El archivo no esta en dropbox con ese nombre");
 		}
@@ -154,7 +162,14 @@ public class Dropbox {
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
                 System.out.println("Re-authentication Sucessful!");
        
-            ArrayList  newEntry = (ArrayList) mDBApi.search("/",nombreadj,1,true);
+            ArrayList  newEntry;
+            
+            try { 
+                newEntry= (ArrayList) mDBApi.search("/",nombreadj,1,true);
+            } catch (Exception e){
+                return null
+            }
+            
             DropboxLink share= mDBApi.share("/"+nombreadj);
              
             share=mDBApi.media("/"+nombreadj, true);
@@ -187,7 +202,14 @@ public class Dropbox {
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
                 System.out.println("Re-authentication Sucessful!");
        
-            ArrayList  newEntry = (ArrayList) mDBApi.search("/",nombreadj,1,true);
+            ArrayList  newEntry;
+            
+            try{
+              newEntry= (ArrayList) mDBApi.search("/",nombreadj,1,true);
+            } catch (Exception e){
+              return null  
+            }
+            
             DropboxLink share= mDBApi.share("/"+nombreadj);
                         
             return share.url
