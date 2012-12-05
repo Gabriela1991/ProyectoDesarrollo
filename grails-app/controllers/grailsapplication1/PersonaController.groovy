@@ -128,8 +128,10 @@ class PersonaController {
          println("verificar si ya se ha auth"+session.persona.keysdropbox)
          
          String claves;
-          if(session.persona.keysdropbox)
-            claves=session.persona.keysdropbox;
+          if(session.persona.keysdropbox){
+              claves=d.auth(session.persona.keysdropbox);
+            claves=session.persona.keysdropbox;      
+          }
           else
             claves=d.auth(session.persona.keysdropbox);
             
