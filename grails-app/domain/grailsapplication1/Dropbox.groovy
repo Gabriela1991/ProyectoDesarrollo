@@ -129,7 +129,7 @@ public class Dropbox {
                 mDBApi.getSession().setAccessTokenPair(reAuthTokens);
                 System.out.println("Re-authentication Sucessful!");
          
-        Entry newEntry = mDBApi.delete("/"+nombrefile);
+        Entry newEntry= mDBApi.delete("/"+nombrefile);   
         } catch (DropboxServerException e) {
 			System.out.println("El archivo no esta en dropbox con ese nombre");
 		}
