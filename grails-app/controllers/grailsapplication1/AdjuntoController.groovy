@@ -165,7 +165,7 @@ class AdjuntoController {
                 FileUtils.writeByteArrayToFile(file, f.getBytes());
                 f.transferTo( file )
                 def personaInstance=session.persona
-
+                
                 def nombreArchivo=d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
 
                 file.delete()

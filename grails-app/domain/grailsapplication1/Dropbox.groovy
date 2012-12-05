@@ -90,26 +90,27 @@ public class Dropbox {
      **/
       public String subirArchivo(File file, String key, String secret){
         
-        try{
-        mDBApi = new DropboxAPI<WebAuthSession>(session);
-                AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
-                mDBApi.getSession().setAccessTokenPair(reAuthTokens);
-                System.out.println("Re-authentication Sucessful!");
-         
- 
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
-            Entry newEntry;
-            try {
-            newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
-            } catch (Exception e){
-                System.out.println("No hay conexion con internet/dropbox");
-            return null;
-            }
-        return  (newEntry.fileName());    
-    
+        try{ 
+            mDBApi = new DropboxAPI<WebAuthSession>(session);
+                        AccessTokenPair reAuthTokens = new AccessTokenPair(key, secret);
+                        mDBApi.getSession().setAccessTokenPair(reAuthTokens);
+                        System.out.println("Re-authentication Sucessful!");
+
+
+                ByteArrayInputStream inputStream = new ByteArrayInputStream(file.getBytes());
+                    Entry newEntry;
+                    try {
+                    newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
+                    } catch (Exception e){
+                        System.out.println("No hay conexion con internet/dropbox");
+                    return null;
+                    }
+                return  (newEntry.fileName());    
         }
         catch (UnknownHostException e){
             System.out.println("No hay conexion con internet/dropbox");
+            return null;
+        } catch (IllegalArgumentException ee){
             return null;
         }
     }
