@@ -15,7 +15,7 @@ class PersonaController {
         [personaInstanceList: Persona.list(params), personaInstanceTotal: Persona.count()]
     }
 
-    def create() {
+    def create() { 
         if (session.persona) session.invalidate();
         [personaInstance: new Persona(params)]
     }
@@ -129,8 +129,10 @@ class PersonaController {
          println("verificar si ya se ha auth"+session.persona.keysdropbox)
          
          String claves;
-          if(session.persona.keysdropbox)
-            claves=session.persona.keysdropbox;
+          if(session.persona.keysdropbox){
+              claves=d.auth(session.persona.keysdropbox);
+            claves=session.persona.keysdropbox;      
+          }
           else
             claves=d.auth(session.persona.keysdropbox);
             

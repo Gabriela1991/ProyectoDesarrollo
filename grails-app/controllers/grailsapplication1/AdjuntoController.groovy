@@ -102,24 +102,25 @@ class AdjuntoController {
     } 
 
     def delete = {
-        println("par"+params.nota+"  "+params.id)
-        def idnota;
-        if (session.nota.id==null)
-        idnota=params.nota
-        else
-        idnota=session.nota.id
-        def Dropbox d=new Dropbox();
-        String claves=session.persona.keysdropbox;
-        def filename = params.id.replace('###', '.')    
-        println("filen"+filename)
-        d.eliminarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
-        log.info "Se ha eliminado un adjunto de dropbox"
-        def adjuntoInstance=Adjunto.findByArchivo(filename)
-        adjuntoInstance.delete();
-        log.info "Se ha eliminado un adjunto de base de datos"
-        flash.message = "El archivo ' ${filename}' ha sido eliminado" 
         
-        redirect( action:"list", id:idnota )
+                println("par"+params.nota+"  "+params.id)
+                def idnota;
+                if (session.nota.id==null)
+                idnota=params.nota
+                else
+                idnota=session.nota.id
+                def Dropbox d=new Dropbox();
+                String claves=session.persona.keysdropbox;
+                def filename = params.id.replace('###', '.')    
+                println("filen"+filename)
+                d.eliminarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
+                log.info "Se ha eliminado un adjunto de dropbox"
+                def adjuntoInstance=Adjunto.findByArchivo(filename)
+                adjuntoInstance.delete();
+                log.info "Se ha eliminado un adjunto de base de datos"
+                flash.message = "El archivo ' ${filename}' ha sido eliminado" 
+
+                redirect( action:"list", id:idnota )
     }
     
     def download = {
@@ -148,8 +149,10 @@ class AdjuntoController {
         def f = request.getFile('fileUpload')
         String fileNameToCreate
         
-        if(session.persona.keysdropbox)
+        if(session.persona.keysdropbox){
+            claves=d.auth(session.persona.keysdropbox);
             claves=session.persona.keysdropbox;
+        }
         else{
             def persona = Persona.findById(session.persona.id);
             claves=d.auth(session.persona.keysdropbox);
@@ -165,7 +168,7 @@ class AdjuntoController {
                 FileUtils.writeByteArrayToFile(file, f.getBytes());
                 f.transferTo( file )
                 def personaInstance=session.persona
-
+                
                 def nombreArchivo=d.subirArchivo(file,claves.split('/')[0].toString(),claves.split('/')[1].toString())
 
                 file.delete()
