@@ -15,7 +15,7 @@ class PersonaController {
         [personaInstanceList: Persona.list(params), personaInstanceTotal: Persona.count()]
     }
 
-    def create() {
+    def create() { 
         if (session.persona) session.invalidate();
         [personaInstance: new Persona(params)]
     }
