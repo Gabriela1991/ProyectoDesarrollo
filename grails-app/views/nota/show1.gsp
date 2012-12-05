@@ -49,77 +49,14 @@
             </g:if>
             <ol class="property-list nota">
               <table>
-               
-                <g:if test="${notaInstance?.etiquetas}">
-                  <li class="fieldcontain">
-                  <tr>
-                    <td style="color: transparent">dfjljlkjlkjkljk</td>
-                    <td style="color: cornflowerblue; fonlkjlkjt-size: medium">
-                      <span id="etiquetas-label" class="property-label"><g:message code="nota.etiquetas.label" default="Etiquetas: " /></span>
-                    </td>
-                    <td style="color: black; font-size: medium">
-                  <g:each in="${notaInstance.etiquetas}" var="e">
-                    <span class="property-value" aria-labelledby="etiquetas-label"><g:link controller="etiqueta" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
-                  </g:each>
+                <tr>
+                  <td><image src="../../images/espacios.png" width="150" height="4"></td>
+                  <td>                    
+                    </br></br>
+                    <g:link controller="adjunto" action="list" id="${notaInstance?.id}"><img src="../../images/bagregarAdjunto.png" width="104" height="26"></g:link>
+                    <g:link action="show" controller="nota" id="${notaInstance?.id}"><img src="../../images/bguardar.png" width="95" height="26"></g:link>
                   </td>
-                  </tr>
-                  </li>
-                </g:if>
-                <g:if test="${notaInstance?.libreta}">
-                  <li class="fieldcontain"> 
-                  <tr>
-                    <td style="color: transparent">dfjljlkjlkjkllkjlkjjk</td>
-                    <td style="color: cornflowerblue; font-size: medium">
-                      <span id="libreta-label" class="property-label"><g:message code="nota.libreta.label" default="Libreta: " /></span>
-                    </td>
-                    <td style="color: black; font-size: medium">
-                      <span class="property-value" aria-labelledby="libreta-label"><g:link controller="libreta" action="show" id="${notaInstance?.libreta?.id}">${notaInstance?.libreta?.nombre.encodeAsHTML()}</g:link></span>
-                    </td>
-                  </tr>
-                  </li>
-                </g:if>
-                <g:if test="${notaInstance?.texto}">
-                  <li class="fieldcontain">
-                  <tr>
-                    <td style="color: transparent">dfjljkllkjlkjlkjlkjjk</td>
-                    <td style="color: cornflowerblue; font-size: medium">
-                      <span id="texto-label" class="property-label"><g:message code="nota.texto.label" default="Texto: " /></span>
-                    </td>
-                    <td style="color: black; font-size: medium">
-                      <span class="property-value" aria-labelledby="texto-label"><g:fieldValue bean="${notaInstance}" field="texto"/></span>
-                    </td>
-                  </tr>
-                  </li>
-                </g:if>
-                <g:if test="${notaInstance?.titulo}">
-                  <li class="fieldcontain">
-                  <tr>
-                    <td style="color: transparent">dfjljkljlkjlkjlkjlkjk</td>
-                    <td style="color: cornflowerblue; font-size: medium">
-                      <span id="titulo-label" class="property-label"><g:message code="nota.titulo.label" default="Titulo: " /></span>
-                    </td>
-                    <td style="color: black; font-size: medium">
-                      <span class="property-value" aria-labelledby="titulo-label"><g:fieldValue bean="${notaInstance}" field="titulo"/></span>
-                    </td>
-                  </tr>
-                  </li>
-                </g:if>
-                <g:if test="${notaInstance?.titulo}">
-                  <li class="fieldcontain">
-                  <tr>
-                    <td style="color: transparent">dfjljkljlklkjlkjjlkjk</td>
-                    <td style="color: cornflowerblue; font-size: medium">
-                      <span id="fecha-label" class="property-label"><g:message code="nota.fecha.label" default="Fecha de Creación: " /></span>
-                    </td>
-                    <td style="color: black; font-size: medium">
-                      <span class="property-value" aria-labelledby="fecha-label"><g:fieldValue bean="${notaInstance}" field="fecha"/></span>
-                    </td>
-                  </tr>
-                  </li>
-                </g:if>
-               
-                  <g:link controller="adjunto" action="list" id="${notaInstance?.id}">${message(code: 'default.add.label', args: [message(code: 'adjunto.label', default: 'Adjunto')])}</g:link>
-                   <g:link action="show" controller="nota" id="${notaInstance?.id}"> Guardar </g:link> 
+                </tr>
               </table>
             </ol>
             </br>

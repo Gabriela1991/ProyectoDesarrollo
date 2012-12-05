@@ -82,6 +82,7 @@ class PersonaController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
+        session.persona = personaInstance;
         redirect(action: "show", id: personaInstance.id)
     }
 

@@ -85,6 +85,12 @@
       </div>
     
       <div id="left">
+        <h3>Búsqueda de Notas: </h3>
+        <g:form action="buscar" controller="nota">
+          <input type="text" name="campo" id="campo" value="Escriba su búsqueda" onClick="this.value=''"/>                                      
+          <g:submitButton name="submit" value="Ok"/>
+        </g:form>
+
         <h3>Opciones: </h3>
         <table>
           <tr>
@@ -92,24 +98,24 @@
               <img src="../../images/home.png" width="25" height="25" />
             </td>
             <td>
-              <li><a href="#">.::HOME::.</a></li>
-            </td>
+          <li><g:link controller="persona" action="ventanaInicio">.::HOME::.</g:link></li>
+          </td>
           </tr>
           <tr>
             <td>
               <img src="../../images/book.png" width="25" height="25" />
             </td>
             <td>
-              <li><a href="#">.::Libretas::.</a></li>
-            </td>
+          <li><g:link controller="libreta" action="list">.::Libretas::.</g:link></li>
+          </td>
           </tr>
           <tr>
             <td>
-              <img src="../../images/notitas.png" width="25" height="25" />
+              <img src="../../images/perfil.png" width="25" height="25" />
             </td>
             <td>
-              <li><a href="#">.::Notas::.</a></li>
-            </td>
+          <li><g:link controller="persona" action="show">.::Configurar Cuenta::.</g:link></li>
+          </td>
           </tr>
         </table>        
       </div>

@@ -57,10 +57,10 @@
 				<g:hiddenField name="id" value="${notaInstance?.id}" />
 				<g:hiddenField name="version" value="${notaInstance?.version}" />
 				<g:render template="form"/>
-                                 <g:link controller="adjunto" action="list" id="${notaInstance?.id}"> ADMINISTRAR ADJUNTOS </g:link>
                                 <table>
                                   <tr>
-                                    <td style="color: transparent">hjjnkljslkkljkljkljkjlkjklj</td>
+                                    <td style="color: transparent">hjjnkljslkkljkljk</td>
+                                    <td><g:link controller="adjunto" action="list" id="${notaInstance?.id}"><img src="../images/badministrar.png"></g:link></td>
                                     <td>
                                         <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: '.::Guardar::.')}" />
                                     </td>
