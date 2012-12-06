@@ -1,11 +1,11 @@
 package grailsapplication1
 
 import org.springframework.dao.DataIntegrityViolationException
-
+import org.apache.commons.logging.*
 class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.getName())
     def index() {
         redirect(action: "list", params: params)
     }
@@ -28,7 +28,8 @@ class PersonaController {
         }
 
         flash.message = message(code: 'default.created.message', args: ["El usuario ", personaInstance.correo+" ha sido"])
-        redirect(action: "inicio")
+    log.info "Se ha agregado usuario a la base de datos con id:"+personaInstance.id    
+    redirect(action: "inicio")
     }
 
     def show(Long id) {
@@ -82,7 +83,8 @@ class PersonaController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
-        session.persona = personaInstance;
+    log.info "Se ha editado el usuario con id:"+personaInstance.id    
+    session.persona = personaInstance;
         redirect(action: "show", id: personaInstance.id)
     }
 
@@ -95,6 +97,7 @@ class PersonaController {
         }
 
         try {
+            log.info "Se ha eliminado usuario de la base de datos con id:"+personaInstance.id
             personaInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "list")

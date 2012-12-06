@@ -1,11 +1,13 @@
 package grailsapplication1
 
 import org.springframework.dao.DataIntegrityViolationException
+import org.apache.commons.logging.*
+
 
 class LibretaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+private static Log log = LogFactory.getLog("bitacora."+LibretaController.class.getName())
     def index() {
         redirect(action: "list", params: params)
     }
@@ -31,6 +33,7 @@ class LibretaController {
         }
 
         flash.message = "Su libreta ha sido creada correctamente"
+        log.info "Se ha agregado una libreta a la base de datos con id:"+libretaInstance.id
         redirect(action: "show", id: libretaInstance.id)
     }
     
@@ -85,7 +88,7 @@ class LibretaController {
             render(view: "edit", model: [libretaInstance: libretaInstance])
             return
         }
-
+        log.info "Se ha editado la libreta con id:"+libretaInstance.id
         flash.message = message(code: 'default.updated.message', args: [message(code: 'libreta.label', default: 'Libreta'), libretaInstance.id])
         redirect(action: "show", id: libretaInstance.id)
     }
@@ -99,6 +102,7 @@ class LibretaController {
         }
 
         try {
+            log.info "Se ha agregado una libreta a la base de datos con id:"+libretaInstance.id
             libretaInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'libreta.label', default: 'Libreta'), id])
             redirect(action: "list")

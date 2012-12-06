@@ -1,11 +1,12 @@
 package grailsapplication1
 
 import org.springframework.dao.DataIntegrityViolationException
+import org.apache.commons.logging.*
 
 class EtiquetaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+private static Log log = LogFactory.getLog("bitacora."+EtiquetaController.class.getName())
     def index() {
         redirect(action: "list", params: params)
     }
@@ -25,7 +26,7 @@ class EtiquetaController {
             render(view: "create", model: [etiquetaInstance: etiquetaInstance])
             return
         }
-
+        log.info "Se ha agregado una etiqueta a la base de datos con id:"+etiquetaInstance.id    
         flash.message = message(code: 'default.created.message', args: [message(code: 'etiqueta.label', default: 'Etiqueta'), etiquetaInstance.id])
         redirect(action: "show", id: etiquetaInstance.id)
     }
@@ -78,7 +79,7 @@ class EtiquetaController {
             render(view: "edit", model: [etiquetaInstance: etiquetaInstance])
             return
         }
-
+        log.info "Se ha editado la etiqueta con id:"+etiquetaInstance.id    
         flash.message = message(code: 'default.updated.message', args: [message(code: 'etiqueta.label', default: 'Etiqueta'), etiquetaInstance.id])
         redirect(action: "show", id: etiquetaInstance.id)
     }
@@ -94,6 +95,7 @@ class EtiquetaController {
         }
 
         try {
+            log.info "Se ha eliminado una etiqueta de la base de datos con id:"+etiquetaInstance.id    
             etiquetaInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'etiqueta.label', default: 'Etiqueta'), id])
             redirect(action: "list")
