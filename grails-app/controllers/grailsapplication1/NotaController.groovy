@@ -279,6 +279,16 @@ def list(Integer max, Long id) {
                             if (bandera==1){
                                 notasaux.add(elemento);    
                             }
+                            bandera=0;
+                            for (int h=0; h<elemento.adjuntos.size(); h++){
+                                if (elemento.adjuntos.archivo.get(h).contains(params.campo)){
+                                    bandera=1
+                                    break;
+                                } else bandera=0
+                            } 
+                            if (bandera==1 && !notasaux.contains(elemento)){
+                                notasaux.add(elemento)
+                            }
                         } else notasaux.add(elemento)
                     }                 
                 }
@@ -295,7 +305,17 @@ def list(Integer max, Long id) {
                             }
                             else bandera=0;               
                         }
-                        if (bandera==1) notasaux.add(elemento);    
+                        if (bandera==1) notasaux.add(elemento);  
+                        bandera=0;
+                            for (int h=0; h<elemento.adjuntos.size(); h++){
+                                if (elemento.adjuntos.get(h).archivo.contains(params.campo)){
+                                    bandera=1
+                                    break;
+                                } else bandera=0
+                            } 
+                            if (bandera==1 && !notasaux.contains(elemento)){
+                                notasaux.add(elemento)
+                            }
                     } else notasaux.add(elemento)
                 }         
             }
