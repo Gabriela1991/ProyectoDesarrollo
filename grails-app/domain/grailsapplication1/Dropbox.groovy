@@ -52,16 +52,18 @@ public class Dropbox {
             appKeys1 = new AppKeyPair("leptv1sfus5ywu7","ocph4agc0d3ktmw");
             session1 = new WebAuthSession(appKeys1, acceso);
             authInfo1 = session1.getAuthInfo();
-            println(keys);
+            
             if(keys==null){ // si persona no ha autorizado a dropbox. key y secret estan vacias
                 RequestTokenPair pair = authInfo1.requestTokenPair;
                 String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=https://www.dropbox.com/home/Apps";
+                
+                
                 Desktop.getDesktop().browse(new URL(url).toURI());
-                JOptionPane.showMessageDialog(null, "Presione continuar cuando haya permitido el acceso a dropbox");
+                sleep(7000)
+                //    JOptionPane.showMessageDialog(null, "Presione continuar cuando haya permitido el acceso a dropbox");
                 session1.retrieveWebAccessToken(pair);
                 AccessTokenPair tokens = session1.getAccessTokenPair();
-                println("key "+tokens.key)
-                println("secret "+ tokens.secret)
+               
                 mDBApi = new DropboxAPI<WebAuthSession>(session1);
                  DropboxAPI.Account account = mDBApi.accountInfo();
         System.out.println("Nombre Usuario Dropbox: " + account.displayName);
@@ -101,7 +103,8 @@ public class Dropbox {
                 RequestTokenPair pair = authInfo.requestTokenPair;
                 String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=http://www.dropbox.com";
                 Desktop.getDesktop().browse(new URL(url).toURI());
-                JOptionPane.showMessageDialog(null, "Presione continuar cuando haya permitido el acceso a dropbox");
+                sleep(7000)
+                //JOptionPane.showMessageDialog(null, "Presione continuar cuando haya permitido el acceso a dropbox");
                 session.retrieveWebAccessToken(pair);
                 AccessTokenPair tokens = session.getAccessTokenPair();
                 println("key "+tokens.key)
@@ -146,7 +149,7 @@ public class Dropbox {
                     try {
                     newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
                     } catch (Exception e){
-                        System.out.println("No hay conexion con internet/dropbox "+e);
+                        System.out.println("No hay conexion con internet/dropbox ");
                     return null;
                     }
                   

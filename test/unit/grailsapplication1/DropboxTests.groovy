@@ -11,11 +11,25 @@ import org.junit.*
 @TestFor(Dropbox)
 class DropboxTests {
 
-    Dropbox d=new Dropbox();
-    Persona p=new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:null,clave:"123456");
+    Dropbox d;
+    Persona p;
     
+    @Before
+    void init(){
+        d=new Dropbox();
+     p=new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:null,clave:"123456");
+    
+    }
+    
+    @Test
     void testSomething() {
      assert d.unit(p.keysdropbox)!=null :'Claves generadas para el usuario';
      
+    }
+    
+    @After
+    void teardown (){
+        d=null;
+        p=null;
     }
 }
