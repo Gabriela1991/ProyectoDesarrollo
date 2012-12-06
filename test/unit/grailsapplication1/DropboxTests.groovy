@@ -15,7 +15,7 @@ class DropboxTests {
     Persona p=new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:null,clave:"123456");
     
     void testSomething() {
-     assert d.auth(p.keysdropbox)!=null :'Claves generadas para el usuario';
+     assert d.unit(p.keysdropbox)!=null :'Claves generadas para el usuario';
      
     }
 }

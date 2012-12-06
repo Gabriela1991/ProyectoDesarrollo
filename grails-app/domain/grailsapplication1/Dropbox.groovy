@@ -33,12 +33,56 @@ public class Dropbox {
 
     final static private String APP_KEY = "s6c9l9rdxibv9rj";
     final static private String APP_SECRET = "oarccj4xfs7tckh";
+    final static private String APP_KEY1 = "leptv1sfus5ywu7";
+    final static private String APP_SECRET1 = "ocph4agc0d3ktmw";
     final static private AccessType ACCESS_TYPE = AccessType.DROPBOX;
+    final static private AccessType acceso=AccessType.APP_FOLDER;
     static private DropboxAPI<WebAuthSession> mDBApi;
     public static AppKeyPair appKeys ;
     public static WebAuthSession session ;
     public static  WebAuthInfo authInfo ;
     
+    public static AppKeyPair appKeys1 ;
+  public static WebAuthSession session1 ;
+   public static    WebAuthInfo authInfo1 ;
+    
+    public static String unit(String keys){
+        
+        try{
+            appKeys1 = new AppKeyPair("leptv1sfus5ywu7","ocph4agc0d3ktmw");
+            session1 = new WebAuthSession(appKeys1, acceso);
+            authInfo1 = session1.getAuthInfo();
+            println(keys);
+            if(keys==null){ // si persona no ha autorizado a dropbox. key y secret estan vacias
+                RequestTokenPair pair = authInfo1.requestTokenPair;
+                String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=https://www.dropbox.com/home/Apps";
+                Desktop.getDesktop().browse(new URL(url).toURI());
+                JOptionPane.showMessageDialog(null, "Presione continuar cuando haya permitido el acceso a dropbox");
+                session1.retrieveWebAccessToken(pair);
+                AccessTokenPair tokens = session1.getAccessTokenPair();
+                println("key "+tokens.key)
+                println("secret "+ tokens.secret)
+                mDBApi = new DropboxAPI<WebAuthSession>(session1);
+                 DropboxAPI.Account account = mDBApi.accountInfo();
+        System.out.println("Nombre Usuario Dropbox: " + account.displayName);
+        return (tokens.key.toString()+"/"+tokens.secret.toString())
+            }
+            return null;
+
+        }
+        catch (DropboxException ex)
+        {
+            System.out.println("fue al dropbox");
+        }
+        
+       catch (UnknownHostException e){
+            System.out.println("No hay conexion con internet/dropbox");
+             throw new DropboxException(e);
+        }
+      
+        
+        
+    }
   
     /**
      * Metodo encargado de verificar si el usuario ya ha dado permisos a la aplicacion para acceder a dropbox.
@@ -102,9 +146,10 @@ public class Dropbox {
                     try {
                     newEntry = mDBApi.putFile("/"+file.getName(), inputStream, file.length(), null, null);
                     } catch (Exception e){
-                        System.out.println("No hay conexion con internet/dropbox");
+                        System.out.println("No hay conexion con internet/dropbox "+e);
                     return null;
                     }
+                  
                 return  (newEntry.fileName());    
         }
         catch (UnknownHostException e){
