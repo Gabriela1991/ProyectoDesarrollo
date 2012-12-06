@@ -309,7 +309,10 @@ def list(Integer max, Long id) {
             [libretaInstance: notasaux.getAt(0..9), notasAuxTotal: notasaux.size()]
             else if (notasaux.size()>0) 
             [libretaInstance: notasaux.getAt(0..notasaux.size()-1), notasAuxTotal: notasaux.size()]
-            else [libretaInstance: notasaux, notasAuxTotal: notasaux.size()]
+            else{
+                flash.message = "No se encontro ninguna nota de acuerdo al criterio de busqueda"
+                [libretaInstance: notasaux, notasAuxTotal: notasaux.size()]
+            }
         }
        else{
            def cantidad = Integer.parseInt(params.offset)
