@@ -6,20 +6,41 @@ class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.getName())
+    
+    /**
+     *
+     * Me redirige a la seccion de mostrar todos los usuarios
+     */
     def index() {
         redirect(action: "list", params: params)
     }
 
+
+    /**
+     *
+     * Muestra por pantalla un listado de todas las personas registradas en la BD
+     */
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [personaInstanceList: Persona.list(params), personaInstanceTotal: Persona.count()]
     }
 
+
+    /**
+     *
+     *Crea un usuario nuevo
+     */
     def create() { 
         if (session.persona) session.invalidate();
         [personaInstance: new Persona(params)]
     }
 
+    
+    /**
+     *
+     * Guarda los cambios realizados sobre un usuario, estos cambios se veran 
+     * reflejados en el log
+     */
     def save() {
         def personaInstance = new Persona(params)
         if (!personaInstance.save(flush: true)) {
@@ -27,11 +48,17 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: ["El usuario ", personaInstance.correo+" ha sido"])
-    log.info "Se ha agregado usuario a la base de datos con id:"+personaInstance.id    
-    redirect(action: "inicio")
+        flash.message = message(code: 'default.created.cuentaCreada', args: ["El usuario ", personaInstance.correo])
+        log.info "Se ha agregado usuario a la base de datos con id:"+personaInstance.id    
+        redirect(action: "inicio")
     }
 
+    
+    /**
+    *
+    *Muestra el detalle de un usuario en especifico, los datos que fueron ingresados
+    *al momento de registrar un usuario en el aplicativo
+    */
     def show(Long id) {
         def personaInstance
         if (session.persona)
@@ -46,6 +73,11 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
         [personaInstance: personaInstance]
     }
 
+
+    /**
+     *
+     * Envia a la opcion de editar un usuario seleccionado
+     */
     def edit(Long id) {
         def personaInstance= Persona.findById(session.persona.id)
         if (!personaInstance) {
@@ -57,6 +89,14 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
         [personaInstance: personaInstance]
     }
 
+
+    /**
+     *
+     * Permite realizar cambio sobre un usario, de ser exitosa la
+     * modificacion, se linkeara a la seccion de mostrar los datos del usuario, de lo contrario
+     * mostrara un msj de error indicando el fallo de la transaccion
+     * Dichos cambios se veran reflejados en la bitacora de la aplicacion
+     */
     def update(Long id, Long version) {
         def personaInstance = Persona.get(id)
         if (!personaInstance) {
@@ -83,44 +123,38 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
-    log.info "Se ha editado el usuario con id:"+personaInstance.id    
-    session.persona = personaInstance;
+        log.info "Se ha editado el usuario con id:"+personaInstance.id    
+        session.persona = personaInstance;
         redirect(action: "show", id: personaInstance.id)
     }
-
-    def delete(Long id) {
-        def personaInstance = Persona.get(id)
-        if (!personaInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            log.info "Se ha eliminado usuario de la base de datos con id:"+personaInstance.id
-            personaInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'persona.label', default: 'Persona'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'persona.label', default: 'Persona'), id])
-            redirect(action: "show", id: id)
-        }
-    }
     
-    
+
+    /**
+     *Comienza el inicio de sesion
+     *
+     */    
      def inicio = { 
          session.persona=null
      
     }
     
+    
+    /**
+    *
+    *Busca al usuario que quiere iniciar sesion en la BD
+    */
     def ventanaInicio (){
         def persona = Persona.findById(session.persona.id)
   
     }
     
-    //Aqui comprobamos que la cuenta introducida por el usuario se la que se
-    //emcuentra almacenada en la BD y que le corresponde dicho password
+
+    /**
+    *
+    *Aqui comprobamos que la cuenta introducida por el usuario es la que se
+    *encuentra almacenada en la BD y que le corresponde dicho password, de ser
+    *asi inicia sesion tanto en el aplicativo como en dropbox
+    */
     def inicioSesion = {
     def persona = Persona.findWhere(correo:params['correo'],
         clave:params['clave'])

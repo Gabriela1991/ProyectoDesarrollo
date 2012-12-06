@@ -63,10 +63,11 @@
             </div>
             <table>
               <tr>
-                <td style="color: transparent">dcgfvhbhkkm,lcvb</td>
+                <td style="color: transparent">djjkhjhjkhkhkhcgfhkjhjkhkkm,lcvb</td>
                 <td>
                   <span class="button">
-                    <g:actionSubmit class="upload" value="Adjuntar" action="upload" params="${[idnota:notaInstance?.id]}" />
+                    </br>
+                    <g:actionSubmit class="upload" value=".::Adjuntar::." action="upload" params="${[idnota:notaInstance?.id]}" />
                   </span>
                 </td>
               </tr>
@@ -82,25 +83,36 @@
         <table>
           <thead>
             <tr>
-          <g:sortableColumn property="files" title="Archivos"/>
-          <g:sortableColumn property="path" title="Opciones" colspan="3"/>
+              <td><g:sortableColumn property="files" title="Archivos"/></td>
+              <td><g:sortableColumn property="path" title="Opciones" colspan="3"/></td>          
           </tr>
           </thead>
           <tbody>
           <g:each in="${adjuntoInstanceList}" status="i" var="adjuntoInstance">
             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+              <td style="color: transparent">fghjk,hbhhgjhghcvbnm,</td>
               <td>${adjuntoInstance.decodeURL()}</td>
+              <td style="color: transparent">fcvbnm,</td>
              <!-- <td> <input type="text" value="${adjuntoInstance.decodeURL()}"></input></td> -->
-              <td><g:link action="download" id="${adjuntoInstance.replace('.','###')}"  > Ver </g:link></td>
-              
-              <td><g:link action="delete" id="${adjuntoInstance.replace('.','###')}" onclick="return confirm('¿Esta Seguro?');"> Eliminar </g:link></td>
+              <td><g:link action="download" id="${adjuntoInstance.replace('.','###')}"  > Ver </g:link>
+                  <g:link action="delete" id="${adjuntoInstance.replace('.','###')}" onclick="return confirm('¿Esta Seguro?');"> Eliminar </g:link>
+              </td>
+              <td></td>
             </tr>
           </g:each>
           </tbody>
         </table>
       </div>
+      <table>
+        <tr>
+          <td style="color: transparent">ffghghghjgjjhjkhhghgjhnjhjhjkhkh</td>
+          <td>
+            </br>
+            <g:link action="show" controller="nota" id="${session.nota.id}"> <img src="../../images/bguardar.png"/> </g:link> 
+          </td>
+        </tr>
+      </table>
       
-      <g:link action="show" controller="nota" id="${session.nota.id}"> Guardar </g:link> 
         </div>         
       </div>
     

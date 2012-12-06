@@ -3,21 +3,40 @@ package grailsapplication1
 import org.springframework.dao.DataIntegrityViolationException
 import org.apache.commons.logging.*
 class NotaController {
+
+    /**
+    *
+    *Inicializacion de variables que se usaran en todo el contralador
+    */
     private static ultimoidlibreta=null;
     private static numero;
     private static ArrayList <Nota> listaBuscar= new ArrayList <Nota>();
     private static Log log = LogFactory.getLog("bitacora."+NotaController.class.getName())
     static allowedMethods = [save: "POST", update: "POST", delete: "POST", create: "GET"]
+    
+    
+    /**
+     *
+     * Me redirige a la seccion de mostrar todos las notas
+     */
     def index() {
         redirect(action: "list", params: params)
     }
+    
+    
     
     def etiquetas = {new ArrayList() as grails.converters.JSON  //este metodo realmente no hace nada.. solo probando
         [Etiqueta: etiquetas];
     }  
     
    
-def list(Integer max, Long id) {  
+    /**
+     *
+     * Muestra por pantalla un listado de todas las notas pertenecientes
+     * a un usuario en especifico, aqui tambien se encuntra incluido la paginacion
+     * para las notas
+     */
+    def list(Integer max, Long id) {  
         def persona= Persona.findById(session.persona.id)  
         def libreta;
         if (!ultimoidlibreta && id){
@@ -37,13 +56,21 @@ def list(Integer max, Long id) {
  }
 
 
-    
+    /**
+    *
+    *Realiza la busqueda de notas por una etiqueta en particular
+    */
     def search(){
         def Etiqueta = Nota.executeQuery("SELECT distinct b.texto FROM Etiqueta b")
         [ Etiqueta:Etiqueta]
         
     }
 
+    
+    /**
+     *
+     *Crea una nota nueva para un usuario
+     */
     def create() {
         def nota= new Nota();
         def persona= Persona.findById(session.persona.id);
@@ -70,6 +97,12 @@ def list(Integer max, Long id) {
         [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona, etiquetasInstance: etiq] 
     }
 
+    
+    /**
+     *
+     * Guarda los cambios realizados sobre una nota
+     * Estos cambios se veran refejados en la bitacora del sistema
+     */
     def save() { 
 
         
@@ -113,13 +146,20 @@ def list(Integer max, Long id) {
         redirect(action: "show1", params:[id: notaInstance.id, sesion:session.persona])        
     }
 
-        
+
+    /**
+     *
+     *Selecciona el maximo ID de notas que se encuentra almacenado en la Base de 
+     *Datos del sistema
+     */
     def listetiqqueta (){
         def etiquetaInstance = new Etiqueta (params)
         def notaInstance = new Nota ().executeQuery("select max id from nota");
         notaInstance.getEtiquetas().println();
         
     }
+    
+    
     
     def show(Long id) {
         def persona= Persona.findById(session.persona.id)
@@ -139,6 +179,12 @@ def list(Integer max, Long id) {
         }
     }
 
+    
+    /**
+     *
+     * Envia a la opcion de editar una nota seleccionada, si este se encuentra
+     * almacenado en la lista de notas
+     */
     def edit(Long id) {
         def persona= Persona.findById(session.persona.id);
         def notaInstance = Nota.get(id)
@@ -152,6 +198,13 @@ def list(Integer max, Long id) {
     }
     
 
+    /**
+     *
+     * Permite realizar cambio sobre las notas seleccionadas, de ser exitosa la
+     * modificacion, se linkeara a la seccion de mostrar notas, de lo contrario
+     * mostrara un msj de error indicando el fallo de la transaccion
+     * Estos cambios se refejaran en la bitacora del sistema
+     */
     def update(Long id, Long version) {
        
         def notaInstance = Nota.get(id)
@@ -215,6 +268,13 @@ def list(Integer max, Long id) {
         redirect(action: "show", id: notaInstance.id)
     }
 
+    
+    /**
+    *
+    *Elimina una nota especifica que pertenece a un usuario, tanto de la BD como
+    *del dropbox en el caso de que contenga adjuntos asociado, estos cambios se
+    *reflejaran en la bitacora del sistema
+    */
     def delete(Long id) {
         println("voy a eliminar adj d db 1")
         def notaInstance = Nota.get(id)
@@ -256,6 +316,12 @@ def list(Integer max, Long id) {
         }
     }
     
+    
+    /**
+    *
+    *Realiza una busqueda rapida de las notas que se encuentran almacenadas en la
+    *Bd y que pertenecen a un usuario en especifico.
+    */
      def buscar () {
         def persona= Persona.findById(session.persona.id);
         def notas= persona.libretas.notas
@@ -353,6 +419,8 @@ def list(Integer max, Long id) {
 
     }
 
+    
+    
     def show1(Long id) {
         def persona= Persona.findById(session.persona.id)
         def notaInstance = Nota.get(id)

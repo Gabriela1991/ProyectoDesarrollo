@@ -14,16 +14,29 @@ class AdjuntoController {
     static allowedMethods = []
     private static Log log = LogFactory.getLog("bitacora."+AdjuntoController.class.getName())
       
+    
+    /**
+     *
+     * Me redirige a la seccion de mostrar todos los adjuntos
+     */
     def index() {
         redirect(action: "list", params: params)
     }
 
     
-
+    /**
+     *
+     *Crea un adjunto nuevo para una nota
+     */
     def create() {
         [adjuntoInstance: new Adjunto(params)]
     }
 
+    
+    /**
+     *
+     * Guarda los cambios realizados sobre un adjunto
+     */
     def save() {
         def adjuntoInstance = new Adjunto(params)
         if (!adjuntoInstance.save(flush: true)) {
@@ -35,6 +48,11 @@ class AdjuntoController {
         redirect(action: "show", id: adjuntoInstance.id)
     }
 
+    
+    /**
+     *
+     *Muestra un conjunto de adjuntos pertenecientes a una nota en especifico
+     */
     def show(Long id) {
         def adjuntoInstance = Adjunto.get(id)
         if (!adjuntoInstance) {
@@ -46,6 +64,12 @@ class AdjuntoController {
         [adjuntoInstance: adjuntoInstance]
     }
 
+    
+     /**
+     *
+     * Envia a la opcion de editar un adjunto seleccionado, si este se encuentra
+     * almacenado en la lista de adjuntos
+     */
     def edit(Long id) {
         def adjuntoInstance = Adjunto.get(id)
         if (!adjuntoInstance) {
@@ -57,6 +81,13 @@ class AdjuntoController {
         [adjuntoInstance: adjuntoInstance]
     }
 
+    
+    /**
+     *
+     * Permite realizar cambio sobre los adjuntos seleccionados, de ser exitosa la
+     * modificacion, se linkeara a la seccion de mostrar adjuntos, de lo contrario
+     * mostrara un msj de error indicando el fallo de la transaccion
+     */
     def update(Long id, Long version) {
         def adjuntoInstance = Adjunto.get(id)
         if (!adjuntoInstance) {
@@ -86,6 +117,12 @@ class AdjuntoController {
         redirect(action: "show", id: adjuntoInstance.id)
     }
 
+    
+    /**
+     *
+     * Muestra por pantalla un listado de todos los adjuntos pertenecientes
+     * a una nota en especifico
+     */
     def list (Long id) {
        //OJO COLOCAR ID DE LA NOTA
          def adjuntos=Adjunto.executeQuery("select cast(archivo as string)from Adjunto where nota_id=:idnota",[idnota:id]);
@@ -101,6 +138,12 @@ class AdjuntoController {
        }
     } 
 
+    
+    /**
+     *
+     * Elimina de una nota un archivo adjunto que se ha especificado con 
+     * anterioridad
+     */
     def delete = {
         
                 println("par"+params.nota+"  "+params.id)
@@ -129,6 +172,11 @@ class AdjuntoController {
                     }
     }
     
+    
+    /**
+     *
+     * Carga archivos adjuntos pertenecientes a una nota, al dropbox
+     */
     def download = {
         println(session.nota.id)
         def Dropbox d=new Dropbox();
@@ -143,6 +191,11 @@ class AdjuntoController {
         }
     }
     
+    
+    /**
+     *
+     * Descarga un adjunto indicado desde dropbox
+     */
     def descargar = {
         println(params.nota)
         def Dropbox d=new Dropbox();
@@ -157,6 +210,13 @@ class AdjuntoController {
         }        
     }
 
+    
+    /**
+     *
+     * Carga un archivo adjunto indicado al dropbox
+     * Cada vez que se cargue un archivo, se reflejara en la bitacora
+     * @params id Identificador de la persona (usuario) en la BD
+     */
     def upload (Long id) {
         
         def Dropbox d=new Dropbox();
