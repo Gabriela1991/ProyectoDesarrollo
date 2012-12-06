@@ -268,7 +268,7 @@ def list(Integer max, Long id) {
                     while (k.hasNext()) {    
                         Object elemento= k.next();
                         def bandera=0;
-                        if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo)) {
+                        if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo) && !elemento.fecha.contains(params.campo)) {
                             for (int h=0; h<elemento.etiquetas.size(); h++){
                                 if (elemento.etiquetas.get(h).texto.contains(params.campo)){
                                     bandera=1
@@ -287,7 +287,7 @@ def list(Integer max, Long id) {
                 while (k.hasNext()) {
                     Object elemento= k.next();
                     def bandera=0;
-                    if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo)) {
+                    if (!elemento.texto.contains(params.campo) && !elemento.titulo.contains(params.campo) && !elemento.fecha.contains(params.campo)) {
                         for (int h=0; h<elemento.etiquetas.size(); h++){
                             if (elemento.etiquetas.get(h).texto.contains(params.campo)){
                                 bandera=1
@@ -305,10 +305,14 @@ def list(Integer max, Long id) {
         }
         
         if (!params.offset){
-            if (notasaux.size()>=10)
-            [libretaInstance: notasaux.getAt(0..9), notasAuxTotal: notasaux.size()]
-            else if (notasaux.size()>0) 
-            [libretaInstance: notasaux.getAt(0..notasaux.size()-1), notasAuxTotal: notasaux.size()]
+            if (notasaux.size()>=10){
+            flash.message= "";
+                [libretaInstance: notasaux.getAt(0..9), notasAuxTotal: notasaux.size()]
+            }
+            else if (notasaux.size()>0) {
+                 flash.message= "";
+                [libretaInstance: notasaux.getAt(0..notasaux.size()-1), notasAuxTotal: notasaux.size()]
+            }
             else{
                 flash.message = "No se encontro ninguna nota de acuerdo al criterio de busqueda"
                 [libretaInstance: notasaux, notasAuxTotal: notasaux.size()]
@@ -316,9 +320,14 @@ def list(Integer max, Long id) {
         }
        else{
            def cantidad = Integer.parseInt(params.offset)
-           if (listaBuscar.size()-10<=cantidad)
-            [libretaInstance: listaBuscar.getAt(cantidad..listaBuscar.size()-1), notasAuxTotal: listaBuscar.size()]
-            else   [libretaInstance: listaBuscar.getAt(cantidad..cantidad+9), notasAuxTotal: listaBuscar.size()]
+           if (listaBuscar.size()-10<=cantidad){
+                flash.message= "";
+                 [libretaInstance: listaBuscar.getAt(cantidad..listaBuscar.size()-1), notasAuxTotal: listaBuscar.size()]
+           }
+            else{
+                flash.message= "";
+                [libretaInstance: listaBuscar.getAt(cantidad..cantidad+9), notasAuxTotal: listaBuscar.size()]
+            }
                
        }
 
