@@ -187,6 +187,7 @@ class AdjuntoController {
             flash.message = "Parece no tener conexion en este momento, no se puede ver su archivo; intente de nuevo mas tarde"
              redirect(controller:"Nota", action:"show", id:session.nota.id)
         } else {
+            flash.message="";
             redirect (url:busqueda)    
         }
     }
@@ -206,6 +207,7 @@ class AdjuntoController {
             flash.message = "Parece no tener conexion en este momento, no se puede descargar su archivo; intente de nuevo mas tarde"
             redirect(controller:"Nota", action:"show", id:session.nota.id)
         } else {
+            flash.message="";
             redirect (url:busqueda)    
         }        
     }
