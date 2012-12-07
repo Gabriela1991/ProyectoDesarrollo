@@ -82,8 +82,7 @@ class NotaController {
                 while(j.hasNext()){
                     Object elemento= j.next();
                         for (int k=0; k<elemento.etiquetas.size(); k++){
-                            Iterator h= elemento.etiquetas[k].iterator()
-                            println (elemento.etiquetas[k])
+                            Iterator h= elemento.etiquetas[k].iterator()                          
                                 while(h.hasNext()){
                                     Object elemento2= h.next();
                                     if (elemento2) etiq.add(elemento2)
@@ -135,7 +134,10 @@ class NotaController {
             x++;
         }
         if (!notaInstance.save(flush: true)) { 
-            render(view: "create", model: [notaInstance: notaInstance])
+            flash.message="Debe rellenar todos los campos de la nota";
+            redirect (action:"create", controller:"nota")
+           
+            //render(view: "create", model: [notaInstance: notaInstance])
             return
         }
 
@@ -214,11 +216,7 @@ class NotaController {
 
         def x=0;
         
-        while (params.getAt('etiquetas['+x+']')){ //los parametros de la nota por defecto son 9 si tiene mas es porque hay alguna etiqueta agregada
-            //  println (numero)
-     
-            //     def etiqueta= Etiqueta.find("from Etiqueta where Nota_Id=:id and id=:idetiq", [id:id,idetiq:params.getAt('etiquetas['+x+'].id').toLong()]); //aqui se obtiene la etiqueta asociada a la nota
-   
+        while (params.getAt('etiquetas['+x+']')){ //los parametros de la nota por defecto son 9 si tiene mas es porque hay alguna etiqueta agregada       
             
             if (params.getAt('etiquetas['+x+']._deleted')=='true'){  //si el _deleted esta activado es que mande a borrar la etiqueta                      
                 def  etiqueta= Etiqueta.find("from Etiqueta where Nota_Id=:id and id=:idetiq", [id:id,idetiq:params.getAt('etiquetas['+x+'].id').toLong()]);
@@ -324,8 +322,6 @@ class NotaController {
     */
      def buscar () {
         def persona= Persona.findById(session.persona.id);
-        println (session.persona.id)
-        println (persona)
         def notas= persona.libretas.notas
         ArrayList<Nota> notasaux= new ArrayList <Nota>()
         if (params.campo){        
@@ -388,8 +384,6 @@ class NotaController {
                 }         
             }
         }
-        println (notasaux)
-        
         if (params.campo) listaBuscar=notasaux
         }
         
