@@ -324,6 +324,8 @@ class NotaController {
     */
      def buscar () {
         def persona= Persona.findById(session.persona.id);
+        println (session.persona.id)
+        println (persona)
         def notas= persona.libretas.notas
         ArrayList<Nota> notasaux= new ArrayList <Nota>()
         if (params.campo){        
@@ -386,6 +388,7 @@ class NotaController {
                 }         
             }
         }
+        println (notasaux)
         
         if (params.campo) listaBuscar=notasaux
         }
