@@ -57,24 +57,32 @@ class NotaTests {
         
         if(arch1){
            String a = d.auth(p.keysdropbox);
-           String archivo = d.subirArchivo(arch1,p.keysdropbox.split('/')[0],p.keysdropbox.split('/')[1]);
-           a1.archivo = archivo;
-           a1.nota = nota;
-           nota.addToAdjuntos(a1);
-           archivo = d.subirArchivo(arch2,p.keysdropbox.split('/')[0],p.keysdropbox.split('/')[1]);
-           a2.archivo = archivo;
-           a2.nota = nota;
-           nota.addToAdjuntos(a2);
-           archivo = d.subirArchivo(arch3,p.keysdropbox.split('/')[0],p.keysdropbox.split('/')[1]);
-           a3.archivo = archivo;
-           a3.nota = nota;
-           nota.addToAdjuntos(a3);
+           String archivo;
+           if (!assertNull('no subio',d.subirArchivo(arch1,p.keysdropbox.split('/')[0],p.keysdropbox.split('/')[1]))){
+               archivo = d.subirArchivo(arch1,p.keysdropbox.split('/')[0],p.keysdropbox.split('/')[1]);
+               a1.archivo = archivo;
+               a1.nota = nota;
+               nota.addToAdjuntos(a1);
+           }
+          
+           if (!assertNull('no subio',d.subirArchivo(arch2,p.keysdropbox.split('/')[0],p.keysdropbox.split('/')[1]))){
+                archivo = d.subirArchivo(arch2,p.keysdropbox.split('/')[0],p.keysdropbox.split('/')[1]);
+                a2.archivo = archivo;
+                a2.nota = nota;
+                nota.addToAdjuntos(a2);
+           }
+           
+            if (!assertNull('no subio',d.subirArchivo(arch3,p.keysdropbox.split('/')[0],p.keysdropbox.split('/')[1]))){
+                archivo = d.subirArchivo(arch3,p.keysdropbox.split('/')[0],p.keysdropbox.split('/')[1]);
+                a3.archivo = archivo;
+                a3.nota = nota;
+                nota.addToAdjuntos(a3);
+            }
+            
            System.out.println(" "+archivo+" nota: "+nota.getAdjuntos());
-           assert nota.getAdjuntos().size() != 0,"agrego archivo";
+          
         }
         else
             assert false;
-    }
-    
-    
+    }   
 }
