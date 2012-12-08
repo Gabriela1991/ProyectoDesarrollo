@@ -81,7 +81,10 @@
                           <g:hiddenField name="id" value="${libretaInstance?.id}" />
                                 <table>
                                   <tr>
-                                    <td style="color: transparent">dfghjkghjkhjkdfghjkghjdffghjf</td>
+                                    <td style="color: transparent">dfghjkghjkhj</td>
+                                    <td>
+                                      <g:link controller="nota" action="create1" id="${libretaInstance?.id}"><img src="../../images/bagregar.png" width="95" height="26" /></g:link>
+                                    </td>
                                     <td>
                                         <g:link controller="nota" action="list" id="${libretaInstance?.id}"><img src="../../images/bMostrar.png" width="95" height="26" /></g:link>
                                     </td>
@@ -138,7 +141,7 @@
             <div style="clear: both;"> </div>
 
             <div id="footer">
-                Desarroladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
+                Desarrolladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
             </div>
 
             </div>

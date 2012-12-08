@@ -101,7 +101,7 @@ class NotaController {
      *
      *Crea una nota nueva para un usuario
      */
-    def create() {
+    def create1() {
         def nota= new Nota();
         def persona= Persona.findById(session.persona.id);
         ArrayList <Etiqueta> etiq= new ArrayList <Etiqueta>()

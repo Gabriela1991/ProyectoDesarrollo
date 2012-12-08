@@ -23,7 +23,7 @@
                   <td style="color: yellowgreen; font-size: medium">${session.persona.nombre}</td>
                   <td style="color: transparent">dfjljkljkjljcghkjkjlkjlkj</td>
                   <td><g:link controller="persona" action="inicio">.::Cerrar Sesion::.
-                       <img src="../images/cerrarSesion.png" width="25" height="25" />
+                       <img src="../../images/cerrarSesion.png" width="25" height="25" />
                       </g:link>
                   </td>
                 </tr>
@@ -34,7 +34,7 @@
                   <tr>
                     <td style="color: transparent">fgghghghghjkdfgh</td>
                     <td>
-                      <img src="../images/notebook1.png" width="55" height="55" />
+                      <img src="../../images/notebook1.png" width="55" height="55" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
                     <td><h2>.::Crear Nota::.</h2></td>
@@ -90,7 +90,7 @@
             <table>
               <tr>
                 <td>
-                  <img src="../images/home.png" width="25" height="25" />
+                  <img src="../../images/home.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="persona" action="ventanaInicio">.::HOME::.</g:link></li>
@@ -98,7 +98,7 @@
               </tr>
               <tr>
                 <td>
-                  <img src="../images/book.png" width="25" height="25" />
+                  <img src="../../images/book.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="libreta" action="list">.::Libretas::.</g:link></li>
@@ -106,7 +106,7 @@
               </tr>
               <tr>
                 <td>
-                  <img src="../images/perfil.png" width="25" height="25" />
+                  <img src="../../images/perfil.png" width="25" height="25" />
                 </td>
                 <td>
                   <li><g:link controller="persona" action="show">.::Crear Nota::.</g:link></li>
