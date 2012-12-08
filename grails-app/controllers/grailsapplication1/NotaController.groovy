@@ -95,6 +95,36 @@ class NotaController {
         
         [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona, etiquetasInstance: etiq] 
     }
+    
+    
+    /**
+     *
+     *Crea una nota nueva para un usuario
+     */
+    def create1() {
+        def nota= new Nota();
+        def persona= Persona.findById(session.persona.id);
+        ArrayList <Etiqueta> etiq= new ArrayList <Etiqueta>()
+        //nota.fecha= new Date().format("dd/MM/yyyy");
+        if (persona.libretas.notas.etiquetas){
+            for (int i=0; i<persona.libretas.notas.size(); i++){
+                Iterator j= persona.libretas.notas[i].iterator()
+                while(j.hasNext()){
+                    Object elemento= j.next();
+                        for (int k=0; k<elemento.etiquetas.size(); k++){
+                            Iterator h= elemento.etiquetas[k].iterator()                          
+                                while(h.hasNext()){
+                                    Object elemento2= h.next();
+                                    if (elemento2) etiq.add(elemento2)
+                                }
+                        }
+                }
+            } 
+        
+        }
+        
+        [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona, etiquetasInstance: etiq] 
+    }
 
     
     /**
