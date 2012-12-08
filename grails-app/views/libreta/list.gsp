@@ -73,6 +73,16 @@
                             </td>
                           </tr>
 			</table>
+                  <table>
+                    <tr>
+                      <td style="color: transparent">sdffghsdfghbjhkjhjhjkhkjhjhnmdfghjnm</td>
+                      <td>
+                        </br>
+                        <g:link controller="nota" action="create" id="${libretaInstance?.id}"><img src="../images/bagregar.png" width="95" height="26" /></g:link>
+                      </td>
+                    </tr>
+                  </table>
+
 			<div class="pagination">
 				<g:paginate total="${libretaInstanceTotal}" />
 			</div>

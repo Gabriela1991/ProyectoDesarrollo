@@ -92,7 +92,7 @@ class NotaController {
             } 
         
         }
-        
+        log.info "Se ha empezado a crear una nota "
         [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona, etiquetasInstance: etiq] 
     }
     
@@ -122,7 +122,7 @@ class NotaController {
             } 
         
         }
-        
+        log.info "Se ha empezado a crear una nota "
         [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona, etiquetasInstance: etiq] 
     }
 
@@ -209,6 +209,7 @@ class NotaController {
             redirect (controller:"libreta",action:"list")
             return
         }else {
+            log.info "El usuario "+persona.id+" esta consultando el detalle de la nota con id: "+notaInstance.id
             [notaInstance: notaInstance]
         }
     }
@@ -229,6 +230,7 @@ class NotaController {
         }
         session.nota= notaInstance
         session.nota.id=notaInstance.id
+        log.info "Se ha empezado a modificar la nota con id: "+notaInstance.id
         [notaInstance: notaInstance, libretasInstance: persona.libretas, sesion: session.persona]
     }
     
@@ -343,6 +345,7 @@ class NotaController {
             redirect(controller:'persona',action: 'ventanaInicio')
         }
         catch (DataIntegrityViolationException e) {
+            log.info "La nota "+notaInstance+" no ha sido eliminada de la BD"
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'nota.label', default: 'Nota'), id])
             redirect(action: "show", id: id)
         }
@@ -423,26 +426,31 @@ class NotaController {
         
         if (!params.offset){
             if (notasaux.size()>=10){
-            flash.message= "";
+                flash.message= "";
+                log.info "Se ha encontrado la nota de acuerdo al criterio de busqueda: "+params.campo  
                 [libretaInstance: notasaux.getAt(0..9), notasAuxTotal: notasaux.size()]
             }
             else if (notasaux.size()>0) {
                  flash.message= "";
-                [libretaInstance: notasaux.getAt(0..notasaux.size()-1), notasAuxTotal: notasaux.size()]
+                 log.info "Se ha encontrado la nota de acuerdo al criterio de busqueda: "+params.campo  
+                 [libretaInstance: notasaux.getAt(0..notasaux.size()-1), notasAuxTotal: notasaux.size()]
             }
             else{
-        
+                flash.message = "No se encontro ninguna nota de acuerdo al criterio de busqueda"
+                log.info "No se ha encontrado la nota de acuerdo al criterio de busqueda: "+params.campo  
                 [libretaInstance: notasaux, notasAuxTotal: notasaux.size()]
             }
         }
        else{
            def cantidad = Integer.parseInt(params.offset)
            if (listaBuscar.size()-10<=cantidad){
-                flash.message= "";
+                 flash.message= "";
+                 log.info "Se ha encontrado la nota de acuerdo al criterio de busqueda: "+params.campo  
                  [libretaInstance: listaBuscar.getAt(cantidad..listaBuscar.size()-1), notasAuxTotal: listaBuscar.size()]
            }
             else{
                 flash.message= "";
+                log.info "Se ha encontrado la nota de acuerdo al criterio de busqueda: "+params.campo  
                 [libretaInstance: listaBuscar.getAt(cantidad..cantidad+9), notasAuxTotal: listaBuscar.size()]
             }
                
@@ -463,6 +471,7 @@ class NotaController {
             if (existeNota) break
         }
         if (!existeNota){
+            log.info "No se ha encontrado la nota solicitada, ya que NO EXISTE"
             flash.message = message(code: 'default.not.found.message', args: ["Error: Lo sentimos la nota que busca no existe"])
             redirect (controller:"libreta",action:"list")
             return
