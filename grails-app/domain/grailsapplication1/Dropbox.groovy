@@ -46,6 +46,10 @@ public class Dropbox {
   public static WebAuthSession session1 ;
    public static    WebAuthInfo authInfo1 ;
     
+    /**
+     *Autentificacion y creacion de un directorio en dropbox para el almacenamiento de la aplicacion
+     *
+     **/
     public static String unit(String keys){
         
         try{

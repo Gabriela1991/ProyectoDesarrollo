@@ -146,7 +146,7 @@ class AdjuntoController {
      */
     def delete = {
         
-                println("par"+params.nota+"  "+params.id)
+                
                 def idnota;
                 if (session.nota.id==null)
                 idnota=params.nota
@@ -155,17 +155,18 @@ class AdjuntoController {
                 def Dropbox d=new Dropbox();
                 String claves=session.persona.keysdropbox;
                 def filename = params.id.replace('###', '.')    
-                println("filen"+filename)
+                
                 int resp = d.eliminarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
                     
                     if (resp==0){
                         flash.message= "Parece haber un problema de conexion, no se puede eliminar tu archivo en este momento";
                         redirect( action:"list", id:idnota )
                     } else {                  
-                        log.info "Se ha eliminado un adjunto de dropbox"
+                       
                         def adjuntoInstance=Adjunto.findByArchivo(filename)
+                         log.info "Se ha eliminado un adjunto de dropbox id:"+adjuntoInstance.id
                         adjuntoInstance.delete();
-                        log.info "Se ha eliminado un adjunto de base de datos"
+                        log.info "Se ha eliminado un adjunto de base de datos id:"+adjuntoInstance.id
                         flash.message = "El archivo ' ${filename}' ha sido eliminado" 
 
                         redirect( action:"list", id:idnota )

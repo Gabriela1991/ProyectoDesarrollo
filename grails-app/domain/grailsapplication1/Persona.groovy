@@ -30,4 +30,8 @@ class Persona {
     String toString()
         { "$correo" }
 
+    static mapping = {
+        keysdropbox cascade:"all-delete-orphan"
+      
+    }
 }

@@ -22,7 +22,7 @@ class DropboxTests {
     }
     
     @Test
-    void testSomething() {
+    void testDirectorio() {
      assert d.unit(p.keysdropbox)!=null :'Claves generadas para el usuario';
      
     }

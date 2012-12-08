@@ -118,7 +118,7 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
         }
 
         personaInstance.properties = params
-
+        personaInstance.clave=personaInstance.clave.encodeAsSHA()
         if (!personaInstance.save(flush: true)) {
             render(view: "edit", model: [personaInstance: personaInstance])
             return
@@ -165,7 +165,6 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
             redirect (controller:'Persona', action:'ventanaInicio')
         //establece la conexion con dropbox
          Dropbox d=new Dropbox()
-         println("verificar si ya se ha auth"+session.persona.keysdropbox)
          
          String claves;
           if(session.persona.keysdropbox){
@@ -177,7 +176,7 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
             
           if(claves!=null){  // Es porque la persona aun no tiene las claves de dropbox
                 session.persona.keysdropbox=claves
-                 println("CLAVES 1 "+claves.split('/')[0].toString())
+                
                 session.persona.save(flush:true) 
             } 
             else { // la persona ya posee las claves de acceso a dropbox
@@ -195,4 +194,15 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
             redirect(controller:'persona',action:'inicio')
        }
     }
+    
+def desvincular = {
+    def personaInstance=Persona.get(session.persona.id)
+    session.persona=null
+   
+    personaInstance.keysdropbox=null
+    personaInstance.merge()
+    personaInstance.save(flush:true)
+    session.persona=personaInstance
+    redirect (controller:'Persona', action:'ventanaInicio')
+}
 }
