@@ -103,7 +103,7 @@ public class Dropbox {
                 RequestTokenPair pair = authInfo.requestTokenPair;
                 String url= "https://www.dropbox.com/0/oauth/authorize?oauth_token="+pair.key.toString()+"&oauth_callback=http://www.dropbox.com";
                 Desktop.getDesktop().browse(new URL(url).toURI());
-                sleep(10000)
+                sleep(17000)
                 //JOptionPane.showMessageDialog(null, "Presione continuar cuando haya permitido el acceso a dropbox");
                 session.retrieveWebAccessToken(pair);
                 AccessTokenPair tokens = session.getAccessTokenPair();
