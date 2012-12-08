@@ -29,6 +29,7 @@ class AdjuntoController {
      *Crea un adjunto nuevo para una nota
      */
     def create() {
+        log.info "Se esta adjuntando un archivo a la nota"
         [adjuntoInstance: new Adjunto(params)]
     }
 
@@ -43,7 +44,7 @@ class AdjuntoController {
             render(view: "create", model: [adjuntoInstance: adjuntoInstance])
             return
         }
-
+        log.info "El adjunto con id: "+adjuntoInstance.id+" ha sido almacenado en la BD"
         flash.message = message(code: 'default.created.message', args: [message(code: 'adjunto.label', default: 'Adjunto'), adjuntoInstance.id])
         redirect(action: "show", id: adjuntoInstance.id)
     }
@@ -56,11 +57,12 @@ class AdjuntoController {
     def show(Long id) {
         def adjuntoInstance = Adjunto.get(id)
         if (!adjuntoInstance) {
+            log.info "El adjunto "+adjuntoInstance.id+"no se ha encontrado en la BD, NO EXISTE"
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'adjunto.label', default: 'Adjunto'), id])
             redirect(action: "list")
             return
         }
-
+        log.info "Se esta consultando el adjunto con id: "+adjuntoInstance.id
         [adjuntoInstance: adjuntoInstance]
     }
 
