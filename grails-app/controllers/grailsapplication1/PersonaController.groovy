@@ -197,12 +197,23 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
     
 def desvincular = {
     def personaInstance=Persona.get(session.persona.id)
-    session.persona=null
+    
    
+    if (personaInstance.keysdropbox!=null){
+        
     personaInstance.keysdropbox=null
     personaInstance.merge()
     personaInstance.save(flush:true)
     session.persona=personaInstance
+    session.persona.merge()
+    flash.message= "Se ha cerrado la sesión en su cuenta de dropbox"
     redirect (controller:'Persona', action:'ventanaInicio')
+    }
+    else {
+        
+        flash.message= "No ha iniciado sesión en Dropbox"
+         redirect (controller:'Persona', action:'ventanaInicio')
+    }
+    
 }
 }

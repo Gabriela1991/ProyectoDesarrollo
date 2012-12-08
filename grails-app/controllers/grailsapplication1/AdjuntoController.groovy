@@ -153,13 +153,26 @@ class AdjuntoController {
                 else
                 idnota=session.nota.id
                 def Dropbox d=new Dropbox();
-                String claves=session.persona.keysdropbox;
+        def claves
+        
+        
+         if(session.persona.keysdropbox){
+            
+            claves=session.persona.keysdropbox;
+        }
+        else{
+            def persona = Persona.findById(session.persona.id);
+            claves=d.auth(session.persona.keysdropbox);
+            persona.keysdropbox=claves;
+            persona.save(flush:true); 
+            session.persona=persona
+        }
                 def filename = params.id.replace('###', '.')    
                 
                 int resp = d.eliminarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
                     
                     if (resp==0){
-                        flash.message= "Parece haber un problema de conexion, no se puede eliminar tu archivo en este momento";
+                        flash.message= "Parece haber un problema de conexion o el archivo no esta en la cuenta de dropbox asociada";
                         redirect( action:"list", id:idnota )
                     } else {                  
                        
@@ -179,13 +192,31 @@ class AdjuntoController {
      * Vista de archivos adjuntos pertenecientes a una nota, al dropbox
      */
     def download = {
-        println(session.nota.id)
+        
         def Dropbox d=new Dropbox();
-        String claves=session.persona.keysdropbox;
+        def claves
+        
+        
+         if(session.persona.keysdropbox){
+            
+            claves=session.persona.keysdropbox;
+        }
+        else{
+            def persona = Persona.findById(session.persona.id);
+            claves=d.auth(session.persona.keysdropbox);
+            persona.keysdropbox=claves;
+            persona.save(flush:true); 
+            session.persona=persona
+        }
+        
+        
+     
         def filename = params.id.replace('###', '.')
+        if (claves!=null){
         String busqueda=d.buscarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
         if (!busqueda){
-            flash.message = "Parece no tener conexion en este momento, no se puede ver su archivo; intente de nuevo mas tarde"
+            flash.message = "El archivo no se encuentra en la cuenta de dropbox asociada o existen problemas con su conexión"
+           // flash.message = "Parece no tener conexion en este momento, no se puede ver su archivo; intente de nuevo mas tarde"
              redirect(controller:"Nota", action:"show", id:session.nota.id)
         } else {
             flash.message="";
@@ -193,6 +224,12 @@ class AdjuntoController {
 
            redirect (controller: "nota",action:"show",id:session.nota.id)    
         }
+        }
+        else {
+            flash.message = "No hay vinculo con dropbox"
+             redirect(controller:"Nota", action:"show", id:session.nota.id)
+        }
+        
     }
     
     
@@ -201,9 +238,22 @@ class AdjuntoController {
      * Descarga un adjunto indicado desde dropbox
      */
     def descargar = {
-        println(params.nota)
-        def Dropbox d=new Dropbox();
-        String claves=session.persona.keysdropbox;
+        
+         def Dropbox d=new Dropbox();
+        def claves
+        
+        
+         if(session.persona.keysdropbox){
+            
+            claves=session.persona.keysdropbox;
+        }
+        else{
+            def persona = Persona.findById(session.persona.id);
+            claves=d.auth(session.persona.keysdropbox);
+            persona.keysdropbox=claves;
+            persona.save(flush:true); 
+            session.persona=persona
+        }
         def filename = params.id.replace('###', '.')
         String busqueda=d.descargarArchivo(filename,claves.split('/')[0].toString(),claves.split('/')[1].toString())
          if (!busqueda){
@@ -242,6 +292,7 @@ class AdjuntoController {
             claves=d.auth(session.persona.keysdropbox);
             persona.keysdropbox=claves;
             persona.save(flush:true); 
+            session.persona=persona
         }
             
         if(claves){
