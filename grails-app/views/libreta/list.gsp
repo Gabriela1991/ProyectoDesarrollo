@@ -120,7 +120,7 @@
             <div style="clear: both;"> </div>
 
             <div id="footer">
-                Desarroladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
+                Desarrolladores: Hernandez, Keyla || Loreto, Maria G || Valderrama, Angel
             </div>
             
           </div>

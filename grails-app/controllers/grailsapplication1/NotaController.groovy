@@ -24,8 +24,11 @@ class NotaController {
     }
     
     
-    
-    def etiquetas = {new ArrayList() as grails.converters.JSON  //este metodo realmente no hace nada.. solo probando
+    /**
+     *
+     *Definimos la lista de etiquetas que conforman a una nota
+     */
+    def etiquetas = {new ArrayList() as grails.converters.JSON 
         [Etiqueta: etiquetas];
     }  
     
@@ -53,6 +56,7 @@ class NotaController {
         if (persona.libretas.contains(libreta)){
             [libretaInstance: ls, notaInstanceTotal: totalCount]   
         }
+        log.info "Consulta de la lista de notas, pertenecientes a la libreta con id: "+ultimoidlibreta
  }
 
 
@@ -95,7 +99,7 @@ class NotaController {
         
         [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona, etiquetasInstance: etiq] 
     }
-
+    
     
     /**
      *
@@ -125,7 +129,7 @@ class NotaController {
         
         [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona, etiquetasInstance: etiq] 
     }
-    
+
     
     /**
      *
@@ -197,7 +201,9 @@ class NotaController {
         def persona= Persona.findById(session.persona.id)
         def notaInstance = Nota.get(id)
         def existeNota=false;
+        session.nota=notaInstance
         
+        session.nota.id=notaInstance.id
         for (int i=0; i< persona.libretas.notas.size(); i++){
             existeNota = persona.libretas.notas.get(i).contains(notaInstance)     
             if (existeNota) break
@@ -226,6 +232,7 @@ class NotaController {
             return
         }
         session.nota= notaInstance
+        session.nota.id=notaInstance.id
         [notaInstance: notaInstance, libretasInstance: persona.libretas, sesion: session.persona]
     }
     
@@ -291,6 +298,7 @@ class NotaController {
             return
         }
         session.nota= notaInstance
+        session.nota.id=notaInstance.id
         flash.message = message(code: 'default.updated.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
         log.info "Se ha editado la nota con identificador: "+notaInstance.id
         redirect(action: "show", id: notaInstance.id)
@@ -428,6 +436,7 @@ class NotaController {
             }
             else{
                 flash.message = "No se encontro ninguna nota de acuerdo al criterio de busqueda"
+                log.info "No se ha encontrado la nota de acuerdo al criterio de busqueda: "+params.campo  
                 [libretaInstance: notasaux, notasAuxTotal: notasaux.size()]
             }
         }
@@ -452,13 +461,15 @@ class NotaController {
         def persona= Persona.findById(session.persona.id)
         def notaInstance = Nota.get(id)
         def existeNota=false;
-        
+        session.nota=notaInstance
+        session.nota.id=notaInstance.id
         for (int i=0; i< persona.libretas.notas.size(); i++){
             existeNota = persona.libretas.notas.get(i).contains(notaInstance)     
             if (existeNota) break
         }
         if (!existeNota){
             flash.message = message(code: 'default.not.found.message', args: ["Error: Lo sentimos la nota que busca no existe"])
+            log.info "La nota con id: "+notaInstance.id" no existe"  
             redirect (controller:"libreta",action:"list")
             return
         }else {

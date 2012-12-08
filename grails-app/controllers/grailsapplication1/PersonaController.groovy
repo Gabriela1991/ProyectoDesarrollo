@@ -5,7 +5,7 @@ import org.apache.commons.logging.*
 class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.getName())
+    private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.getName())
     
     /**
      *
@@ -51,7 +51,7 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
         }
 
         flash.message = message(code: 'default.created.cuentaCreada', args: ["El usuario ", personaInstance.correo])
-        log.info "Se ha agregado usuario a la base de datos con id:"+personaInstance.id    
+        log.info "Se ha agregado un usuario a la base de datos con id: "+personaInstance.id    
         redirect(action: "inicio")
     }
 
@@ -111,7 +111,7 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
             if (personaInstance.version > version) {
                 personaInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'persona.label', default: 'Persona')] as Object[],
-                          "Another user has updated this Persona while you were editing")
+                          "Mientras usted editaba su perfil, otro usuario lo ha editado")
                 render(view: "edit", model: [personaInstance: personaInstance])
                 return
             }
@@ -125,7 +125,7 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
-        log.info "Se ha editado el usuario con id:"+personaInstance.id    
+        log.info "Se ha editado el usuario con id: "+personaInstance.id    
         session.persona = personaInstance;
         redirect(action: "show", id: personaInstance.id)
     }
@@ -137,7 +137,7 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
      */    
      def inicio = { 
          session.persona=null
-     
+         session.nota=null
     }
     
     
@@ -147,7 +147,6 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
     */
     def ventanaInicio (){
         def persona = Persona.findById(session.persona.id)
-  
     }
     
 
@@ -161,39 +160,42 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
     
     def persona = Persona.findByCorreoAndClave(params['correo'],params.clave.encodeAsSHA())
         session.persona = persona
-         if (persona){
+         if (persona){             
+            log.info "El usuario con id: "+persona.id+" ha iniciado sesion en la aplicacion" 
             redirect (controller:'Persona', action:'ventanaInicio')
-        //establece la conexion con dropbox
-         Dropbox d=new Dropbox()
-         
-         String claves;
-          if(session.persona.keysdropbox){
-              claves=d.auth(session.persona.keysdropbox);
-            claves=session.persona.keysdropbox;      
-          }
-          else
-            claves=d.auth(session.persona.keysdropbox);
             
-          if(claves!=null){  // Es porque la persona aun no tiene las claves de dropbox
-                session.persona.keysdropbox=claves
-                
-                session.persona.save(flush:true) 
-            } 
-            else { // la persona ya posee las claves de acceso a dropbox
-                claves=session.persona.keysdropbox
-                try {
-                   println("CLAVES 2 "+claves.split('/')[0].toString())
-                } catch (NullPointerException e){
-                flash.message = message (code: 'default.not.conection');                
-                }
-            }
-        
+            //establece la conexion con dropbox
+             Dropbox d=new Dropbox()
+
+             String claves;
+              if(session.persona.keysdropbox){
+                  claves=d.auth(session.persona.keysdropbox);
+                  claves=session.persona.keysdropbox;      
+              }
+              else
+                claves=d.auth(session.persona.keysdropbox);
+
+            if(claves!=null){  // Es porque la persona aun no tiene las claves de dropbox
+                  session.persona.keysdropbox=claves                
+                  session.persona.save(flush:true) 
+                  log.info "Se ha otorgado las claves del dropbox al usuario con id: "+persona.id  
+              } 
+              else { // la persona ya posee las claves de acceso a dropbox
+                  claves=session.persona.keysdropbox
+                  try {
+                     println("CLAVES 2 "+claves.split('/')[0].toString())
+                  } catch (NullPointerException e){
+                     log.info "El usuario con id: "+persona.id+" ha iniciado sesion sin acceso a internet"  
+                     flash.message = message (code: 'default.not.conection');                
+                  }
+              }        
       }
        else{ //si no se encuentra almacenado en la BD regresa a la ventana de login
-           flash.message = message(code: 'default.not.found.message', args: ["Correo o clave incorrectas, intente de nuevo"])
+            flash.message = message(code: 'default.not.found.message', args: ["Correo o clave incorrectas, intente de nuevo"])
             redirect(controller:'persona',action:'inicio')
        }
     }
+    
     
 def desvincular = {
     def personaInstance=Persona.get(session.persona.id)
@@ -201,19 +203,20 @@ def desvincular = {
    
     if (personaInstance.keysdropbox!=null){
         
-    personaInstance.keysdropbox=null
-    personaInstance.merge()
-    personaInstance.save(flush:true)
-    session.persona=personaInstance
-    session.persona.merge()
-    flash.message= "Se ha cerrado la sesión en su cuenta de dropbox"
-    redirect (controller:'Persona', action:'ventanaInicio')
-    }
-    else {
-        
-        flash.message= "No ha iniciado sesión en Dropbox"
-         redirect (controller:'Persona', action:'ventanaInicio')
-    }
+        personaInstance.keysdropbox=null
+        personaInstance.merge()
+        personaInstance.save(flush:true)
+        session.persona=personaInstance
+        session.persona.merge()
+        flash.message= "Se ha cerrado la sesión en su cuenta de dropbox"
+        redirect (controller:'Persona', action:'ventanaInicio')
+        log.info "Se ha desinculado la cuenta de dropbox del usuario con id: "+personaInstance.id  
+        }
+        else {
+
+            flash.message= "No ha iniciado sesión en Dropbox"
+             redirect (controller:'Persona', action:'ventanaInicio')
+        }
     
-}
+    }
 }

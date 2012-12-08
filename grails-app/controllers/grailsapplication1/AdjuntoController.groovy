@@ -146,12 +146,10 @@ class AdjuntoController {
      */
     def delete = {
         
+                def nota=Nota.get(session.nota.id)
+        
+        def   idnota=nota.id
                 
-                def idnota;
-                if (session.nota.id==null)
-                idnota=params.nota
-                else
-                idnota=session.nota.id
                 def Dropbox d=new Dropbox();
         def claves
         
@@ -177,7 +175,7 @@ class AdjuntoController {
                     } else {                  
                        
                         def adjuntoInstance=Adjunto.findByArchivo(filename)
-                         log.info "Se ha eliminado un adjunto de dropbox id:"+adjuntoInstance.id
+                        log.info "Se ha eliminado un adjunto de dropbox id:"+adjuntoInstance.id
                         adjuntoInstance.delete();
                         log.info "Se ha eliminado un adjunto de base de datos id:"+adjuntoInstance.id
                         flash.message = "El archivo ' ${filename}' ha sido eliminado" 
@@ -196,6 +194,9 @@ class AdjuntoController {
         def Dropbox d=new Dropbox();
         def claves
         
+        def nota=Nota.get(session.nota.id)
+        
+        def   idnota=nota.id
         
          if(session.persona.keysdropbox){
             
@@ -227,7 +228,7 @@ class AdjuntoController {
         }
         else {
             flash.message = "No hay vinculo con dropbox"
-             redirect(controller:"Nota", action:"show", id:session.nota.id)
+             redirect(controller:"Nota", action:"show", id:idnota)
         }
         
     }
@@ -242,7 +243,9 @@ class AdjuntoController {
          def Dropbox d=new Dropbox();
         def claves
         
+        def nota=Nota.get(session.nota.id)
         
+        def   idnota=nota.id
          if(session.persona.keysdropbox){
             
             claves=session.persona.keysdropbox;
@@ -264,7 +267,7 @@ class AdjuntoController {
            
             Desktop.getDesktop().browse(new URL(busqueda).toURI())    
 
-           redirect (controller: "nota",action:"show",id:session.nota.id)    
+           redirect (controller: "nota",action:"show",id:idnota)    
         }        
     }
 

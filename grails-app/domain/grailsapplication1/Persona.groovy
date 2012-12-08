@@ -17,7 +17,7 @@ class Persona {
     static constraints = {
         nombre(blank:false, maxSize:15)
         apellido(blank:false, maxSize:15)
-        correo(blank:false, maxSize:45, unique:true)
+        correo(email:true, blank:false, maxSize:45, unique:true)
         keysdropbox(blank:true, maxSize:40, nullable:true)
         clave(blank:false, clave:true, maxSize:2000)
      

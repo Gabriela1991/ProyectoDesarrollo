@@ -109,7 +109,7 @@
                   <img src="../../images/perfil.png" width="25" height="25" />
                 </td>
                 <td>
-                  <li><g:link controller="persona" action="show">.::Crear Nota::.</g:link></li>
+                  <li><g:link controller="persona" action="show">.::Configurar Cuenta::.</g:link></li>
                 </td>
               </tr>
             </table>        
