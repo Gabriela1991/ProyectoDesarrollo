@@ -25,7 +25,7 @@ class NotaController {
     
     
     
-    def etiquetas = {new ArrayList() as grails.converters.JSON  //este metodo realmente no hace nada.. solo probando
+    def etiquetas = {new ArrayList() as grails.converters.JSON 
         [Etiqueta: etiquetas];
     }  
     
