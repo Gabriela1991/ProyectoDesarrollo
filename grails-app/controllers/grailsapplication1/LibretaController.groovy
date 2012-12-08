@@ -26,6 +26,7 @@ class LibretaController {
     def list(Integer max) {
         def persona= Persona.findById(session.persona.id)
         params.max = Math.min(max ?: 10, 100)
+        log.info "Se ha consultado la lista de libretas pertenecientes al usuario con id: "+persona.id
         [libretaInstanceList: persona.libretas, libretaInstanceTotal: Libreta.count()]
     }
 
@@ -35,7 +36,8 @@ class LibretaController {
      *Crea una libreta nueva para un usuario
      */
     def create() {
-        // def persona= Persona.findById(session.persona.id);
+        def persona= Persona.findById(session.persona.id);
+        log.info "El usuario "+persona.id+" ha comenzado a crear una libreta"
         [libretaInstance: new Libreta(params)]
     }
 
@@ -54,7 +56,7 @@ class LibretaController {
         }
 
         flash.message = "Su libreta ha sido creada correctamente"
-        log.info "Se ha agregado una libreta a la base de datos con id:"+libretaInstance.id
+        log.info "Se ha agregado una libreta a la base de datos con id: "+libretaInstance.id
         redirect(action: "show", id: libretaInstance.id)
     }
     
@@ -65,17 +67,19 @@ class LibretaController {
     */
     def show(Long id) {
          NotaController.ultimoidlibreta=null;
-        NotaController.numero=0;
-        def persona= Persona.findById(session.persona.id)
-        def libretaInstance = Libreta.get(id)
-        if (persona.libretas.contains(Libreta.get(id))){
-            [libretaInstance: libretaInstance]
-        }
-        else {
-            flash.message = message(code: 'default.not.found.message', args: ["Error: Lo sentimos la libreta solicitada no existe"])
-            redirect(action: "list")
-            return
-        }
+         NotaController.numero=0;
+         def persona= Persona.findById(session.persona.id)
+         def libretaInstance = Libreta.get(id)
+         if (persona.libretas.contains(Libreta.get(id))){
+             log.info "El usuario "+persona.id+" esta consultando el detalle de la libreta con id: "+libretaInstance.id
+             [libretaInstance: libretaInstance]
+         }
+         else {
+             log.info "No se ha encontrado la libreta solicitada, ya que NO EXISTE"
+             flash.message = message(code: 'default.not.found.message', args: ["Error: Lo sentimos la libreta solicitada no existe"])
+             redirect(action: "list")
+             return
+         }
     }
 
     
@@ -86,13 +90,15 @@ class LibretaController {
      */
     def edit(Long id) {
         println (id)
+        def persona= Persona.findById(session.persona.id)
         def libretaInstance = Libreta.get(id)
         if (!libretaInstance) {
+            log.info "No se ha encontrado la libreta"+libretaInstance.id+" para ser editada"
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'libreta.label', default: 'Libreta'), id])
             redirect(action: "list")
             return
         }
-
+        log.info "El usuario "+persona.id+" ha empezado a editar la libreta con id: "+libretaInstance.id
         [libretaInstance: libretaInstance]
     }
 
@@ -130,7 +136,7 @@ class LibretaController {
             render(view: "edit", model: [libretaInstance: libretaInstance])
             return
         }
-        log.info "Se ha editado la libreta con id:"+libretaInstance.id
+        log.info "Se ha editado la libreta con id: "+libretaInstance.id
         flash.message = message(code: 'default.updated.message', args: [message(code: 'libreta.label', default: 'Libreta'), libretaInstance.id])
         redirect(action: "show", id: libretaInstance.id)
     }
@@ -149,12 +155,13 @@ class LibretaController {
         }
 
         try {
-            log.info "Se ha agregado una libreta a la base de datos con id:"+libretaInstance.id
+            log.info "Se ha eliminado la libreta con id: "+libretaInstance.id+" de la base de datos"
             libretaInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'libreta.label', default: 'Libreta'), id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
+            log.info "La libreta con id: "+libretaInstance.id+" no se ha podido eliminar de la Base de Datos"
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'libreta.label', default: 'Libreta'), id])
             redirect(action: "show", id: id)
         }
