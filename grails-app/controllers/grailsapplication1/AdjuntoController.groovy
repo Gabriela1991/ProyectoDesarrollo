@@ -175,7 +175,7 @@ class AdjuntoController {
                     } else {                  
                        
                         def adjuntoInstance=Adjunto.findByArchivo(filename)
-                         log.info "Se ha eliminado un adjunto de dropbox id:"+adjuntoInstance.id
+                        log.info "Se ha eliminado un adjunto de dropbox id:"+adjuntoInstance.id
                         adjuntoInstance.delete();
                         log.info "Se ha eliminado un adjunto de base de datos id:"+adjuntoInstance.id
                         flash.message = "El archivo ' ${filename}' ha sido eliminado" 
