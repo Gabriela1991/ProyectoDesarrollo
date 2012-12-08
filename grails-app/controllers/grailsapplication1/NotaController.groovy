@@ -372,7 +372,7 @@ class NotaController {
                         if (bandera==1) notasaux.add(elemento);  
                         bandera=0;
                             for (int h=0; h<elemento.adjuntos.size(); h++){
-                                if (elemento.adjuntos.get(h).archivo.contains(params.campo)){
+                                if (elemento.adjuntos.archivo.get(h).contains(params.campo)){
                                     bandera=1
                                     break;
                                 } else bandera=0
