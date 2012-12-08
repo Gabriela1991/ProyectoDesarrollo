@@ -42,7 +42,9 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
      * reflejados en el log
      */
     def save() {
+        
         def personaInstance = new Persona(params)
+       
         if (!personaInstance.save(flush: true)) {
             render(view: "create", model: [personaInstance: personaInstance])
             return
@@ -156,8 +158,8 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
     *asi inicia sesion tanto en el aplicativo como en dropbox
     */
     def inicioSesion = {
-    def persona = Persona.findWhere(correo:params['correo'],
-        clave:params['clave'])
+    
+    def persona = Persona.findByCorreoAndClave(params['correo'],params.clave.encodeAsSHA())
         session.persona = persona
          if (persona){
             redirect (controller:'Persona', action:'ventanaInicio')

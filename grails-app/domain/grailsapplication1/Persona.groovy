@@ -19,9 +19,13 @@ class Persona {
         apellido(blank:false, maxSize:15)
         correo(blank:false, maxSize:45, unique:true)
         keysdropbox(blank:true, maxSize:40, nullable:true)
-        clave(blank:false, password:true, maxSize:15)
+        clave(blank:false, clave:true, maxSize:2000)
      
     }
+    def beforeInsert = {
+		clave = clave.encodeAsSHA()
+		
+	}
     
     String toString()
         { "$correo" }
