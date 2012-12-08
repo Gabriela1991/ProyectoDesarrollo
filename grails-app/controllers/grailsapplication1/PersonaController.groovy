@@ -137,7 +137,7 @@ class PersonaController {
      */    
      def inicio = { 
          session.persona=null
-     session.nota=null
+         session.nota=null
     }
     
     

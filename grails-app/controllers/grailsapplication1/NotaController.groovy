@@ -24,7 +24,10 @@ class NotaController {
     }
     
     
-    
+    /**
+     *
+     *Definimos la lista de etiquetas que conforman a una nota
+     */
     def etiquetas = {new ArrayList() as grails.converters.JSON 
         [Etiqueta: etiquetas];
     }  
@@ -53,6 +56,7 @@ class NotaController {
         if (persona.libretas.contains(libreta)){
             [libretaInstance: ls, notaInstanceTotal: totalCount]   
         }
+        log.info "Consulta de la lista de notas, pertenecientes a la libreta con id: "+ultimoidlibreta
  }
 
 
@@ -432,6 +436,7 @@ class NotaController {
             }
             else{
                 flash.message = "No se encontro ninguna nota de acuerdo al criterio de busqueda"
+                log.info "No se ha encontrado la nota de acuerdo al criterio de busqueda: "+params.campo  
                 [libretaInstance: notasaux, notasAuxTotal: notasaux.size()]
             }
         }
@@ -464,6 +469,7 @@ class NotaController {
         }
         if (!existeNota){
             flash.message = message(code: 'default.not.found.message', args: ["Error: Lo sentimos la nota que busca no existe"])
+            log.info "La nota con id: "+notaInstance.id" no existe"  
             redirect (controller:"libreta",action:"list")
             return
         }else {
