@@ -1,5 +1,5 @@
 package grailsapplication1
-
+import java.awt.Desktop;
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.MultipartFile
@@ -175,7 +175,7 @@ class AdjuntoController {
     
     /**
      *
-     * Carga archivos adjuntos pertenecientes a una nota, al dropbox
+     * Vista de archivos adjuntos pertenecientes a una nota, al dropbox
      */
     def download = {
         println(session.nota.id)
@@ -188,7 +188,9 @@ class AdjuntoController {
              redirect(controller:"Nota", action:"show", id:session.nota.id)
         } else {
             flash.message="";
-            redirect (url:busqueda)    
+                    Desktop.getDesktop().browse(new URL(busqueda).toURI())    
+
+           redirect (controller: "nota",action:"show",id:session.nota.id)    
         }
     }
     
@@ -208,7 +210,10 @@ class AdjuntoController {
             redirect(controller:"Nota", action:"show", id:session.nota.id)
         } else {
             flash.message="";
-            redirect (url:busqueda)    
+           
+            Desktop.getDesktop().browse(new URL(busqueda).toURI())    
+
+           redirect (controller: "nota",action:"show",id:session.nota.id)    
         }        
     }
 
