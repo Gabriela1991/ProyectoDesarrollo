@@ -6,10 +6,15 @@ import grails.test.mixin.*
 import org.junit.*
 
 /**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
+ * La siguiente prueba unitaria ha sido creada con la intencion de crear una nota
+ * a la cual se le hes asignada 3 adjuntos y los cuales son cargados al dropbox
  */
 @TestFor(Nota)
 class NotaTests {
+    
+    /**
+     *Declaracion de los objetos con los que se trabajara en la prueba
+    */
     Persona p;
     Libreta libreta;
     Nota nota;
@@ -17,12 +22,16 @@ class NotaTests {
     File arch1, arch2, arch3;
     Dropbox d;
     
+    
+    /**
+    *Inicializacion de los objetos con los que se trabajara durante la prueba
+    */
     @Before
     void init(){
        
         p = new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:"mgbkdsd67qc14wl/q0hy12n2s5jwcsu",clave:"123456");
         libreta = new Libreta(titulo:"libreta 1",tema:"sdfsf");
-        nota = new Nota(titulo:"prueba", texto:"sdfsfd",fecha:"05/12/12",libreta:libreta.id);
+        nota = new Nota(titulo:"Prueba Unitaria - Nota", texto:"Prueba",fecha:"05/12/12",libreta:libreta.id);
     
         a1 = new Adjunto(nombre:"Introduccion.txt", nota:nota.id);
         a2 = new Adjunto(nombre:"a2", nota:nota.id);
@@ -36,6 +45,15 @@ class NotaTests {
         d = new Dropbox();
     }
 
+    
+    /**
+    *Lo primero que se hace es  generar las claves del dropbox para el usuario y 
+    *asi poder subir los adjuntos al repositorio. Luego se crea el adjunto y este
+    *es añadido a la nota. Este proceso se hace con los tres adjuntos que se desean
+    *asociar a la nota creada.
+    *En el caso de que ninguno de los archivos que se este adjuntando no existe, 
+    *se despliega un mensaje indicando lo sucedido.
+    */
     @Test
     void testNotaTresAdjuntos() {
         
@@ -71,9 +89,13 @@ class NotaTests {
         }
     }   
 
+    
+    /**
+    *
+    *Al finalizar la prueba colocamos en null a todos los objetos utilizados
+    */
     @After
-     void tearDown() {
-        // Tear down logic here
+     void tearDown() {        
         p=null;
         a1=null;
         a2=null;

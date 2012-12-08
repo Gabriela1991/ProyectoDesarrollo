@@ -15,42 +15,64 @@ import grails.test.GrailsUnitTestCase
 @TestFor(NotaController)
 @Mock(Persona)
 class NotaControllerTests{
+  
+    /**
+    *
+    *Se declaran los objetos a utilizar durante la prueba
+    */
     Persona p;
     Nota n;
     Libreta l;
     Etiqueta e1,e2;
-  //  Adjunto a1;
-    
+  
+    /**
+    *
+    *Inicializacion de los objetos a utilizar durante la prueba
+    *Luego de crear cada uno de los objetos estos son almacenados en la BD
+    */
     @Before
     void setUp() {
        
        p= new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:"qlhkg9e9m4s8gjj/xc93llpbixivaln",clave:"123456") 
        p.id=1;
        
-       l=new Libreta (nombre:"Libreta prueba",tema: "tema libreta prueba")
+       l=new Libreta (nombre:"Libreta Prueba Unitaria",tema: "libreta prueba unitaria")
        l.persona=p;
        
        
        p.addToLibretas(l);
        p.save(flush:true);
-       n= new Nota(titulo: "Titulo nota", texto: "Texto nota", fecha:new Date().format("dd/MM/yyyy"), libreta: l)
+       n= new Nota(titulo: "Prueba Unitaria - Nota", texto: "Prueba", fecha:new Date().format("dd/MM/yyyy"), libreta: l)
       
        def controller = mockController(NotaController)
        
        e1= new Etiqueta(texto: "Etiqueta 1 prueba");
        e2= new Etiqueta(texto: "Etiqueta 2 prueba");
-    //   a1= new Adjunto(nombre:"Adjunto 1 prueha", nota:n.id); 
+    
         
        n.etiquetas= new ArrayList <Etiqueta>();
        n.adjuntos= new ArrayList <Adjunto>();
        n.etiquetas.add(e1);
        n.etiquetas.add(e2);
-//       n.adjuntos.add(a1);
+
        l.notas= new ArrayList <Nota>();
        l.notas.add(n); 
         
     }
 
+    
+    /**
+    *Aqui se presentan dos casos de prueba
+    *a) testBuscadorNotasCorrecto --> Busca en la BD todas aquellas notas que tengan 
+    *la cadena de busqueda indicado en el campo params.campo, como lo indicado
+    *en ese campo se encuentra contenido en una nota, dira que la busqueda ha 
+    *sido exitosa
+    *
+    *b) testBuscadorNotasIncorrecto --> Busca en la BD todas aquellas notas que tengan 
+    *la cadena de busqueda indicado en el campo params.campo, como lo indicado
+    *en ese campo no se encuentra contenido en una nota, dira que la busqueda no ha 
+    *devuelto ninguna nota con esa caracteristica solicitada
+    */
     @Test
     void testBuscadorNotasCorrecto() {
 
@@ -74,6 +96,11 @@ class NotaControllerTests{
         assert controller.flash.message != ""
     }
     
+    
+    /**
+    *
+    *Al finalizar la prueba colocamos en null a todos los objetos utilizados
+    */
     @After
      void tearDown() {
         // Tear down logic here
