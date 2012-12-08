@@ -29,7 +29,7 @@ class NotaTests {
     @Before
     void init(){
        
-        p = new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:"mgbkdsd67qc14wl/q0hy12n2s5jwcsu",clave:"123456");
+        p = new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:"a0cyjp9cw56cdk1/7y0rjbkvf6xnckb",clave:"123456");
         libreta = new Libreta(titulo:"libreta 1",tema:"sdfsf");
         nota = new Nota(titulo:"Prueba Unitaria - Nota", texto:"Prueba",fecha:"05/12/12",libreta:libreta.id);
     
@@ -38,9 +38,9 @@ class NotaTests {
         a3 = new Adjunto(nombre:"a3", nota:nota.id);
         
         
-        arch1 = new File("C:/Users/Eule/Desktop/ProyectoDesarrollo-master/web-app/images/Introduccion.txt");
-        arch2 = new File("C:/Users/Eule/Desktop/ProyectoDesarrollo-master/web-app/images/koek9.jpg");
-        arch3 = new File("C:/Users/Eule/Desktop/ProyectoDesarrollo-master/web-app/images/libreta.jpg");
+        arch1 = new File("C:/Imagenes/Introduccion.txt");
+        arch2 = new File("C:/Imagenes/koek9.jpg");
+        arch3 = new File("C:/Imagenes/libreta.jpg");
         
         d = new Dropbox();
     }
