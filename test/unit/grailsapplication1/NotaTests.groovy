@@ -38,9 +38,9 @@ class NotaTests {
         a3 = new Adjunto(nombre:"a3", nota:nota.id);
         
         
-        arch1 = new File("C:/Users/Angel/Desktop/ProyectoDesarrollo-master/web-app/images/Introduccion.txt");
-        arch2 = new File("C:/Users/Angel/Desktop/ProyectoDesarrollo-master/web-app/images/koek9.jpg");
-        arch3 = new File("C:/Users/Angel/Desktop/ProyectoDesarrollo-master/web-app/images/libreta.jpg");
+        arch1 = new File("C:/Users/Eule/Desktop/ProyectoDesarrollo-master/web-app/images/Introduccion.txt");
+        arch2 = new File("C:/Users/Eule/Desktop/ProyectoDesarrollo-master/web-app/images/koek9.jpg");
+        arch3 = new File("C:/Users/Eule/Desktop/ProyectoDesarrollo-master/web-app/images/libreta.jpg");
         
         d = new Dropbox();
     }

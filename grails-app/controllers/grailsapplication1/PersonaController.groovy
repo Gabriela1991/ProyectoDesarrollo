@@ -117,8 +117,11 @@ class PersonaController {
             }
         }
 
+        if (params.clave!=personaInstance.clave)
+        params.clave=params.clave.encodeAsSHA()
+        
         personaInstance.properties = params
-        personaInstance.clave=personaInstance.clave.encodeAsSHA()
+
         if (!personaInstance.save(flush: true)) {
             render(view: "edit", model: [personaInstance: personaInstance])
             return

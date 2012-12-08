@@ -33,7 +33,7 @@ class NotaControllerTests{
     @Before
     void setUp() {
        
-       p= new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:"qlhkg9e9m4s8gjj/xc93llpbixivaln",clave:"123456") 
+       p= new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:"d27whkkkvvjpy01/1udnlslcu9iiuin",clave:"123456") 
        p.id=1;
        
        l=new Libreta (nombre:"Libreta Prueba Unitaria",tema: "libreta prueba unitaria")
