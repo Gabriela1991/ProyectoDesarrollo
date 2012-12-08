@@ -69,7 +69,7 @@
                           <tr>
                             <td style="color: transparent">dfghjkfghjdfghjkfghjghghjghjg</td>
                             <td>
-                              <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: '.::Crear Nota::.')}" />
+                              <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: '.::Configurar Cuenta::.')}" />
                             </td>
                           </tr>
                         </table>	
