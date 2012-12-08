@@ -137,7 +137,7 @@ private static Log log = LogFactory.getLog("bitacora."+PersonaController.class.g
      */    
      def inicio = { 
          session.persona=null
-     
+     session.nota=null
     }
     
     

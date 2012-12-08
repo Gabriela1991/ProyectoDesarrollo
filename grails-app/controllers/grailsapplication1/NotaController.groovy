@@ -99,36 +99,6 @@ class NotaController {
     
     /**
      *
-     *Crea una nota nueva para un usuario
-     */
-    def create1() {
-        def nota= new Nota();
-        def persona= Persona.findById(session.persona.id);
-        ArrayList <Etiqueta> etiq= new ArrayList <Etiqueta>()
-        //nota.fecha= new Date().format("dd/MM/yyyy");
-        if (persona.libretas.notas.etiquetas){
-            for (int i=0; i<persona.libretas.notas.size(); i++){
-                Iterator j= persona.libretas.notas[i].iterator()
-                while(j.hasNext()){
-                    Object elemento= j.next();
-                        for (int k=0; k<elemento.etiquetas.size(); k++){
-                            Iterator h= elemento.etiquetas[k].iterator()                          
-                                while(h.hasNext()){
-                                    Object elemento2= h.next();
-                                    if (elemento2) etiq.add(elemento2)
-                                }
-                        }
-                }
-            } 
-        
-        }
-        
-        [notaInstance: nota, libretasInstance: persona.libretas, sesion: session.persona, etiquetasInstance: etiq] 
-    }
-    
-    
-    /**
-     *
      * Guarda los cambios realizados sobre una nota
      * Estos cambios se veran refejados en la bitacora del sistema
      */
@@ -197,7 +167,9 @@ class NotaController {
         def persona= Persona.findById(session.persona.id)
         def notaInstance = Nota.get(id)
         def existeNota=false;
+        session.nota=notaInstance
         
+        session.nota.id=notaInstance.id
         for (int i=0; i< persona.libretas.notas.size(); i++){
             existeNota = persona.libretas.notas.get(i).contains(notaInstance)     
             if (existeNota) break
@@ -226,6 +198,7 @@ class NotaController {
             return
         }
         session.nota= notaInstance
+        session.nota.id=notaInstance.id
         [notaInstance: notaInstance, libretasInstance: persona.libretas, sesion: session.persona]
     }
     
@@ -291,6 +264,7 @@ class NotaController {
             return
         }
         session.nota= notaInstance
+        session.nota.id=notaInstance.id
         flash.message = message(code: 'default.updated.message', args: [message(code: 'nota.label', default: 'Nota'), notaInstance.id])
         log.info "Se ha editado la nota con identificador: "+notaInstance.id
         redirect(action: "show", id: notaInstance.id)
@@ -452,7 +426,8 @@ class NotaController {
         def persona= Persona.findById(session.persona.id)
         def notaInstance = Nota.get(id)
         def existeNota=false;
-        
+        session.nota=notaInstance
+        session.nota.id=notaInstance.id
         for (int i=0; i< persona.libretas.notas.size(); i++){
             existeNota = persona.libretas.notas.get(i).contains(notaInstance)     
             if (existeNota) break
