@@ -2,6 +2,7 @@ package grailsapplication1
 
 import org.springframework.dao.DataIntegrityViolationException
 import org.apache.commons.logging.*
+import grails.converters.*
 class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -153,6 +154,44 @@ class PersonaController {
     }
     
 
+    def readXml(String  ruta) {
+         def persona = new XmlSlurper().parse(new File(ruta+"\\datosPersona.xml"))
+         def set = new XmlSlurper().parse(new File(ruta+"\\libretasPersona.xml"))
+         def list = new XmlSlurper().parse(new File(ruta+"\\notasPersona.xml"))
+         persona.each({
+              
+              set.libreta.each( {
+                    def libreta = new Libreta();
+                    libreta.nombre= it.nombre;
+                    libreta.tema= it.tema;
+                    def per= new Persona();
+                    per.nombre= persona.nombre
+                    per.apellido = persona.apellido
+                    per.correo = persona.correo
+                    per.clave= persona.clave
+                    per.keysdropbox= persona.keysdropbox
+                    per.addToLibretas(libreta)
+                    libreta.persona= per
+                    println(per)
+                    println (libreta)
+                    
+                    list.set.each({ it.nota.each({
+                        def nota = new Nota();
+                        nota.titulo = it.titulo;
+                        nota.texto = it.texto;
+                        nota.fecha = it.fecha; 
+                        int idNota = Integer.parseInt(it.nota.libreta.'@id')
+                        if(libreta.id == idNota){
+                            nota.libreta=libreta;
+                        }
+                        nota.etiquetas,adjuntos)
+                    })})
+                    
+            })   
+         })
+        
+    }
+    
     /**
     *
     *Aqui comprobamos que la cuenta introducida por el usuario es la que se
@@ -167,8 +206,30 @@ class PersonaController {
             log.info "El usuario con id: "+persona.id+" ha iniciado sesion en la aplicacion" 
             redirect (controller:'Persona', action:'ventanaInicio')
             
+            //XML y creacion de la carpeta del usuario
+            String usuario = session.persona.correo
+            String ruta = "C:\\Users\\Eule\\Desktop\\"+usuario
+            File folder = new File(ruta)
+            folder.mkdir()
+            File archivo1= new File(ruta+"\\datosPersona.xml")
+            File archivo2= new File(ruta+"\\libretasPersona.xml")
+            File archivo3= new File(ruta+"\\notasPersona.xml")
+            File archivo4= new File(ruta+"\\adjunttosPersona.xml")
+            
+            String s= session.persona as XML
+            archivo1.write(s)
+            s = session.persona.libretas as XML
+            archivo2.write(s)
+            s = session.persona.libretas.notas as XML
+            archivo3.write(s)
+            s = session.persona.libretas.notas.adjuntos as XML
+            archivo4.write(s)
+            
+            readXml(ruta)
+            
+            
             //establece la conexion con dropbox
-             Dropbox d=new Dropbox()
+            Dropbox d=new Dropbox()
 
              String claves;
               if(session.persona.keysdropbox){
