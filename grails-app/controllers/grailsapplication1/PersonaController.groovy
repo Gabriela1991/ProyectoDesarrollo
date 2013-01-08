@@ -184,8 +184,8 @@ class PersonaController {
                         if(libreta.id == idNota){
                             nota.libreta=libreta;
                         }
-                //        nota.etiquetas,adjuntos)
-                )
+                   //     nota.etiquetas,adjuntos
+                    )              
                     })})
                     
             })   
