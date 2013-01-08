@@ -153,7 +153,7 @@ class PersonaController {
         def persona = Persona.findById(session.persona.id)
     }
     
-
+    
     def readXml(String  ruta) {
          def persona = new XmlSlurper().parse(new File(ruta+"\\datosPersona.xml"))
          def set = new XmlSlurper().parse(new File(ruta+"\\libretasPersona.xml"))
@@ -185,13 +185,16 @@ class PersonaController {
                             nota.libreta=libreta;
                         }
                    //     nota.etiquetas,adjuntos
-                    )              
+                                  
                     })})
                     
             })   
          })
         
     }
+    
+    
+
     
     /**
     *
