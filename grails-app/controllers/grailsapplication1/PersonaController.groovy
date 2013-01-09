@@ -3,6 +3,7 @@ package grailsapplication1
 import org.springframework.dao.DataIntegrityViolationException
 import org.apache.commons.logging.*
 import grails.converters.*
+import grails.converters.deep.XML
 class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -155,41 +156,47 @@ class PersonaController {
     
     
     def readXml(String  ruta) {
-         def persona = new XmlSlurper().parse(new File(ruta+"\\datosPersona.xml"))
-         def set = new XmlSlurper().parse(new File(ruta+"\\libretasPersona.xml"))
-         def list = new XmlSlurper().parse(new File(ruta+"\\notasPersona.xml"))
+         def persona = new XmlSlurper().parse(new File(ruta+"\\datosPersona.xml"))   
+            Persona per= new Persona();
          persona.each({
-              
-              set.libreta.each( {
-                    def libreta = new Libreta();
-                    libreta.nombre= it.nombre;
-                    libreta.tema= it.tema;
-                    def per= new Persona();
-                    per.nombre= persona.nombre
-                    per.apellido = persona.apellido
-                    per.correo = persona.correo
-                    per.clave= persona.clave
-                    per.keysdropbox= persona.keysdropbox
-                    per.addToLibretas(libreta)
-                    libreta.persona= per
-                    println(per)
-                    println (libreta)
-                    
-                    list.set.each({ it.nota.each({
-                        def nota = new Nota();
-                        nota.titulo = it.titulo;
-                        nota.texto = it.texto;
-                        nota.fecha = it.fecha; 
-                        int idNota = Integer.parseInt(it.nota.libreta.'@id')
-                        if(libreta.id == idNota){
-                            nota.libreta=libreta;
-                        }
-                   //     nota.etiquetas,adjuntos
-                                  
-                    })})
-                    
-            })   
+            per.nombre= it.nombre
+            per.apellido= it.apellido
+            per.correo= it.correo
+            per.clave= it.clave
+            per.keysdropbox= it.keysdropbox
+                persona.libretas.libreta.each ({
+                        Libreta lib= new Libreta();
+                        lib.tema= it.tema
+                        lib.nombre= it.nombre
+                        lib.persona= per
+                        lib.notas= new ArrayList <Nota>();
+                        per.addToLibretas(lib)
+                        it.notas.nota.each ({
+                                Nota nota= new Nota();
+                                nota.texto= it.texto
+                                nota.titulo= it.titulo
+                                nota.fecha= it.fecha
+                                nota.libreta=lib
+                                nota.etiquetas= new ArrayList <Etiqueta>();
+                                lib.notas.add(nota)
+                                    it.etiquetas.etiqueta.each({
+                                            Etiqueta et= new Etiqueta();
+                                            et.texto= it.texto
+                                            nota.etiquetas.add(et)
+                                    })
+                                    it.adjuntos.adjunto.each({
+                                            Adjunto adj= new Adjunto();
+                                            adj.archivo= it.archivo
+                                            adj.nombre=it.nombre
+                                            nota.addToAdjuntos(adj)
+                                            adj.nota=nota
+                                    })
+                        })
+                })
+            
          })
+     //creo que asi guarda la persona no estoy seguro xD no se si lo guarde todo creo que no :(
+      //  per.save(flush:true);
         
     }
     
@@ -216,19 +223,11 @@ class PersonaController {
             File folder = new File(ruta)
             folder.mkdir()
             File archivo1= new File(ruta+"\\datosPersona.xml")
-            File archivo2= new File(ruta+"\\libretasPersona.xml")
-            File archivo3= new File(ruta+"\\notasPersona.xml")
-            File archivo4= new File(ruta+"\\adjunttosPersona.xml")
-            
-            String s= session.persona as XML
+      
+            //establece que se usaran las asociaciones en el xml
+            XML.use("deep")
+            String s= session.persona as XML           
             archivo1.write(s)
-            s = session.persona.libretas as XML
-            archivo2.write(s)
-            s = session.persona.libretas.notas as XML
-            archivo3.write(s)
-            s = session.persona.libretas.notas.adjuntos as XML
-            archivo4.write(s)
-            
             readXml(ruta)
             
             
