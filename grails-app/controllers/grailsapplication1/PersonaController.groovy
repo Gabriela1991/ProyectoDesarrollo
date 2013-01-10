@@ -200,7 +200,9 @@ class PersonaController {
         
     }
     
-    
+    def descargarXML(){
+        
+    }
 
     
     /**
@@ -219,7 +221,7 @@ class PersonaController {
             
             //XML y creacion de la carpeta del usuario
             String usuario = session.persona.correo
-            String ruta = "C:\\Users\\Eule\\Desktop\\"+usuario
+            String ruta = "C:\\Users\\Gabriela\\Desktop\\"+usuario
             File folder = new File(ruta)
             folder.mkdir()
             File archivo1= new File(ruta+"\\datosPersona.xml")
