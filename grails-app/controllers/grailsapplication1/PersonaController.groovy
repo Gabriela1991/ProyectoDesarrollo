@@ -162,7 +162,7 @@ class PersonaController {
         if(!arch.empty){
             def f =  arch.getOriginalFilename();
          
-            def persona = new XmlSlurper().parse(new File("C:\\administradorDeNotas\\admin@gmail.com\\"+f)) 
+            def persona = new XmlSlurper().parse(new File("C:\\Users\\Eule\\Downloads\\"+f)) 
             
             Persona per= new Persona();
 
@@ -208,7 +208,7 @@ class PersonaController {
                            lib.notas= new ArrayList <Nota>();
                            per.addToLibretas(lib)
                            
-                           def libre = Libreta.findById(persona.libretas.libreta.@'id'.toInteger())
+                           def libre = Libreta.findById(it.@'id'.toInteger())
                            session.libre = libre
                            
                            if(libre){
@@ -219,7 +219,11 @@ class PersonaController {
                                    libre.nombre = lib.nombre
                                }
                            }else{
-                               //libre.save(flush:true);
+                               libre = new Libreta()
+                               libre.tema = lib.tema
+                               libre.nombre = lib.nombre
+                               libre.Persona = perso
+                               libre.save(flush:true);
                            }
                             
                            it.notas.nota.each ({
@@ -231,7 +235,7 @@ class PersonaController {
                                    nota.etiquetas= new ArrayList <Etiqueta>();
                                    lib.notas.add(nota)
                                    
-                                    def x = Libreta.findById(persona.libretas.libreta.notas.nota.@'id'.toInteger())
+                                    def x = Nota.findById(it.@'id'.toInteger())
                                    session.x = x
                                    
                                    if(x){
@@ -245,7 +249,12 @@ class PersonaController {
                                            x.fecha = nota.fecha
                                        }
                                    }else{
-                                       printf("la nota no existe, hay q crearla")
+                                       x = new Nota()
+                                       x.texto=nota.texto
+                                       x.titulo = nota.titulo
+                                       x.fecha = nota.fecha
+                                       x.libreta=libre                                      
+                                       x.save(flush:true)                                       
                                    }
                                    
                                        it.etiquetas.etiqueta.each({
@@ -253,14 +262,18 @@ class PersonaController {
                                                et.texto= it.texto
                                                nota.etiquetas.add(et)
                                                
-                                               def eti = Etiqueta.findById(persona.libretas.libreta.notas.nota.etiquetas.etiqueta.@'id'.toInteger())
+                                               def eti = Etiqueta.findById(it.@'id'.toInteger())
                                                 session.eti = eti
                                                 if(eti){
                                                     if(eti.texto != et.texto){
                                                         eti.texto = et.texto
                                                     }
                                                 }else{
-                                                    printf("la etiqueta no existe, hay q crearla")
+                                                    eti = new Etiqueta()
+                                                    eti.texto = et.texto
+                                                    x.addToEtiquetas(eti)
+                                                   // eti.nota=x
+                                                    eti.save(flush:true)
                                                 }
                                        })
                                        it.adjuntos.adjunto.each({
@@ -268,17 +281,21 @@ class PersonaController {
                                                adj.archivo= it.archivo
                                                adj.nombre=it.nombre
                                                nota.addToAdjuntos(adj)
-                                               def ad = Adjunto.findById(persona.libretas.libreta.notas.nota.adjuntos.adjunto.@'id'.toInteger())
+                                               def ad = Adjunto.findById(it.@'id'.toInteger())
                                                 session.ad = ad
                                                 if(ad){
                                                     if(ad.archivo != adj.archivo){
                                                         ad.archivo = adj.archivo
                                                     }
-                                                    if(ad.nombre != adj.nombre){
-                                                        ad.nombre = adj.nombre
+                                                    if(ad.nombre != adj.nombre){    
+                                                    ad.nombre = adj.nombre
                                                     }
                                                 }else{
-                                                    printf("el adjunto no existe, hay q crearla")
+                                                    ad = new Adjunto()
+                                                    ad.archivo = adj.archivo
+                                                    ad.nombre = adj.nombre
+                                                    x.addToAdjuntos(ad)
+                                                    ad.save(flush:true)
                                                 }
                                                adj.nota=nota
                                        })
