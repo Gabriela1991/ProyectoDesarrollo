@@ -1,5 +1,6 @@
 
 <%@ page import="grailsapplication1.Persona" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -37,14 +38,22 @@
                       <img src="../images/perfil.png" width="35" height="35" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
-                    <td><h2>.::Descargar XML::.</h2></td>
+                    <td><h2>.::Generar XML::.</h2></td>
                   </tr>
                 </table>
               </div>
               
               <div class="articles">
                 
-                <g:link base="C:\\Users\\Gabriela\\Desktop\\prueba.txt">aqui</g:link>
+                <table>
+                  <tr>
+                    <td style="color: transparent">gjhghghghgghgggg</td>
+                    <td><img src="../images/check.jpg" width="60" height="60" /></td>
+                    <td>Su archivo XML ha sido generado en la siguiente ruta </br>
+                        
+                    </td>
+                  </tr>
+                </table>
               </div>
               
             </div>

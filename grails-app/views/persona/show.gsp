@@ -88,8 +88,8 @@
                       <td>
                         <g:form>
                            <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: '.::Modificar Perfil::.')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar su Perfil?')}');" />
-		           <g:actionSubmit  action="desvincular" value="${message(code: 'default.button.edite.label', default: 'Desvincular dropbox')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de cerrar sesión den dropbox?')}');" />
-                           <a href="C:\archivoscompartido\usuario3\Bienvenido.txt">Descargar XML</a>
+		           <g:actionSubmit  action="desvincular" value="${message(code: 'default.button.edite.label', default: 'Desvincular dropbox')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de cerrar sesión den dropbox?')}');" />                           
+                           <g:link controller="Persona" action="descargarXML" >Descargar XML</g:link>
                         </g:form>
                       </td>
                     </tr>

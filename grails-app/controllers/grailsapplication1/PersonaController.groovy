@@ -201,7 +201,25 @@ class PersonaController {
     }
     
     def descargarXML(){
+        def personaInstance=Persona.get(session.persona.id)   
         
+            //XML y creacion de la carpeta del usuario
+            String usuario = personaInstance.correo
+            String ruta = "C:\\administradorDeNotas\\"+usuario
+            File folder = new File(ruta)
+            folder.mkdirs()
+            File archivoXML= new File(ruta+"\\datosPersona.xml")
+      
+            //establece que se usaran las asociaciones en el xml
+            XML.use("deep")
+            String s= personaInstance as XML           
+            archivoXML.write(s)  
+            
+            def file = new File(ruta+"\\datosPersona.xml"); //<-- you'll probably want to pass in the file name dynamically with the 'params' map    
+            response.setContentType("application/excel")
+            response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
+
+            response.outputStream << file.newInputStream()
     }
 
     
@@ -219,18 +237,18 @@ class PersonaController {
             log.info "El usuario con id: "+persona.id+" ha iniciado sesion en la aplicacion" 
             redirect (controller:'Persona', action:'ventanaInicio')
             
-            //XML y creacion de la carpeta del usuario
-            String usuario = session.persona.correo
-            String ruta = "C:\\Users\\Gabriela\\Desktop\\"+usuario
-            File folder = new File(ruta)
-            folder.mkdir()
-            File archivo1= new File(ruta+"\\datosPersona.xml")
-      
-            //establece que se usaran las asociaciones en el xml
-            XML.use("deep")
-            String s= session.persona as XML           
-            archivo1.write(s)
-            readXml(ruta)
+//            //XML y creacion de la carpeta del usuario
+//            String usuario = session.persona.correo
+//            String ruta = "C:\\Users\\Gabriela\\Desktop\\"+usuario
+//            File folder = new File(ruta)
+//            folder.mkdir()
+//            File archivo1= new File(ruta+"\\datosPersona.xml")
+//      
+//            //establece que se usaran las asociaciones en el xml
+//            XML.use("deep")
+//            String s= session.persona as XML           
+//            archivo1.write(s)
+//            readXml(ruta)
             
             
             //establece la conexion con dropbox
