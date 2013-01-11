@@ -153,52 +153,150 @@ class PersonaController {
     def ventanaInicio (){
         def persona = Persona.findById(session.persona.id)
     }
+       
     
-    
-    def readXml(String  ruta) {
-         def persona = new XmlSlurper().parse(new File(ruta+"\\datosPersona.xml"))   
-            Persona per= new Persona();
-         persona.each({
-            per.nombre= it.nombre
-            per.apellido= it.apellido
-            per.correo= it.correo
-            per.clave= it.clave
-            per.keysdropbox= it.keysdropbox
-                persona.libretas.libreta.each ({
-                        Libreta lib= new Libreta();
-                        lib.tema= it.tema
-                        lib.nombre= it.nombre
-                        lib.persona= per
-                        lib.notas= new ArrayList <Nota>();
-                        per.addToLibretas(lib)
-                        it.notas.nota.each ({
-                                Nota nota= new Nota();
-                                nota.texto= it.texto
-                                nota.titulo= it.titulo
-                                nota.fecha= it.fecha
-                                nota.libreta=lib
-                                nota.etiquetas= new ArrayList <Etiqueta>();
-                                lib.notas.add(nota)
-                                    it.etiquetas.etiqueta.each({
-                                            Etiqueta et= new Etiqueta();
-                                            et.texto= it.texto
-                                            nota.etiquetas.add(et)
-                                    })
-                                    it.adjuntos.adjunto.each({
-                                            Adjunto adj= new Adjunto();
-                                            adj.archivo= it.archivo
-                                            adj.nombre=it.nombre
-                                            nota.addToAdjuntos(adj)
-                                            adj.nota=nota
-                                    })
-                        })
-                })
+    def readXML() {
+         def arch = request.getFile('archivo')
+         
+         
+        if(!arch.empty){
+            def f =  arch.getOriginalFilename();
+         
+            def persona = new XmlSlurper().parse(new File("C:\\administradorDeNotas\\admin@gmail.com\\"+f)) 
             
-         })
-     //creo que asi guarda la persona no estoy seguro xD no se si lo guarde todo creo que no :(
-      //  per.save(flush:true);
+            Persona per= new Persona();
+
+            persona.each({
+               per.nombre= it.nombre
+               per.apellido= it.apellido
+               per.correo= it.correo
+               per.clave= it.clave
+               per.keysdropbox= it.keysdropbox
+               
+               def perso = Persona.findById(persona.@'id'.toInteger())
+               session.perso = perso
+               
+               //Si existe la persona se compara campo por campo para ver si existen diferencias
+               if(perso){
+                   if(perso.correo != per.correo){
+                       perso.correo = per.correo
+                   }
+                   if(perso.nombre != per.nombre){
+                       perso.nombre = per.nombre
+                   }
+                   if(perso.apellido != per.apellido){
+                       perso.apellido = per.apellido
+                   }
+                   if(perso.clave != per.clave){
+                       perso.clave = per.clave
+                   }
+                   if(perso.keysdropbox != per.keysdropbox){
+                       perso.keysdropbox = per.keysdropbox
+                   }
+                   
+               }else{ //De no existir la persona se crea una nueva en a BD
+         
+                   println("no existeeeeeeee")
+                   //per.save(flush:true);
+               }
+                  
+                   persona.libretas.libreta.each ({
+                           Libreta lib= new Libreta();
+                           lib.tema= it.tema
+                           lib.nombre= it.nombre
+                           lib.persona= per
+                           lib.notas= new ArrayList <Nota>();
+                           per.addToLibretas(lib)
+                           
+                           def libre = Libreta.findById(persona.libretas.libreta.@'id'.toInteger())
+                           session.libre = libre
+                           
+                           if(libre){
+                               if(libre.tema != lib.tema){
+                                   libre.tema = lib.tema
+                               }
+                               if(libre.nombre != lib.nombre){
+                                   libre.nombre = lib.nombre
+                               }
+                           }else{
+                               //libre.save(flush:true);
+                           }
+                            
+                           it.notas.nota.each ({
+                                   Nota nota= new Nota();
+                                   nota.texto= it.texto
+                                   nota.titulo= it.titulo
+                                   nota.fecha= it.fecha
+                                   nota.libreta=lib
+                                   nota.etiquetas= new ArrayList <Etiqueta>();
+                                   lib.notas.add(nota)
+                                   
+                                    def x = Libreta.findById(persona.libretas.libreta.notas.nota.@'id'.toInteger())
+                                   session.x = x
+                                   
+                                   if(x){
+                                       if(x.texto != nota.texto){
+                                           x.texto = nota.texto
+                                       }
+                                       if(x.titulo != nota.titulo){
+                                           x.titulo = nota.titulo
+                                       }
+                                       if(x.fecha != nota.fecha){
+                                           x.fecha = nota.fecha
+                                       }
+                                   }else{
+                                       printf("la nota no existe, hay q crearla")
+                                   }
+                                   
+                                       it.etiquetas.etiqueta.each({
+                                               Etiqueta et= new Etiqueta();
+                                               et.texto= it.texto
+                                               nota.etiquetas.add(et)
+                                               
+                                               def eti = Etiqueta.findById(persona.libretas.libreta.notas.nota.etiquetas.etiqueta.@'id'.toInteger())
+                                                session.eti = eti
+                                                if(eti){
+                                                    if(eti.texto != et.texto){
+                                                        eti.texto = et.texto
+                                                    }
+                                                }else{
+                                                    printf("la etiqueta no existe, hay q crearla")
+                                                }
+                                       })
+                                       it.adjuntos.adjunto.each({
+                                               Adjunto adj= new Adjunto();
+                                               adj.archivo= it.archivo
+                                               adj.nombre=it.nombre
+                                               nota.addToAdjuntos(adj)
+                                               def ad = Adjunto.findById(persona.libretas.libreta.notas.nota.adjuntos.adjunto.@'id'.toInteger())
+                                                session.ad = ad
+                                                if(ad){
+                                                    if(ad.archivo != adj.archivo){
+                                                        ad.archivo = adj.archivo
+                                                    }
+                                                    if(ad.nombre != adj.nombre){
+                                                        ad.nombre = adj.nombre
+                                                    }
+                                                }else{
+                                                    printf("el adjunto no existe, hay q crearla")
+                                                }
+                                               adj.nota=nota
+                                       })
+                           })
+                   })
+
+            })
+        //creo que asi guarda la persona no estoy seguro xD no se si lo guarde todo creo que no :(
         
+        //    per.save(flush:true);
+   
+        }else{
+            flash.message = 'El archivo no puede ser vacío'
+            redirect(controller: "Persona", action: "importarXML")
+        }        
     }
+    
+    def importarXML(){}
     
     def descargarXML(){
         def personaInstance=Persona.get(session.persona.id)   
@@ -215,6 +313,7 @@ class PersonaController {
             String s= personaInstance as XML           
             archivoXML.write(s)  
             
+            //genera el link de descarga
             def file = new File(ruta+"\\datosPersona.xml"); //<-- you'll probably want to pass in the file name dynamically with the 'params' map    
             response.setContentType("application/excel")
             response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")

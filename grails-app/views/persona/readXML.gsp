@@ -38,20 +38,18 @@
                       <img src="../images/perfil.png" width="35" height="35" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
-                    <td><h2>.::Generar XML::.</h2></td>
+                    <td><h2>.::Importar XML::.</h2></td>
                   </tr>
                 </table>
               </div>
               
               <div class="articles">
-                
+                </br>
                 <table>
                   <tr>
-                    <td style="color: transparent">gjhghghghgghgggg</td>
-                    <td><img src="../images/check.jpg" width="60" height="60" /></td>
-                    <td>Su archivo XML ha sido generado en la siguiente ruta </br>
-                        
-                    </td>
+                    <td><img src="../images/espacios.png" width="60"></td>
+                    <td><img src="../images/check.jpg" width="40" height="40"></td>
+                    <td style="color: yellowgreen; font-size: medium"> 'Se ha importado de manera EXITOSA el XML'</td>
                   </tr>
                 </table>
               </div>

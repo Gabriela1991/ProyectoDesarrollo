@@ -1,5 +1,6 @@
 
 <%@ page import="grailsapplication1.Persona" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -37,70 +38,47 @@
                       <img src="../images/perfil.png" width="35" height="35" />
                     </td>
                     <td style="color: transparent">fgghgh</td>
-                    <td><h2>.::Configurar Cuenta::.</h2></td>
+                    <td><h2>.::Importar XML::.</h2></td>
                   </tr>
                 </table>
               </div>
+              
               <div class="articles">
-                <div id="show-persona" class="content scaffold-show" role="main">
-		   
-		   <ol class="property-list persona">
-                <table>
-                  <tr>
-                    <td style="color: transparent">fgghghghghjkdfgh</td>
-                    <td style="color: cornflowerblue; font-size: medium">Nombre:</td>
-                    <td>
-                      <g:if test="${personaInstance?.nombre}">
-			  <li class="fieldcontain">
-			     <span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${personaInstance}" field="nombre"/></span>
-			  </li>
-		       </g:if>
+                </br></br>
+                <g:form method="post"  enctype="multipart/form-data">
+            <div class="dialog">
+              <table>
+                <tbody>
+                  <tr class="prop">
+                    <td valign="top" class="name">
+                      <label for="fileUpload" style="color: cornflowerblue; font-size: medium">Archivo: </label>
                     </td>
-                  </tr>
-                  <tr>
-                    <td style="color: transparent">fgghghghghjkdfgh</td>
-                    <td style="color: cornflowerblue; font-size: medium">Apellido:</td>
-                    <td>
-                      <g:if test="${personaInstance?.apellido}">
-			  <li class="fieldcontain">
-			      <span class="property-value" aria-labelledby="apellido-label"><g:fieldValue bean="${personaInstance}" field="apellido"/></span>
-			  </li>
-		       </g:if>
+                    <td><img src="../images/espacios.png" width="20"></td>
+                    <td valign="top" class="value ${hasErrors(bean:adjuntoInstance,field:'upload','errors')}">
+                      <input type="file" id="archivo" name="archivo" />
                     </td>
-                  </tr>
-                  <tr>
-                    <td style="color: transparent">fgghghghghjkdfgh</td>
-                    <td style="color: cornflowerblue; font-size: medium">Correo:</td>
-                    <td>
-                      <g:if test="${personaInstance?.correo}">
-			  <li class="fieldcontain">
-			      <span class="property-value" aria-labelledby="correo-label"><g:fieldValue bean="${personaInstance}" field="correo"/></span>
-			  </li>
-		       </g:if>
-                    </td>
-                  </tr>
-                </table>
-              </ol>
-                  </br>
-                  <table>
-                    <tr>
-                      <td style="color: transparent">fgghghghghjkdfgh</td>
-                      <td>
-                        <g:form>
-                           <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: '.::Modificar Perfil::.')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar su Perfil?')}');" />
-		           <g:actionSubmit  action="desvincular" value="${message(code: 'default.button.edite.label', default: 'Desvincular dropbox')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de cerrar sesión den dropbox?')}');" />                           
-                        </g:form>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <g:link controller="Persona" action="descargarXML" >Descargar XML</g:link>
-                        <g:link controller="Persona" action="importarXML" >Importar XML</g:link>
-                      </td>
-                    </tr>
-                  </table>
-		</div>
+                  </tr> 
+                </tbody>
+              </table>
+            </div>
+            <table>
+              <tr>
+                <td style="color: transparent">djjkhjhjkhkhkhcgfhkjhjkhkkm,lcvb</td>
+                <td>
+                  <span class="button">
+                    </br>
+                    <g:actionSubmit class="upload" value=".::Importar::." action="readXML" />
+                  </span>
+                </td>
+              </tr>
+            </table>
+            
+          </g:form>
+                <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+      </g:if>
               </div>
+              
             </div>
             
           <div id="left">
