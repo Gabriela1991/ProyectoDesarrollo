@@ -57,7 +57,7 @@ class PersonaControllerTests {
         a1 = new Adjunto(nombre:"a1", nota:n.id);
         a2 = new Adjunto(nombre:"a2", nota:n.id);
         a3 = new Adjunto(nombre:"a3", nota:n.id);
-        arch1 = new File("C:/Users/Keyla/Downloads/datosPersona.xml");
+        arch1 = new File("C:/Users/Eule/Downloads/datosPersona.xml");
         l.notas= new ArrayList <Nota>();
         l.notas.add(n); 
         l.save(flush:true)
