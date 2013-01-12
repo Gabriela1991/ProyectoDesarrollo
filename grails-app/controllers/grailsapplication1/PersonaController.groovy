@@ -170,7 +170,7 @@ class PersonaController {
         if(!arch.empty){
             def f =  arch.getOriginalFilename();
         
-            def persona = new XmlSlurper().parse(new File("C:\\Users\\Keyla\\Downloads\\"+f)) 
+            def persona = new XmlSlurper().parse(new File("C:\\Users\\Eule\\Downloads\\"+f)) 
             
             Persona per= new Persona();
 
@@ -231,7 +231,7 @@ class PersonaController {
                                libre = new Libreta()
                                libre.tema = lib.tema
                                libre.nombre = lib.nombre
-                               libre.Persona = perso
+                               libre.persona = perso
                                libre.save(flush:true);
                                log.info "Se ha agregado una libreta a la base de datos con id: "+libre.id+" a traves de XML"
                            }
@@ -287,6 +287,7 @@ class PersonaController {
                                                     eti = new Etiqueta()
                                                     eti.texto = et.texto
                                                     x.addToEtiquetas(eti)
+                                                    if (eti.id)
                                                     log.info "Se ha creado la etiqueta con id: ", eti.id+" a traves de XML"
                                                     eti.save(flush:true)
                                                 }
@@ -312,6 +313,7 @@ class PersonaController {
                                                     ad.archivo = adj.archivo
                                                     ad.nombre = adj.nombre
                                                     x.addToAdjuntos(ad)
+                                                    if (ad.id)
                                                     log.info "Se ha creado el adjunto con id: ", ad.id+" a traves de XML"
                                                     ad.save(flush:true)
                                                 }
