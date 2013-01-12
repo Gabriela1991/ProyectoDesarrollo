@@ -166,11 +166,11 @@ class PersonaController {
          def arch = request.getFile('archivo')
          def usuario =Persona.get(session.persona.id)  
          
-         
+        
         if(!arch.empty){
             def f =  arch.getOriginalFilename();
-         
-            def persona = new XmlSlurper().parse(new File("C:\\Users\\Gabriela\\Downloads\\"+f)) 
+        
+            def persona = new XmlSlurper().parse(new File("C:\\Users\\Keyla\\Downloads\\"+f)) 
             
             Persona per= new Persona();
 

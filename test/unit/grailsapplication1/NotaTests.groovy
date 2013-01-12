@@ -31,7 +31,7 @@ class NotaTests {
        
         p = new Persona(nombre:"juan",apellido:"perez",correo:"jperez@ucab.edu.ve",keysdropbox:"a0cyjp9cw56cdk1/7y0rjbkvf6xnckb",clave:"123456");
         libreta = new Libreta(titulo:"libreta 1",tema:"sdfsf");
-        nota = new Nota(titulo:"Prueba Unitaria - Nota", texto:"Prueba",fecha:"05/12/12",libreta:libreta.id);
+        nota = new Nota(titulo:"Prueba Unitaria - Nota", texto:"Prueba",fecha:"05/01/13",libreta:libreta.id);
     
         a1 = new Adjunto(nombre:"Introduccion.txt", nota:nota.id);
         a2 = new Adjunto(nombre:"a2", nota:nota.id);
