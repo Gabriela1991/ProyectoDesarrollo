@@ -157,12 +157,13 @@ class PersonaController {
     
     def readXML() {
          def arch = request.getFile('archivo')
+         def usuario =Persona.get(session.persona.id)  
          
          
         if(!arch.empty){
             def f =  arch.getOriginalFilename();
          
-            def persona = new XmlSlurper().parse(new File("C:\\Users\\Eule\\Downloads\\"+f)) 
+            def persona = new XmlSlurper().parse(new File("C:\\Users\\Gabriela\\Downloads\\"+f)) 
             
             Persona per= new Persona();
 
@@ -194,13 +195,7 @@ class PersonaController {
                        perso.keysdropbox = per.keysdropbox
                    }
                    
-               }else{ //De no existir la persona se crea una nueva en a BD
-         
-                   println("no existeeeeeeee")
-                   //per.save(flush:true);
-               }
-                  
-                   persona.libretas.libreta.each ({
+                    persona.libretas.libreta.each ({
                            Libreta lib= new Libreta();
                            lib.tema= it.tema
                            lib.nombre= it.nombre
@@ -272,7 +267,6 @@ class PersonaController {
                                                     eti = new Etiqueta()
                                                     eti.texto = et.texto
                                                     x.addToEtiquetas(eti)
-                                                   // eti.nota=x
                                                     eti.save(flush:true)
                                                 }
                                        })
@@ -301,14 +295,17 @@ class PersonaController {
                                        })
                            })
                    })
-
+               
+               }else{ //De no existir la persona no se carga el xml y se registra en el log
+                  log.error "El usuario con id: "+usuario.id+" ha intentado cargar un usuario no registrado en la Base de Datos"     
+                  flash.message = 'El usuario que intentas importar no existe en la Base de Datos, importe un usuario valido'
+                  redirect(controller: "Persona", action: "importarXML")
+               }
             })
-        //creo que asi guarda la persona no estoy seguro xD no se si lo guarde todo creo que no :(
-        
-        //    per.save(flush:true);
-   
+       
         }else{
             flash.message = 'El archivo no puede ser vacío'
+            log.error "El usuario con id: "+usuario.id+" ha intentado importar un archivo XML vacio"
             redirect(controller: "Persona", action: "importarXML")
         }        
     }
