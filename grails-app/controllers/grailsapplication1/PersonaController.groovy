@@ -154,7 +154,14 @@ class PersonaController {
         def persona = Persona.findById(session.persona.id)
     }
        
-    
+    /**
+    *
+    *Dado un archivo XML subido por el usuario, se carga en la base de datos
+    *los datos que se encuentran en el archivo, solo si cumplen con la siguientes 
+    *condiciones:
+    *1) Que el usuario exista y que hayan campos distintos, para modificar
+    *2) Que el usuario exista y se deseen agrregar nuevas notas, archivos, etc..
+    */
     def readXML() {
          def arch = request.getFile('archivo')
          def usuario =Persona.get(session.persona.id)  
@@ -181,18 +188,23 @@ class PersonaController {
                if(perso){
                    if(perso.correo != per.correo){
                        perso.correo = per.correo
+                       log.info "Se ha modificado al usuario "+perso.id+" a traves de XML"
                    }
                    if(perso.nombre != per.nombre){
                        perso.nombre = per.nombre
+                       log.info "Se ha modificado al usuario "+perso.id+" a traves de XML"
                    }
                    if(perso.apellido != per.apellido){
                        perso.apellido = per.apellido
+                       log.info "Se ha modificado al usuario "+perso.id+" a traves de XML"
                    }
                    if(perso.clave != per.clave){
                        perso.clave = per.clave
+                       log.info "Se ha modificado al usuario "+perso.id+" a traves de XML"
                    }
                    if(perso.keysdropbox != per.keysdropbox){
                        perso.keysdropbox = per.keysdropbox
+                       log.info "Se ha modificado al usuario "+perso.id+" a traves de XML"
                    }
                    
                     persona.libretas.libreta.each ({
@@ -209,9 +221,11 @@ class PersonaController {
                            if(libre){
                                if(libre.tema != lib.tema){
                                    libre.tema = lib.tema
+                                   log.info "Se ha editado la libreta con id: "+libre.id+" a traves de XML"
                                }
                                if(libre.nombre != lib.nombre){
                                    libre.nombre = lib.nombre
+                                   log.info "Se ha editado la libreta con id: "+libre.id+" a traves de XML"
                                }
                            }else{
                                libre = new Libreta()
@@ -219,6 +233,7 @@ class PersonaController {
                                libre.nombre = lib.nombre
                                libre.Persona = perso
                                libre.save(flush:true);
+                               log.info "Se ha agregado una libreta a la base de datos con id: "+libre.id+" a traves de XML"
                            }
                             
                            it.notas.nota.each ({
@@ -236,12 +251,15 @@ class PersonaController {
                                    if(x){
                                        if(x.texto != nota.texto){
                                            x.texto = nota.texto
+                                           log.info "Se ha modificado la nota con id: ", x.id+" a traves de XML"
                                        }
                                        if(x.titulo != nota.titulo){
                                            x.titulo = nota.titulo
+                                           log.info "Se ha modificado la nota con id: ", x.id+" a traves de XML"
                                        }
                                        if(x.fecha != nota.fecha){
                                            x.fecha = nota.fecha
+                                           log.info "Se ha modificado la nota con id: ", x.id+" a traves de XML"
                                        }
                                    }else{
                                        x = new Nota()
@@ -250,6 +268,7 @@ class PersonaController {
                                        x.fecha = nota.fecha
                                        x.libreta=libre                                      
                                        x.save(flush:true)                                       
+                                       log.info "Se ha agregado una nota a la base de datos con id: "+x.id+" a traves de XML"
                                    }
                                    
                                        it.etiquetas.etiqueta.each({
@@ -262,11 +281,13 @@ class PersonaController {
                                                 if(eti){
                                                     if(eti.texto != et.texto){
                                                         eti.texto = et.texto
+                                                        log.info "Se ha modificado la etiqueta con id: "+eti.id+" a traves de XML"
                                                     }
                                                 }else{
                                                     eti = new Etiqueta()
                                                     eti.texto = et.texto
                                                     x.addToEtiquetas(eti)
+                                                    log.info "Se ha creado la etiqueta con id: ", eti.id+" a traves de XML"
                                                     eti.save(flush:true)
                                                 }
                                        })
@@ -280,15 +301,18 @@ class PersonaController {
                                                 if(ad){
                                                     if(ad.archivo != adj.archivo){
                                                         ad.archivo = adj.archivo
+                                                        log.info "Se ha modificado el adjunto con id: ", ad.id+" a traves de XML"
                                                     }
                                                     if(ad.nombre != adj.nombre){    
                                                     ad.nombre = adj.nombre
+                                                    log.info "Se ha modificado el adjunto con id: ", ad.id+" a traves de XML"
                                                     }
                                                 }else{
                                                     ad = new Adjunto()
                                                     ad.archivo = adj.archivo
                                                     ad.nombre = adj.nombre
                                                     x.addToAdjuntos(ad)
+                                                    log.info "Se ha creado el adjunto con id: ", ad.id+" a traves de XML"
                                                     ad.save(flush:true)
                                                 }
                                                adj.nota=nota

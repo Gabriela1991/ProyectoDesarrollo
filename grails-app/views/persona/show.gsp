@@ -84,18 +84,13 @@
                   </br>
                   <table>
                     <tr>
-                      <td style="color: transparent">fgghghghghjkdfgh</td>
                       <td>
                         <g:form>
                            <g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edite.label', default: '.::Modificar Perfil::.')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de Modificar su Perfil?')}');" />
-		           <g:actionSubmit  action="desvincular" value="${message(code: 'default.button.edite.label', default: 'Desvincular dropbox')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de cerrar sesión den dropbox?')}');" />                           
+		           <g:actionSubmit  action="desvincular" value="${message(code: 'default.button.edite.label', default: '.::Desvincular dropbox::.')}" onclick="return confirm('${message(code: 'default.button.edit.confirm.message', default: 'Esta seguro de cerrar sesión den dropbox?')}');" />                           
+                           <g:actionSubmit  action="descargarXML" value="${message(code: 'default.button.edite.label', default: '.::Descargar XML::.')}"  />                           
+                           <g:actionSubmit  action="importarXML" value="${message(code: 'default.button.edite.label', default: '.::Importar XML::.')}"  />                           
                         </g:form>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <g:link controller="Persona" action="descargarXML" >Descargar XML</g:link>
-                        <g:link controller="Persona" action="importarXML" >Importar XML</g:link>
                       </td>
                     </tr>
                   </table>
