@@ -267,7 +267,8 @@ class PersonaController {
                                        x.titulo = nota.titulo
                                        x.fecha = nota.fecha
                                        x.libreta=libre                                      
-                                       x.save(flush:true)                                       
+                                       x.save(flush:true) 
+                                       if(x.id)
                                        log.info "Se ha agregado una nota a la base de datos con id: "+x.id+" a traves de XML"
                                    }
                                    
@@ -359,6 +360,8 @@ class PersonaController {
             response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
 
             response.outputStream << file.newInputStream()
+            
+        log.info "El usuario con id "+personaInstance.id+" ha exportado su XML de configuracion"
     }
 
     
@@ -375,20 +378,7 @@ class PersonaController {
          if (persona){             
             log.info "El usuario con id: "+persona.id+" ha iniciado sesion en la aplicacion" 
             redirect (controller:'Persona', action:'ventanaInicio')
-            
-//            //XML y creacion de la carpeta del usuario
-//            String usuario = session.persona.correo
-//            String ruta = "C:\\Users\\Gabriela\\Desktop\\"+usuario
-//            File folder = new File(ruta)
-//            folder.mkdir()
-//            File archivo1= new File(ruta+"\\datosPersona.xml")
-//      
-//            //establece que se usaran las asociaciones en el xml
-//            XML.use("deep")
-//            String s= session.persona as XML           
-//            archivo1.write(s)
-//            readXml(ruta)
-            
+                  
             
             //establece la conexion con dropbox
             Dropbox d=new Dropbox()
